@@ -4,11 +4,14 @@
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
 
 [node name="Ship" type="RigidBody2D"]
+max_contacts_reported = 4
+contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
 speed = 50.0
 rotation_speed = 1000.0
+max_health = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
@@ -17,3 +20,5 @@ polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_2f5eh")
 offset = Vector2(0, 8)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
