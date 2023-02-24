@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://fmyumo0aq4ua"]
+
+[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="1_2f5eh"]
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
+
+[node name="Ship" type="RigidBody2D"]
+linear_damp = 2.0
+angular_damp = 10.0
+script = ExtResource("1_lvdat")
+speed = 50.0
+rotation_speed = 1000.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_2f5eh")
+offset = Vector2(0, 8)
