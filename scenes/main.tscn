@@ -6,12 +6,12 @@
 [node name="Main" type="Node2D"]
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
-position = Vector2(184, 95)
+position = Vector2(352, 255)
 player = 1
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
-position = Vector2(972, 506)
-rotation = 3.14159
+position = Vector2(508, 450)
+rotation = -1.5708
 player = 2
 
 [node name="Sprite2D" parent="Ship2" index="1"]
