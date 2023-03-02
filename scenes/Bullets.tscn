@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfo3oqn0uyd1n"]
+
+[ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="1_2ipuv"]
+[ext_resource type="Script" path="res://scenes/Bullets.gd" id="1_pu0ja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mb8t7"]
+size = Vector2(58.3335, 75)
+
+[node name="Bullets" type="CharacterBody2D"]
+script = ExtResource("1_pu0ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+scale = Vector2(0.239999, 0.2)
+shape = SubResource("RectangleShape2D_mb8t7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.239999, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0287998, 0.032)
+texture = ExtResource("1_2ipuv")
