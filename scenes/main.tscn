@@ -5,17 +5,33 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
+[node name="Ship1" parent="." node_paths=PackedStringArray("_cooldown_timer") instance=ExtResource("1_ra0tt")]
 position = Vector2(184, 95)
 player = 1
+_cooldown_timer = NodePath("Timer")
+metadata/_edit_group_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Ship1"]
+
+[node name="Timer" type="Timer" parent="Ship1"]
+wait_time = 0.578
+one_shot = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
 position = Vector2(972, 506)
 rotation = 3.14159
+scale = Vector2(0.870492, 0.941369)
 player = 2
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" parent="Ship2" index="1"]
 texture = ExtResource("2_v3nrg")
+
+[node name="Timer" type="Timer" parent="Ship2"]
+wait_time = 0.578
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Ship2"]
 
 [editable path="Ship1"]
 [editable path="Ship2"]
