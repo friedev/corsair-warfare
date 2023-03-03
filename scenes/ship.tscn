@@ -15,13 +15,13 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
-player = null
 speed = 50.0
 rotation_speed = 1000.0
 ram_dps_min = 0.1
-ram_dps_max = 0.5
-obstacle_dps = 0.5
-max_health = 2.0
+ram_dps_max = 0.2
+obstacle_dps = 0.2
+max_health = 1.0
+cannon_count = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
@@ -52,5 +52,27 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[node name="CannonSpawnPoints" type="Node2D" parent="."]
+
+[node name="CannonPointL1" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-20, -10)
+gizmo_extents = 4.0
+
+[node name="CannonPointL2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, -10)
+gizmo_extents = 4.0
+
+[node name="CannonPointR1" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-20, 10)
+gizmo_extents = 4.0
+
+[node name="CannonPointR2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, 10)
+gizmo_extents = 4.0
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

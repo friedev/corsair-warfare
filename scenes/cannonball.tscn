@@ -4,16 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="2_pv1rt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
-radius = 8.0
+radius = 4.0
 
 [node name="Cannonball" type="RigidBody2D"]
 z_index = -1
+collision_layer = 2
 mass = 0.1
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_dmxjy")
 speed = 300.0
-damage = 0.25
+damage = 0.05
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0eiya")
@@ -22,7 +23,7 @@ shape = SubResource("CircleShape2D_0eiya")
 scale = Vector2(0.239999, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.033, 0.033)
+scale = Vector2(0.016, 0.016)
 texture = ExtResource("2_pv1rt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
