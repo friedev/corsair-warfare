@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Ship
 
+const max_cannonball_offset := 10.0
+
 const cannonball_scene = preload('res://scenes/cannonball.tscn')
 
 enum Player {
@@ -26,12 +28,19 @@ var health: float:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 
+@export var cannon_count: int
+
 var can_fire := true
 
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var cooldown_timer: Timer = %CooldownTimer
+
+@onready var cannon_point_l1: Node2D = %CannonPointL1
+@onready var cannon_point_l2: Node2D = %CannonPointL2
+@onready var cannon_point_r1: Node2D = %CannonPointR1
+@onready var cannon_point_r2: Node2D = %CannonPointR2
 
 
 func _ready() -> void:
@@ -55,9 +64,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
-		self.fire_cannons(PI / 2)
+		self.fire_cannons_right()
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
-		self.fire_cannons(3 * PI / 2)
+		self.fire_cannons_left()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -87,15 +96,39 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
-func fire_cannons(cannon_rotation: float):
+func spawn_cannonball(ball_position: Vector2, ball_rotation: float):
 	var cannonball = self.cannonball_scene.instantiate()
-	cannonball.global_position = self.global_position
-	cannonball.rotation = self.rotation + cannon_rotation
+	cannonball.global_position = ball_position
+	cannonball.rotation = ball_rotation
 	cannonball.add_collision_exception_with(self)
 	self.get_parent().add_child(cannonball)
 
+
+func fire_cannons(point1: Vector2, point2: Vector2, ball_rotation: float):
+	for i in range(self.cannon_count):
+		var offset_ratio := float(i) / float(self.cannon_count)
+		var perpendicular_offset := self.max_cannonball_offset * randf()
+		var ball_position := point1 + (point2 - point1) * offset_ratio
+		ball_position -= Vector2(perpendicular_offset, 0).rotated(ball_rotation)
+		self.spawn_cannonball(ball_position, ball_rotation)
+
 	self.can_fire = false
 	self.cooldown_timer.start()
+
+
+func fire_cannons_right():
+	self.fire_cannons(
+		self.cannon_point_r1.global_position,
+		self.cannon_point_r2.global_position,
+		PI / 2 + self.rotation
+	)
+
+func fire_cannons_left():
+	self.fire_cannons(
+		self.cannon_point_l1.global_position,
+		self.cannon_point_l2.global_position,
+		-PI / 2 + self.rotation
+	)
 
 
 func destroy() -> void:
