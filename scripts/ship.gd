@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name Ship
 
-const bullet_scene = preload('res://scenes/Bullets.tscn')
+const bullet_scene = preload('res://scenes/bullet.tscn')
 
 enum Player {
 	P1 = 1,

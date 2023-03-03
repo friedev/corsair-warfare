@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dskkh1jdwkys5"]
+[gd_scene load_steps=4 format=3 uid="uid://bolu7sivbkenu"]
 
-[ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="1_2ipuv"]
-[ext_resource type="Script" path="res://scenes/Bullets.gd" id="1_pu0ja"]
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_abl00"]
+[ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="2_ky2ub"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
 radius = 8.0
 
-[node name="Bullets" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D"]
 mass = 0.1
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_pu0ja")
+script = ExtResource("1_abl00")
 speed = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -21,6 +21,6 @@ scale = Vector2(0.239999, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.033, 0.033)
-texture = ExtResource("1_2ipuv")
+texture = ExtResource("2_ky2ub")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
