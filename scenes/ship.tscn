@@ -47,9 +47,6 @@ value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="CannonRayCast2D" type="RayCast2D" parent="."]
-unique_name_in_owner = true
-
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.578
