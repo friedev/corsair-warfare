@@ -4,6 +4,7 @@
 extends RigidBody2D
 
 @export var speed: float
+@export var damage: float
 
 func _ready() -> void:
 	self.linear_velocity = Vector2.RIGHT.rotated(self.rotation) * self.speed
@@ -14,9 +15,7 @@ func _on_VisiblityNotifier2D_screen_exited() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("body entered")
 	if body is Ship:
-		# TODO do damage
-		print("hit ship")
-		pass
+		var ship = body as Ship
+		ship.health -= self.damage
 	self.queue_free()
