@@ -46,32 +46,24 @@ func _physics_process(delta: float) -> void:
 	var _ray_cast = $RayCast2D
 	var _cooldown_timer = $Timer
 	var sprite
+	var action_prefix: String
 	if self.player == Player.P1:
-		if Input.is_action_pressed("p1_left"):
-			self.apply_torque(-rotation_speed)
-		if Input.is_action_pressed("p1_right"):
-			self.apply_torque(rotation_speed)
-		if Input.is_action_just_pressed("p1_fire_right") and _can_fire:
-			shoot(90)
-			_can_fire = true
-			_cooldown_timer.start()
-		if Input.is_action_just_pressed("p1_fire_left") and _can_fire:
-			shoot(270)
-			_can_fire = true
-			_cooldown_timer.start()
+		action_prefix = "p1"
 	elif self.player == Player.P2:
-		if Input.is_action_pressed("p2_left"):
-			self.apply_torque(-rotation_speed)
-		if Input.is_action_pressed("p2_right"):
-			self.apply_torque(rotation_speed)
-		if Input.is_action_just_pressed("p2_fire_right") and _can_fire:
-			shoot(90)
-			_can_fire = true
-			_cooldown_timer.start()
-		if Input.is_action_just_pressed("p2_fire_left") and _can_fire:
-			shoot(270)
-			_can_fire = true
-			_cooldown_timer.start()
+		action_prefix = "p2"
+
+	if Input.is_action_pressed("%s_left" % action_prefix):
+		self.apply_torque(-rotation_speed)
+	if Input.is_action_pressed("%s_right" % action_prefix):
+		self.apply_torque(rotation_speed)
+	if Input.is_action_just_pressed("%s_fire_right" % action_prefix) and _can_fire:
+		shoot(90)
+		_can_fire = true
+		_cooldown_timer.start()
+	if Input.is_action_just_pressed("%s_fire_left" % action_prefix) and _can_fire:
+		shoot(270)
+		_can_fire = true
+		_cooldown_timer.start()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -115,7 +107,6 @@ func shoot(angle):
 
 func _on_Timer_timeout():
 	_can_fire = true
-
 
 
 func destroy() -> void:
