@@ -14,6 +14,6 @@ func _physics_process(delta):
 	if c and c.get_collider():
 		# Do damage
 		queue_free()
-		
+
 func _on_VisiblityNotifier2D_screen_exited():
 	queue_free()
