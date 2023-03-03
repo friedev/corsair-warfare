@@ -1,6 +1,7 @@
 extends RigidBody2D
 class_name Ship
 
+const bullet_scene = preload('res://scenes/bullet.tscn')
 
 enum Player {
 	P1 = 1,
@@ -9,8 +10,10 @@ enum Player {
 
 
 @export var player: Player
+@export var texture: Texture2D
 @export var speed: float
 @export var rotation_speed: float
+
 @export var ram_dps_min: float
 @export var ram_dps_max: float
 @export var obstacle_dps: float
@@ -23,11 +26,16 @@ var health: float:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 
+var can_fire := true
+
+@onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var cooldown_timer: Timer = %CooldownTimer
 
 
 func _ready() -> void:
+	self.sprite.texture = texture
 	self.health = self.max_health
 
 
@@ -36,16 +44,20 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	var action_prefix: String
 	if self.player == Player.P1:
-		if Input.is_action_pressed("p1_left"):
-			self.apply_torque(-rotation_speed)
-		if Input.is_action_pressed("p1_right"):
-			self.apply_torque(rotation_speed)
+		action_prefix = "p1"
 	elif self.player == Player.P2:
-		if Input.is_action_pressed("p2_left"):
-			self.apply_torque(-rotation_speed)
-		if Input.is_action_pressed("p2_right"):
-			self.apply_torque(rotation_speed)
+		action_prefix = "p2"
+
+	if Input.is_action_pressed("%s_left" % action_prefix):
+		self.apply_torque(-rotation_speed)
+	if Input.is_action_pressed("%s_right" % action_prefix):
+		self.apply_torque(rotation_speed)
+	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
+		self.shoot(PI / 2)
+	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
+		self.shoot(3 * PI / 2)
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -75,6 +87,21 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
+func shoot(cannon_rotation: float):
+	var bullet = self.bullet_scene.instantiate()
+	bullet.global_position = self.global_position
+	bullet.rotation = self.rotation + cannon_rotation
+	bullet.add_collision_exception_with(self)
+	self.get_parent().add_child(bullet)
+
+	self.can_fire = false
+	self.cooldown_timer.start()
+
+
 func destroy() -> void:
 	print("Player %d died" % self.player)
 	self.queue_free()
+
+
+func _on_cooldown_timer_timeout() -> void:
+	self.can_fire = true
