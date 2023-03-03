@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfo3oqn0uyd1n"]
+[gd_scene load_steps=4 format=3 uid="uid://dskkh1jdwkys5"]
 
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="1_2ipuv"]
 [ext_resource type="Script" path="res://scenes/Bullets.gd" id="1_pu0ja"]

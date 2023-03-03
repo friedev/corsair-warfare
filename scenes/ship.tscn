@@ -1,14 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=5 format=3 uid="uid://fmyumo0aq4ua"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
+bg_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5848p"]
+bg_color = Color(0.945098, 0.219608, 0.196078, 1)
+
 [node name="Ship" type="RigidBody2D"]
+max_contacts_reported = 4
+contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
 speed = 50.0
 rotation_speed = 1000.0
+ram_dps_min = 0.1
+ram_dps_max = 0.5
+obstacle_dps = 0.5
+max_health = 2.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
@@ -17,3 +29,19 @@ polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_2f5eh")
 offset = Vector2(0, 8)
+
+[node name="ControlParent" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="HealthBar" type="ProgressBar" parent="ControlParent"]
+unique_name_in_owner = true
+offset_left = -32.0
+offset_top = 24.0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3u3v2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5848p")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
