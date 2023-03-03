@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name Ship
 
-const bulletPath = preload('res://scenes/Bullets.tscn')
+const bullet_scene = preload('res://scenes/Bullets.tscn')
 
 enum Player {
 	P1 = 1,
@@ -31,8 +31,7 @@ var can_fire := true
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
-@onready var cannon_ray_cast = %CannonRayCast2D
-@onready var cooldown_timer = %CooldownTimer
+@onready var cooldown_timer: Timer = %CooldownTimer
 
 
 func _ready() -> void:
@@ -56,9 +55,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
-		shoot(90)
+		self.shoot(90)
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
-		shoot(270)
+		self.shoot(270)
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -90,10 +89,10 @@ func apply_collision_damage(delta: float):
 
 func shoot(angle: float):
 	var direction = Vector2.RIGHT.rotated(global_rotation + deg_to_rad(angle))
-	var bullet = bulletPath.instantiate()
+	var bullet = self.bullet_scene.instantiate()
 
+	bullet.global_position = self.global_position
 	bullet.direction = direction
-	bullet.global_position = self.cannon_ray_cast.global_position
 	bullet.add_collision_exception_with(self)
 	get_parent().add_child(bullet)
 
