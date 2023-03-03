@@ -26,6 +26,7 @@ max_health = 2.0
 polygon = PackedVector2Array(-30, -10, 15, -7, 35, 0, 15, 7, -30, 10)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_2f5eh")
 offset = Vector2(0, 8)
@@ -45,3 +46,9 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.578
+one_shot = true

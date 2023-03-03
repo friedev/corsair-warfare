@@ -10,6 +10,7 @@ enum Player {
 
 
 @export var player: Player
+@export var texture: Texture2D
 @export var speed: float
 @export var rotation_speed: float
 @export var _cooldown_timer: Node
@@ -27,11 +28,13 @@ var health: float:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 
+@onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
 
 
 func _ready() -> void:
+	self.sprite.texture = texture
 	self.health = self.max_health
 
 
