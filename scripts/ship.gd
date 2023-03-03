@@ -48,6 +48,8 @@ func _physics_process(delta: float) -> void:
 			self.apply_torque(rotation_speed)
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
+#	print("Linerar Velocity: ", self.linear_velocity.x)
+	
 
 
 func apply_collision_damage(delta: float):
@@ -78,3 +80,28 @@ func apply_collision_damage(delta: float):
 func destroy() -> void:
 	print("Player %d died" % self.player)
 	self.queue_free()
+
+func correctYMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.x = self.mass * 0.43
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
+
+func correctNYMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.x = self.mass * .043
+	impulse *= current_wind
+	self.apply_central_impulse(impulse)
+	
+func correctXMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.y = self.mass * .5
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
+	
+func correctNXMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.y = self.mass * .5
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
+

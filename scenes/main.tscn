@@ -1,21 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgv626rniu1e4"]
+[gd_scene load_steps=5 format=3 uid="uid://yqanqusq1sbd"]
 
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="Script" path="res://scripts/WindArea2D.gd" id="1_vt0xp"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ship_black.png" id="2_v3nrg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl3mo"]
+size = Vector2(1151, 647)
 
 [node name="Main" type="Node2D"]
 
+[node name="WindArea2D" type="Area2D" parent="."]
+gravity_space_override = 1
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 15.0
+script = ExtResource("1_vt0xp")
+metadata/_edit_group_ = true
+
+[node name="WindCollision2D" type="CollisionShape2D" parent="WindArea2D"]
+position = Vector2(575.5, 323.5)
+shape = SubResource("RectangleShape2D_sl3mo")
+
+[node name="Timer" type="Timer" parent="WindArea2D"]
+wait_time = 2.0
+
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
-position = Vector2(352, 255)
+position = Vector2(349, 574)
+rotation = -1.5708
 player = 1
+metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
-position = Vector2(508, 450)
+position = Vector2(430, 571)
 rotation = -1.5708
 player = 2
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" parent="Ship2" index="1"]
 texture = ExtResource("2_v3nrg")
+
+[connection signal="timeout" from="WindArea2D/Timer" to="WindArea2D" method="_on_timer_timeout"]
 
 [editable path="Ship1"]
 [editable path="Ship2"]
