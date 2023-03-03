@@ -1,37 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgv626rniu1e4"]
+[gd_scene load_steps=4 format=3 uid="uid://cgv626rniu1e4"]
 
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="2_i4wnm"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ship_black.png" id="2_v3nrg"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Ship1" parent="." node_paths=PackedStringArray("_cooldown_timer") instance=ExtResource("1_ra0tt")]
+[node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 position = Vector2(184, 95)
 player = 1
-_cooldown_timer = NodePath("Timer")
+texture = ExtResource("2_i4wnm")
 metadata/_edit_group_ = true
-
-[node name="RayCast2D" type="RayCast2D" parent="Ship1"]
-
-[node name="Timer" type="Timer" parent="Ship1"]
-wait_time = 0.578
-one_shot = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
 position = Vector2(972, 506)
 rotation = 3.14159
-scale = Vector2(0.870492, 0.941369)
 player = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" parent="Ship2" index="1"]
 texture = ExtResource("2_v3nrg")
-
-[node name="Timer" type="Timer" parent="Ship2"]
-wait_time = 0.578
-one_shot = true
-
-[node name="RayCast2D" type="RayCast2D" parent="Ship2"]
-
-[editable path="Ship1"]
-[editable path="Ship2"]
+metadata/_edit_group_ = true
