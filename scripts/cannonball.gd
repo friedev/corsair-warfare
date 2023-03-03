@@ -2,6 +2,7 @@
 # TODO splash into the ocean after a certain range (simulate height? or just based on speed)
 
 extends RigidBody2D
+class_name Cannonball
 
 @export var speed: float
 @export var damage: float

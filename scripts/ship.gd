@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name Ship
 
-const bullet_scene = preload('res://scenes/bullet.tscn')
+const cannonball_scene = preload('res://scenes/cannonball.tscn')
 
 enum Player {
 	P1 = 1,
@@ -55,9 +55,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
-		self.shoot(PI / 2)
+		self.fire_cannons(PI / 2)
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
-		self.shoot(3 * PI / 2)
+		self.fire_cannons(3 * PI / 2)
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -87,12 +87,12 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
-func shoot(cannon_rotation: float):
-	var bullet = self.bullet_scene.instantiate()
-	bullet.global_position = self.global_position
-	bullet.rotation = self.rotation + cannon_rotation
-	bullet.add_collision_exception_with(self)
-	self.get_parent().add_child(bullet)
+func fire_cannons(cannon_rotation: float):
+	var cannonball = self.cannonball_scene.instantiate()
+	cannonball.global_position = self.global_position
+	cannonball.rotation = self.rotation + cannon_rotation
+	cannonball.add_collision_exception_with(self)
+	self.get_parent().add_child(cannonball)
 
 	self.can_fire = false
 	self.cooldown_timer.start()
