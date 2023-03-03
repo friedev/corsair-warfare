@@ -13,9 +13,7 @@ enum Player {
 @export var texture: Texture2D
 @export var speed: float
 @export var rotation_speed: float
-@export var _cooldown_timer: Node
 
-var _can_fire := true
 @export var ram_dps_min: float
 @export var ram_dps_max: float
 @export var obstacle_dps: float
@@ -28,9 +26,13 @@ var health: float:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 
+var can_fire := true
+
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var cannon_ray_cast = %CannonRayCast2D
+@onready var cooldown_timer = %CooldownTimer
 
 
 func _ready() -> void:
@@ -43,9 +45,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var _ray_cast = $RayCast2D
-	var _cooldown_timer = $Timer
-	var sprite
 	var action_prefix: String
 	if self.player == Player.P1:
 		action_prefix = "p1"
@@ -56,14 +55,10 @@ func _physics_process(delta: float) -> void:
 		self.apply_torque(-rotation_speed)
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
-	if Input.is_action_just_pressed("%s_fire_right" % action_prefix) and _can_fire:
+	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
 		shoot(90)
-		_can_fire = true
-		_cooldown_timer.start()
-	if Input.is_action_just_pressed("%s_fire_left" % action_prefix) and _can_fire:
+	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
 		shoot(270)
-		_can_fire = true
-		_cooldown_timer.start()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -93,22 +88,23 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
-func shoot(angle):
-	var _ray_cast = $RayCast2D
-	var _cooldown_timer = $Timer
+func shoot(angle: float):
 	var direction = Vector2.RIGHT.rotated(global_rotation + deg_to_rad(angle))
 	var bullet = bulletPath.instantiate()
 
 	bullet.direction = direction
-	bullet.global_position = _ray_cast.global_position
+	bullet.global_position = self.cannon_ray_cast.global_position
 	bullet.add_collision_exception_with(self)
 	get_parent().add_child(bullet)
 
-
-func _on_Timer_timeout():
-	_can_fire = true
+	self.can_fire = false
+	self.cooldown_timer.start()
 
 
 func destroy() -> void:
 	print("Player %d died" % self.player)
 	self.queue_free()
+
+
+func _on_cooldown_timer_timeout() -> void:
+	self.can_fire = true
