@@ -55,9 +55,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
-		self.shoot(90)
+		self.shoot(PI / 2)
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
-		self.shoot(270)
+		self.shoot(3 * PI / 2)
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
@@ -87,14 +87,12 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
-func shoot(angle: float):
-	var direction = Vector2.RIGHT.rotated(global_rotation + deg_to_rad(angle))
+func shoot(cannon_rotation: float):
 	var bullet = self.bullet_scene.instantiate()
-
 	bullet.global_position = self.global_position
-	bullet.direction = direction
+	bullet.rotation = self.rotation + cannon_rotation
 	bullet.add_collision_exception_with(self)
-	get_parent().add_child(bullet)
+	self.get_parent().add_child(bullet)
 
 	self.can_fire = false
 	self.cooldown_timer.start()

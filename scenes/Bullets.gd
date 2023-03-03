@@ -1,20 +1,22 @@
-extends CharacterBody2D
+# TODO drag
+# TODO splash into the ocean after a certain range (simulate height? or just based on speed)
 
-var direction := Vector2.RIGHT
+extends RigidBody2D
 
-var speed := 300.0
+@export var speed: float
 
-func _ready():
-	set_as_top_level(true)
-	direction = direction.normalized()
-	look_at(direction + global_position)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	var v = direction * speed * delta
-	var c:= move_and_collide(v)
-	if c and c.get_collider():
-		# Do damage
-		queue_free()
+func _ready() -> void:
+	self.linear_velocity = Vector2.RIGHT.rotated(self.rotation) * self.speed
 
-func _on_VisiblityNotifier2D_screen_exited():
-	queue_free()
+
+func _on_VisiblityNotifier2D_screen_exited() -> void:
+	self.queue_free()
+
+
+func _on_body_entered(body: Node) -> void:
+	print("body entered")
+	if body is Ship:
+		# TODO do damage
+		print("hit ship")
+		pass
+	self.queue_free()

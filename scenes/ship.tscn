@@ -49,7 +49,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.578
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
