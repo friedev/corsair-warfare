@@ -20,7 +20,7 @@ player = 2
 texture = ExtResource("2_v3nrg")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Ship1", "Ship2")]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
 script = ExtResource("4_7ig8w")
-Ship1 = NodePath("../Ship1")
-Ship2 = NodePath("../Ship2")
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
