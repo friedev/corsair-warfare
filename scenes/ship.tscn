@@ -55,22 +55,22 @@ one_shot = true
 
 [node name="CannonSpawnPoints" type="Node2D" parent="."]
 
-[node name="CannonPointL1" type="Marker2D" parent="."]
+[node name="CannonPointL1" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
 position = Vector2(-20, -10)
 gizmo_extents = 4.0
 
-[node name="CannonPointL2" type="Marker2D" parent="."]
+[node name="CannonPointL2" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
 position = Vector2(10, -10)
 gizmo_extents = 4.0
 
-[node name="CannonPointR1" type="Marker2D" parent="."]
+[node name="CannonPointR1" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
 position = Vector2(-20, 10)
 gizmo_extents = 4.0
 
-[node name="CannonPointR2" type="Marker2D" parent="."]
+[node name="CannonPointR2" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
 position = Vector2(10, 10)
 gizmo_extents = 4.0
