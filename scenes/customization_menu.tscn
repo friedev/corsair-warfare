@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://i2e2c356wg46"]
+
+[ext_resource type="PackedScene" uid="uid://dehe53rxke5t" path="res://scenes/customization_section.tscn" id="1_owfwi"]
+
+[node name="CustomizationMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="CustomizationSection1" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_owfwi")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="CustomizationSection2" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("1_owfwi")]
+layout_mode = 2
