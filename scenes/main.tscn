@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8nmvmqb1gyyp"]
+[gd_scene load_steps=4 format=3 uid="uid://b8nmvmqb1gyyp"]
 
-[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="2_i4wnm"]
-[ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ship_black.png" id="2_v3nrg"]
+[ext_resource type="PackedScene" uid="uid://c0v5jsh58pr1x" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 
 [node name="Main" type="Node2D"]
@@ -10,14 +9,15 @@
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 position = Vector2(184, 95)
 player = 1
-texture = ExtResource("2_i4wnm")
+texture_health_high = ExtResource("2_1fgds")
+texture_health_medium = ExtResource("2_1fgds")
+texture_health_low = ExtResource("2_1fgds")
 metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
 position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
-texture = ExtResource("2_v3nrg")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
