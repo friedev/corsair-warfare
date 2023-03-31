@@ -12,7 +12,11 @@ enum Player {
 
 
 @export var player: Player
-@export var texture: Texture2D
+
+@export var texture_health_high: Texture2D
+@export var texture_health_medium: Texture2D
+@export var texture_health_low: Texture2D
+
 @export var speed: float
 @export var rotation_speed: float
 
@@ -27,6 +31,13 @@ var health: float:
 		if self.health == 0:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
+		# Update sprite based on health
+		if self.health > self.max_health * (2.0 / 3.0):
+			self.sprite.texture = self.texture_health_high
+		elif self.health > self.max_health * (1.0 / 3.0):
+			self.sprite.texture = self.texture_health_medium
+		else:
+			self.sprite.texture = self.texture_health_low
 
 @export var cannon_count: int
 
@@ -44,7 +55,7 @@ var can_fire := true
 
 
 func _ready() -> void:
-	self.sprite.texture = texture
+	self.sprite.texture = self.texture_health_high
 	self.health = self.max_health
 
 
