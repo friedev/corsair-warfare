@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=8 format=3 uid="uid://c0v5jsh58pr1x"]
 
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="1_2f5eh"]
+[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
+[ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
+[ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
+[ext_resource type="Texture2D" uid="uid://c2hw0ecgjbs6y" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -15,6 +18,9 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
+texture_health_high = ExtResource("2_4hfof")
+texture_health_medium = ExtResource("3_gtpjx")
+texture_health_low = ExtResource("4_3ogfv")
 speed = 50.0
 rotation_speed = 1000.0
 ram_dps_min = 0.1
