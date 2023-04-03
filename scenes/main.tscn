@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8nmvmqb1gyyp"]
+[gd_scene load_steps=6 format=3 uid="uid://b8nmvmqb1gyyp"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://c0v5jsh58pr1x" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
+[ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
+script = ExtResource("1_dq6dd")
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
+unique_name_in_owner = true
 position = Vector2(184, 95)
 player = 1
 texture_health_high = ExtResource("2_1fgds")
@@ -15,6 +19,7 @@ texture_health_low = ExtResource("2_1fgds")
 metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
+unique_name_in_owner = true
 position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
@@ -24,3 +29,17 @@ metadata/_edit_group_ = true
 script = ExtResource("4_6ifil")
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
+
+[node name="Menus" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CustomizationMenu" parent="Menus" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
+layout_mode = 2
+ship1 = NodePath("../../Ship1")
+ship2 = NodePath("../../Ship2")
+
+[connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
