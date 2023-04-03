@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8nmvmqb1gyyp"]
+[gd_scene load_steps=6 format=3 uid="uid://b8nmvmqb1gyyp"]
 
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="2_i4wnm"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ship_black.png" id="2_v3nrg"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
+[ext_resource type="Script" path="res://scenes/Camera2D.gd" id="4_7ig8w"]
+[ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/Untitled-1.png" id="5_fhlkv"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,6 +12,7 @@
 position = Vector2(184, 95)
 player = 1
 texture = ExtResource("2_i4wnm")
+obstacle_dps = 0.15
 metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
@@ -18,9 +20,23 @@ position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
 texture = ExtResource("2_v3nrg")
-metadata/_edit_group_ = true
+obstacle_dps = 0.15
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
-script = ExtResource("4_6ifil")
-ship1 = NodePath("../Ship1")
-ship2 = NodePath("../Ship2")
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship_1", "ship_2")]
+script = ExtResource("4_7ig8w")
+ship_1 = NodePath("../Ship1")
+ship_2 = NodePath("../Ship2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(589, 325)
+polygon = PackedVector2Array(0, -1500, 574.03, -1385.82, 1060.66, -1060.66, 1385.82, -574.03, 1500, 0, 1385.82, 574.03, 1060.66, 1060.66, 574.03, 1385.82, 0, 1500, -574.03, 1385.82, -1060.66, 1060.66, -1385.82, 574.03, -1500, 0, -1385.82, -574.03, -1060.66, -1060.66, -574.03, -1385.82, 0, -1500, 0, -2000, -2000, -2000, -2000, 2000, 2000, 2000, 2000, -2000, 0, -2000)
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+
+[node name="Untitled-1" type="Sprite2D" parent="."]
+position = Vector2(585, 257)
+scale = Vector2(3.47823, 3.47823)
+texture = ExtResource("5_fhlkv")
