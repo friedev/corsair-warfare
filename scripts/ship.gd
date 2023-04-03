@@ -36,8 +36,8 @@ var can_fire_R := true
 
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
-@onready var cooldown_timer_UI_L: ProgressBar = %Sprite2D/CannonTimerL
-@onready var cooldown_timer_UI_R: ProgressBar = %Sprite2D/CannonTimerR
+@onready var cooldown_timer_UI_L: ProgressBar = %CannonTimerL
+@onready var cooldown_timer_UI_R: ProgressBar = %CannonTimerR
 @onready var health_bar: ProgressBar = %HealthBar
 
 @onready var cooldown_timer_L: Timer = %CooldownTimerL
@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	#set cannon UI to update
 	self.cooldown_timer_UI_L.value = 0.5 - self.cooldown_timer_L.time_left
 	self.cooldown_timer_UI_R.value = 0.5 - self.cooldown_timer_R.time_left
-	
+
 	var action_prefix: String
 	if self.player == Player.P1:
 		action_prefix = "p1"
@@ -121,7 +121,7 @@ func fire_cannons(point1: Vector2, point2: Vector2, ball_rotation: float):
 		ball_position -= Vector2(perpendicular_offset, 0).rotated(ball_rotation)
 		self.spawn_cannonball(ball_position, ball_rotation)
 
-	
+
 
 
 func fire_cannons_right():
