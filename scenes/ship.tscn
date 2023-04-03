@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cdqt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp1kc"]
-bg_color = Color(0.458824, 1, 0.439216, 0.721569)
+bg_color = Color(0.87451, 0.858824, 0.843137, 0.721569)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -39,15 +39,18 @@ offset = Vector2(0, 8)
 
 [node name="CannonTimerR" type="ProgressBar" parent="Sprite2D"]
 unique_name_in_owner = true
+z_index = -1
 anchors_preset = -1
-anchor_left = 0.12
+anchor_left = 0.073
 anchor_top = 0.904
-anchor_right = 0.88
+anchor_right = 0.448845
 anchor_bottom = 1.136
-offset_left = -461.16
-offset_top = -143.008
-offset_right = -461.84
-offset_bottom = -143.072
+offset_left = -421.539
+offset_top = 186.992
+offset_right = -421.376
+offset_bottom = 186.928
+rotation = 1.5708
+pivot_offset = Vector2(320, 30)
 theme_override_styles/background = SubResource("StyleBoxEmpty_5cdqt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yp1kc")
 max_value = 0.5
@@ -57,15 +60,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CannonTimerL" type="ProgressBar" parent="Sprite2D"]
 unique_name_in_owner = true
+z_index = -1
 anchors_preset = -1
-anchor_left = 0.12
+anchor_left = 0.073
 anchor_top = -0.156
-anchor_right = 0.88
+anchor_right = 0.832
 anchor_bottom = 0.076
-offset_left = -461.16
-offset_top = -142.888
-offset_right = -461.84
-offset_bottom = -142.952
+offset_left = -421.539
+offset_top = -452.888
+offset_right = -744.376
+offset_bottom = -452.952
+rotation = 4.71239
+pivot_offset = Vector2(320, 30)
 theme_override_styles/background = SubResource("StyleBoxEmpty_5cdqt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yp1kc")
 max_value = 0.5

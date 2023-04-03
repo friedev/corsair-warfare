@@ -59,8 +59,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#set cannon UI to update
-	self.cooldown_timer_UI_L.value = self.cooldown_timer_L.time_left
-	self.cooldown_timer_UI_R.value = self.cooldown_timer_R.time_left
+	self.cooldown_timer_UI_L.value = 0.5 - self.cooldown_timer_L.time_left
+	self.cooldown_timer_UI_R.value = 0.5 - self.cooldown_timer_R.time_left
 	
 	var action_prefix: String
 	if self.player == Player.P1:
