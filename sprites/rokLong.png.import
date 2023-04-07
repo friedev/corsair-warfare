@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d27g5vtx1qhj2"
-path="res://.godot/imported/health_low.png-ed5b09e54f7c9d3537eeed79b4b92b0d.ctex"
+uid="uid://cgxeqxo6mkrt0"
+path="res://.godot/imported/rokLong.png-4994d1f05bca9ab5773215a5840e0e8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ships/black/health_low.png"
-dest_files=["res://.godot/imported/health_low.png-ed5b09e54f7c9d3537eeed79b4b92b0d.ctex"]
+source_file="res://sprites/rokLong.png"
+dest_files=["res://.godot/imported/rokLong.png-4994d1f05bca9ab5773215a5840e0e8f.ctex"]
 
 [params]
 
