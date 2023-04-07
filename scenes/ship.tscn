@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs6q85tm7pl1e"]
+[gd_scene load_steps=10 format=3 uid="uid://fmyumo0aq4ua"]
 
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="1_2f5eh"]
+[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
+[ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
+[ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
+[ext_resource type="Texture2D" uid="uid://c2hw0ecgjbs6y" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -9,12 +12,20 @@ bg_color = Color(0, 0, 0, 0.501961)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5848p"]
 bg_color = Color(0.945098, 0.219608, 0.196078, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cdqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp1kc"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+
 [node name="Ship" type="RigidBody2D"]
 max_contacts_reported = 4
 contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
+texture_health_high = ExtResource("2_4hfof")
+texture_health_medium = ExtResource("3_gtpjx")
+texture_health_low = ExtResource("4_3ogfv")
 speed = 50.0
 rotation_speed = 1000.0
 ram_dps_min = 0.1
@@ -48,7 +59,12 @@ value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="CooldownTimer" type="Timer" parent="."]
+[node name="CooldownTimerL" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="CooldownTimerR" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
@@ -75,4 +91,36 @@ unique_name_in_owner = true
 position = Vector2(10, 10)
 gizmo_extents = 4.0
 
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[node name="CannonBarL" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = -1
+offset_left = -1.0
+offset_top = -31.0
+offset_right = 99.0
+offset_bottom = -29.0
+rotation = 4.71239
+pivot_offset = Vector2(0, 1)
+theme_override_styles/background = SubResource("StyleBoxEmpty_5cdqt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yp1kc")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CannonBarR" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = -1
+offset_top = 32.0
+offset_right = 100.0
+offset_bottom = 34.0
+rotation = 1.5708
+pivot_offset = Vector2(0, 1)
+theme_override_styles/background = SubResource("StyleBoxEmpty_5cdqt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yp1kc")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
+[connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
