@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8nmvmqb1gyyp"]
+[gd_scene load_steps=7 format=3 uid="uid://cu3bi35hm6ysu"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
+[ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
@@ -29,6 +30,18 @@ metadata/_edit_group_ = true
 script = ExtResource("4_6ifil")
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
+
+[node name="Border" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
+position = Vector2(589, 325)
+polygon = PackedVector2Array(0, -1500, 574.03, -1385.82, 1060.66, -1060.66, 1385.82, -574.03, 1500, 0, 1385.82, 574.03, 1060.66, 1060.66, 574.03, 1385.82, 0, 1500, -574.03, 1385.82, -1060.66, 1060.66, -1385.82, 574.03, -1500, 0, -1385.82, -574.03, -1060.66, -1060.66, -574.03, -1385.82, 0, -1500, 0, -2000, -2000, -2000, -2000, 2000, 2000, 2000, 2000, -2000, 0, -2000)
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Border"]
+position = Vector2(585, 257)
+scale = Vector2(3.47823, 3.47823)
+texture = ExtResource("5_xsw8y")
 
 [node name="Menus" type="MarginContainer" parent="."]
 anchors_preset = 15

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbgcsj18ybvqk"]
 
-[ext_resource type="Script" path="res://scripts/cannonball.gd" id="1_dmxjy"]
+[ext_resource type="Script" path="res://scripts/cannonball.gd" id="1_01itt"]
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="2_pv1rt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
@@ -12,7 +12,7 @@ collision_layer = 2
 mass = 0.1
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_dmxjy")
+script = ExtResource("1_01itt")
 speed = 300.0
 damage = 0.05
 distance = 400.0
