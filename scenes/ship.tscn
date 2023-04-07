@@ -30,7 +30,7 @@ speed = 50.0
 rotation_speed = 1000.0
 ram_dps_min = 0.1
 ram_dps_max = 0.2
-obstacle_dps = 0.2
+obstacle_dps = 0.15
 max_health = 1.0
 cannon_count = 5
 
