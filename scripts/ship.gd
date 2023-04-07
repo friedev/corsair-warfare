@@ -12,7 +12,11 @@ enum Player {
 
 
 @export var player: Player
-@export var texture: Texture2D
+
+@export var texture_health_high: Texture2D
+@export var texture_health_medium: Texture2D
+@export var texture_health_low: Texture2D
+
 @export var speed: float
 @export var rotation_speed: float
 
@@ -21,22 +25,34 @@ enum Player {
 @export var obstacle_dps: float
 
 @export var max_health: float
+
 var health: float:
 	set(value):
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
 			self.destroy()
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
+		# Update sprite based on health
+		if self.health > self.max_health * (2.0 / 3.0):
+			self.sprite.texture = self.texture_health_high
+		elif self.health > self.max_health * (1.0 / 3.0):
+			self.sprite.texture = self.texture_health_medium
+		else:
+			self.sprite.texture = self.texture_health_low
 
 @export var cannon_count: int
 
-var can_fire := true
+var can_fire_l := true
+var can_fire_r := true
 
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
-@onready var cooldown_timer: Timer = %CooldownTimer
+@onready var cannon_bar_l: ProgressBar = %CannonBarL
+@onready var cannon_bar_r: ProgressBar = %CannonBarR
 
+@onready var cooldown_timer_l: Timer = %CooldownTimerL
+@onready var cooldown_timer_r: Timer = %CooldownTimerR
 @onready var cannon_point_l1: Node2D = %CannonPointL1
 @onready var cannon_point_l2: Node2D = %CannonPointL2
 @onready var cannon_point_r1: Node2D = %CannonPointR1
@@ -44,7 +60,7 @@ var can_fire := true
 
 
 func _ready() -> void:
-	self.sprite.texture = texture
+	self.sprite.texture = self.texture_health_high
 	self.health = self.max_health
 
 
@@ -53,6 +69,15 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	self.cannon_bar_l.value = (
+		self.cannon_bar_l.max_value
+		* (1 - self.cooldown_timer_l.time_left / self.cooldown_timer_l.wait_time)
+	)
+	self.cannon_bar_r.value = (
+		self.cannon_bar_r.max_value
+		* (1 - self.cooldown_timer_r.time_left / self.cooldown_timer_r.wait_time)
+	)
+
 	var action_prefix: String
 	if self.player == Player.P1:
 		action_prefix = "p1"
@@ -63,9 +88,9 @@ func _physics_process(delta: float) -> void:
 		self.apply_torque(-rotation_speed)
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
-	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire:
+	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
 		self.fire_cannons_right()
-	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire:
+	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
 		self.fire_cannons_left()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
@@ -112,9 +137,6 @@ func fire_cannons(point1: Vector2, point2: Vector2, ball_rotation: float):
 		ball_position -= Vector2(perpendicular_offset, 0).rotated(ball_rotation)
 		self.spawn_cannonball(ball_position, ball_rotation)
 
-	self.can_fire = false
-	self.cooldown_timer.start()
-
 
 func fire_cannons_right():
 	self.fire_cannons(
@@ -122,6 +144,9 @@ func fire_cannons_right():
 		self.cannon_point_r2.global_position,
 		PI / 2 + self.rotation
 	)
+	self.can_fire_r = false
+	self.cooldown_timer_r.start()
+
 
 func fire_cannons_left():
 	self.fire_cannons(
@@ -129,6 +154,9 @@ func fire_cannons_left():
 		self.cannon_point_l2.global_position,
 		-PI / 2 + self.rotation
 	)
+	self.can_fire_l = false
+	self.cooldown_timer_l.start()
+	print_debug("ran timer function")
 
 
 func destroy() -> void:
@@ -136,5 +164,9 @@ func destroy() -> void:
 	self.queue_free()
 
 
-func _on_cooldown_timer_timeout() -> void:
-	self.can_fire = true
+func _on_cooldown_timer_l_timeout() -> void:
+	self.can_fire_l = true
+
+
+func _on_cooldown_timer_r_timeout() -> void:
+	self.can_fire_r = true
