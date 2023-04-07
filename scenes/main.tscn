@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu3bi35hm6ysu"]
+[gd_scene load_steps=11 format=3 uid="uid://cu3bi35hm6ysu"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
-[ext_resource type="Script" path="res://scripts/WindArea2D.gd" id="1_vt0xp"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
+[ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
@@ -11,26 +11,13 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl3mo"]
-size = Vector2(1151, 647)
-
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
 
-[node name="WindArea2D" type="Area2D" parent="."]
-gravity_space_override = 1
-gravity_point_center = Vector2(0, 0)
-gravity_direction = Vector2(0, 0)
-gravity = 15.0
-script = ExtResource("1_vt0xp")
-metadata/_edit_group_ = true
-
-[node name="WindCollision2D" type="CollisionShape2D" parent="WindArea2D"]
-position = Vector2(575.5, 323.5)
-shape = SubResource("RectangleShape2D_sl3mo")
-
-[node name="Timer" type="Timer" parent="WindArea2D"]
-wait_time = 2.0
+[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+unique_name_in_owner = true
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -83,5 +70,4 @@ layout_mode = 2
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
-[connection signal="timeout" from="WindArea2D/Timer" to="WindArea2D" method="_on_timer_timeout"]
 [connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
