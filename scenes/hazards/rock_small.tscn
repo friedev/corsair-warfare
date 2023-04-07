@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bku4dpxpvppcb"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Texture2D" uid="uid://311125q7bqx" path="res://sprites/rokSmall.png" id="1_a7fvv"]
+[ext_resource type="Texture2D" uid="uid://311125q7bqx" path="res://sprites/hazards/rock_small.png" id="1_a7fvv"]
 
 [node name="RockSmall" type="StaticBody2D"]
 

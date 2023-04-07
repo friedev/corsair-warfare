@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5emirsx02vrq"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Texture2D" uid="uid://hc16yq2nj5sp" path="res://sprites/rokBig.png" id="1_3tkgc"]
+[ext_resource type="Texture2D" uid="uid://hc16yq2nj5sp" path="res://sprites/hazards/rock_big.png" id="1_3tkgc"]
 
 [node name="RockBig" type="StaticBody2D"]
 position = Vector2(2, -4)
