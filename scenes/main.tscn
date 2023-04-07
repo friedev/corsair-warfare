@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
-[ext_resource type="PackedScene" uid="uid://dyxwbiphjc64" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
-[ext_resource type="PackedScene" uid="uid://c5emirsx02vrq" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
-[ext_resource type="PackedScene" uid="uid://bku4dpxpvppcb" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
