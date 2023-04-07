@@ -46,14 +46,6 @@ position = Vector2(585, 257)
 scale = Vector2(3.47823, 3.47823)
 texture = ExtResource("5_xsw8y")
 
-[node name="rockSmall@CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(406, 365, 395, 370, 393, 377, 397, 382, 398, 387, 411, 394, 421, 394, 425, 387, 425, 378, 418, 370)
-
-[node name="rockSmall@Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(410.856, 380.75)
-scale = Vector2(0.321229, 0.321229)
-texture = ExtResource("6_l7q02")
-
 [node name="rockLong" type="StaticBody2D" parent="."]
 position = Vector2(-102, 64)
 
@@ -75,6 +67,16 @@ polygon = PackedVector2Array(627, 356, 619, 365, 614, 378, 613, 395, 613, 408, 6
 position = Vector2(659, 411)
 scale = Vector2(0.400944, 0.400944)
 texture = ExtResource("8_rgykk")
+
+[node name="rockSmall" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="rockSmall"]
+polygon = PackedVector2Array(406, 365, 395, 370, 393, 377, 397, 382, 398, 387, 411, 394, 421, 394, 425, 387, 425, 378, 418, 370)
+
+[node name="Sprite2D" type="Sprite2D" parent="rockSmall"]
+position = Vector2(410.856, 380.75)
+scale = Vector2(0.321229, 0.321229)
+texture = ExtResource("6_l7q02")
 
 [node name="Menus" type="MarginContainer" parent="."]
 anchors_preset = 15
