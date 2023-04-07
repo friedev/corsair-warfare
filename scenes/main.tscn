@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
-[ext_resource type="PackedScene" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
+[ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
