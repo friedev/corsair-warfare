@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bku4dpxpvppcb"]
+
+[ext_resource type="Texture2D" uid="uid://311125q7bqx" path="res://sprites/rokSmall.png" id="1_a7fvv"]
+
+[node name="RockSmall" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(406, 365, 395, 370, 393, 377, 397, 382, 398, 387, 411, 394, 421, 394, 425, 387, 425, 378, 418, 370)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(410.856, 380.75)
+scale = Vector2(0.321229, 0.321229)
+texture = ExtResource("1_a7fvv")
