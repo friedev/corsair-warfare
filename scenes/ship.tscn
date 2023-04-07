@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=5 format=3 uid="uid://bs6q85tm7pl1e"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]

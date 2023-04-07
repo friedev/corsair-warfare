@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8nmvmqb1gyyp"]
+[gd_scene load_steps=6 format=3 uid="uid://c33sxbwprvdet"]
 
-[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="PackedScene" uid="uid://bs6q85tm7pl1e" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ship_white.png" id="2_i4wnm"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ship_black.png" id="2_v3nrg"]
 [ext_resource type="Script" path="res://scenes/Camera2D.gd" id="4_7ig8w"]
