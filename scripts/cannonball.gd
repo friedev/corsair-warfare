@@ -18,10 +18,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if self.global_position.distance_to(start_position) > self.max_distance:
-		print(self.start_position)
-		print(self.global_position)
-		print(self.global_position.distance_to(start_position))
-		print(self.max_distance)
 		self.queue_free()
 
 
