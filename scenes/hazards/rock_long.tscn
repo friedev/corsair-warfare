@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cgxeqxo6mkrt0" path="res://sprites/hazards/rock_long.png" id="1_ml1sd"]
+
+[node name="RockLong" type="StaticBody2D"]
+position = Vector2(-102, 64)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(414, 168, 407, 174, 399, 197, 399, 216, 401, 237, 405, 245, 407, 249, 411, 265, 414, 269, 422, 272, 427, 268, 429, 249, 434, 233, 433, 216, 429, 212, 424, 182, 420, 170)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(417, 222)
+scale = Vector2(0.34188, 0.34188)
+texture = ExtResource("1_ml1sd")
