@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
-[ext_resource type="Texture2D" uid="uid://311125q7bqx" path="res://sprites/rokSmall.png" id="6_l7q02"]
-[ext_resource type="Texture2D" uid="uid://cgxeqxo6mkrt0" path="res://sprites/rokLong.png" id="7_c8wg4"]
-[ext_resource type="Texture2D" uid="uid://hc16yq2nj5sp" path="res://sprites/rokBig.png" id="8_rgykk"]
+[ext_resource type="PackedScene" uid="uid://dyxwbiphjc64" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
+[ext_resource type="PackedScene" uid="uid://c5emirsx02vrq" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
+[ext_resource type="PackedScene" uid="uid://bku4dpxpvppcb" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
@@ -46,37 +46,11 @@ position = Vector2(585, 257)
 scale = Vector2(3.47823, 3.47823)
 texture = ExtResource("5_xsw8y")
 
-[node name="RockLong" type="StaticBody2D" parent="."]
-position = Vector2(-102, 64)
+[node name="RockLong" parent="." instance=ExtResource("6_fsva3")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockLong"]
-polygon = PackedVector2Array(414, 168, 407, 174, 399, 197, 399, 216, 401, 237, 405, 245, 407, 249, 411, 265, 414, 269, 422, 272, 427, 268, 429, 249, 434, 233, 433, 216, 429, 212, 424, 182, 420, 170)
+[node name="RockBig" parent="." instance=ExtResource("7_1j5n2")]
 
-[node name="Sprite2D" type="Sprite2D" parent="RockLong"]
-position = Vector2(417, 222)
-scale = Vector2(0.34188, 0.34188)
-texture = ExtResource("7_c8wg4")
-
-[node name="RockBig" type="StaticBody2D" parent="."]
-position = Vector2(2, -4)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockBig"]
-polygon = PackedVector2Array(627, 356, 619, 365, 614, 378, 613, 395, 613, 408, 612, 417, 611, 427, 612, 436, 618, 442, 629, 445, 645, 447, 657, 449, 665, 456, 676, 462, 687, 463, 696, 455, 704, 439, 709, 421, 709, 402, 702, 391, 693, 382, 689, 374, 683, 361, 668, 360, 657, 355)
-
-[node name="Sprite2D" type="Sprite2D" parent="RockBig"]
-position = Vector2(659, 411)
-scale = Vector2(0.400944, 0.400944)
-texture = ExtResource("8_rgykk")
-
-[node name="RockSmall" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockSmall"]
-polygon = PackedVector2Array(406, 365, 395, 370, 393, 377, 397, 382, 398, 387, 411, 394, 421, 394, 425, 387, 425, 378, 418, 370)
-
-[node name="Sprite2D" type="Sprite2D" parent="RockSmall"]
-position = Vector2(410.856, 380.75)
-scale = Vector2(0.321229, 0.321229)
-texture = ExtResource("6_l7q02")
+[node name="RockSmall" parent="." instance=ExtResource("8_eo5qm")]
 
 [node name="Menus" type="MarginContainer" parent="."]
 anchors_preset = 15
