@@ -1,6 +1,8 @@
 extends Area2D
 class_name WindArea
 
+signal wind_changed(wind: Vector2)
+
 @export var ship1: Ship
 @export var ship2: Ship
 
@@ -39,6 +41,7 @@ func change_wind_direction():
 	self.wind =  wind_directions[index]
 #	var current_wind = Vector2(2, 0)
 	self.set_gravity_direction(self.wind)
+	self.wind_changed.emit(self.wind)
 	print("gravity direction:", self.wind)
 
 
