@@ -15,5 +15,4 @@ wind_change_rate = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(575.5, 323.5)
 shape = SubResource("CircleShape2D_yiq71")
