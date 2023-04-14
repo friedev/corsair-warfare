@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu3bi35hm6ysu"]
+[gd_scene load_steps=14 format=3 uid="uid://b75t67uo3jksu"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
+[ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://sprites/wind_background.png" id="11_dfaoh"]
+[ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://sprites/wind_arrow.png" id="12_0i2ml"]
+[ext_resource type="Script" path="res://scripts/wind_arrow.gd" id="12_uurxi"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
@@ -58,6 +61,53 @@ texture = ExtResource("5_xsw8y")
 
 [node name="RockSmall" parent="." instance=ExtResource("8_eo5qm")]
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="WindHUD" type="Control" parent="HUD/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="HUD/MarginContainer/WindHUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("11_dfaoh")
+
+[node name="Arrow" type="NinePatchRect" parent="HUD/MarginContainer/WindHUD"]
+layout_mode = 2
+offset_left = 1066.0
+offset_top = 45.0
+offset_right = 1116.0
+offset_bottom = 83.0
+grow_horizontal = 0
+pivot_offset = Vector2(6, 19)
+texture = ExtResource("12_0i2ml")
+region_rect = Rect2(59, 45, 46, 36)
+patch_margin_left = 9
+patch_margin_top = 19
+patch_margin_right = 41
+patch_margin_bottom = 19
+script = ExtResource("12_uurxi")
+minimum_size = 50
+maximum_size = 64
+
 [node name="Menus" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,4 +120,5 @@ layout_mode = 2
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
+[connection signal="wind_changed" from="WindArea" to="HUD/MarginContainer/WindHUD/Arrow" method="_on_wind_area_wind_changed"]
 [connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
