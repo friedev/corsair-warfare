@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b75t67uo3jksu"]
+[gd_scene load_steps=19 format=3 uid="uid://duaeydrjcm1bi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -8,21 +8,51 @@
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
+[ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/wind_particle.png" id="6_gbier"]
+[ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 [ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://sprites/wind_background.png" id="11_dfaoh"]
 [ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://sprites/wind_arrow.png" id="12_0i2ml"]
 [ext_resource type="Script" path="res://scripts/wind_arrow.gd" id="12_uurxi"]
 
+[sub_resource type="Gradient" id="Gradient_3bfk4"]
+offsets = PackedFloat32Array(0, 0.496296, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_plouj"]
+gradient = SubResource("Gradient_3bfk4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gbbth"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2000.0
+particle_flag_disable_z = true
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_plouj")
+
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
 
-[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
-unique_name_in_owner = true
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
+script = ExtResource("4_6ifil")
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
-wind_change_rate = 2.0
-wind_noise_multiplier = 3.0
+
+[node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
+position = Vector2(575.5, 323.5)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_gbbth")
+texture = ExtResource("6_gbier")
+lifetime = 2.0
+script = ExtResource("7_0s2p7")
+added_velocity_multiplier = 100.0
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -40,10 +70,13 @@ rotation = 3.14159
 player = 2
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
-script = ExtResource("4_6ifil")
+[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+unique_name_in_owner = true
+position = Vector2(575.5, 323.5)
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
+wind_change_rate = 1.0
+wind_noise_multiplier = 3.0
 
 [node name="Border" type="StaticBody2D" parent="."]
 
@@ -122,5 +155,6 @@ layout_mode = 2
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
+[connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUD/MarginContainer/WindHUD/Arrow" method="_on_wind_area_wind_changed"]
 [connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
