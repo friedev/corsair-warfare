@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu3bi35hm6ysu"]
+[gd_scene load_steps=11 format=3 uid="uid://cu3bi35hm6ysu"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
+[ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
@@ -12,6 +13,11 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
+
+[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+unique_name_in_owner = true
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true

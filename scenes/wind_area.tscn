@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://btova3sdipnu"]
+
+[ext_resource type="Script" path="res://scripts/wind_area.gd" id="1_om06h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yiq71"]
+radius = 2000.0
+
+[node name="WindArea" type="Area2D"]
+gravity_space_override = 1
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 15.0
+script = ExtResource("1_om06h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(575.5, 323.5)
+shape = SubResource("CircleShape2D_yiq71")
+
+[node name="WindChangeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="WindChangeTimer" to="." method="_on_timer_timeout"]
