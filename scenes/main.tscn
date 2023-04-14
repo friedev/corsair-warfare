@@ -21,6 +21,8 @@ script = ExtResource("1_dq6dd")
 unique_name_in_owner = true
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
+wind_change_rate = 2.0
+wind_noise_multiplier = 3.0
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
