@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
 [ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
 [ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
-[ext_resource type="PackedScene" path="res://scenes/cannonball.tscn" id="5_iubct"]
+[ext_resource type="PackedScene" uid="uid://coqvjgbm03mhf" path="res://scenes/cannonball.tscn" id="5_iubct"]
 [ext_resource type="PackedScene" uid="uid://cehkhvu5ki3mn" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
