@@ -55,6 +55,8 @@ var can_fire_r := true
 
 @onready var cooldown_timer_l: Timer = %CooldownTimerL
 @onready var cooldown_timer_r: Timer = %CooldownTimerR
+@onready var cannon_particles_l: GPUParticles2D = %CannonParticlesL
+@onready var cannon_particles_r: GPUParticles2D = %CannonParticlesR
 @onready var cannon_point_l1: Node2D = %CannonPointL1
 @onready var cannon_point_l2: Node2D = %CannonPointL2
 @onready var cannon_point_r1: Node2D = %CannonPointR1
@@ -155,6 +157,7 @@ func fire_cannons_right():
 		PI / 2 + self.rotation
 	)
 	self.can_fire_r = false
+	self.cannon_particles_r.restart()
 	self.cooldown_timer_r.start()
 
 
@@ -165,6 +168,7 @@ func fire_cannons_left():
 		-PI / 2 + self.rotation
 	)
 	self.can_fire_l = false
+	self.cannon_particles_l.restart()
 	self.cooldown_timer_l.start()
 
 
