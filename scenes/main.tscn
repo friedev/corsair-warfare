@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://duaeydrjcm1bi"]
+[gd_scene load_steps=20 format=3 uid="uid://duaeydrjcm1bi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://sprites/wind_background.png" id="11_dfaoh"]
 [ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://sprites/wind_arrow.png" id="12_0i2ml"]
 [ext_resource type="Script" path="res://scripts/wind_arrow.gd" id="12_uurxi"]
+[ext_resource type="PackedScene" uid="uid://daq3dji20ld26" path="res://scenes/game_over_menu.tscn" id="16_pt5je"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -96,9 +97,9 @@ texture = ExtResource("5_xsw8y")
 
 [node name="RockSmall" parent="." instance=ExtResource("8_eo5qm")]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,11 +111,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WindHUD" type="Control" parent="HUD/MarginContainer"]
+[node name="WindHUD" type="Control" parent="HUDLayer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Background" type="TextureRect" parent="HUD/MarginContainer/WindHUD"]
+[node name="Background" type="TextureRect" parent="HUDLayer/MarginContainer/WindHUD"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -125,7 +126,7 @@ grow_horizontal = 0
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("11_dfaoh")
 
-[node name="Arrow" type="NinePatchRect" parent="HUD/MarginContainer/WindHUD"]
+[node name="Arrow" type="NinePatchRect" parent="HUDLayer/MarginContainer/WindHUD"]
 layout_mode = 2
 offset_left = 1066.0
 offset_top = 45.0
@@ -143,18 +144,29 @@ script = ExtResource("12_uurxi")
 minimum_size = 50
 maximum_size = 64
 
-[node name="Menus" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MenuLayer" type="CanvasLayer" parent="."]
 
-[node name="CustomizationMenu" parent="Menus" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
-layout_mode = 2
+[node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
+[node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
-[connection signal="wind_changed" from="WindArea" to="HUD/MarginContainer/WindHUD/Arrow" method="_on_wind_area_wind_changed"]
-[connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD/Arrow" method="_on_wind_area_wind_changed"]
+[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
