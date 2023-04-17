@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Ship
 
+signal destroyed(ship: Ship)
+
 const max_cannonball_offset := 10.0
 
 const cannonball_scene = preload('res://scenes/cannonball.tscn')
@@ -167,8 +169,8 @@ func fire_cannons_left():
 
 
 func destroy() -> void:
-	print("Player %d died" % self.player)
-	self.queue_free()
+	self.set_enabled(false)
+	self.destroyed.emit(self)
 
 
 func correctYMovement(current_wind):

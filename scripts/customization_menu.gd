@@ -17,6 +17,10 @@ var sails_values: Array[float] = [1.0, (4.0 / 3.0), (5.0 / 3.0), 2.0]
 var cannons_values: Array[int] = [3, 4, 5, 6]
 
 
+func _ready() -> void:
+	self.show()
+
+
 func apply_customization(ship: Ship, section: CustomizationSection) -> void:
 	ship.max_health = self.hull_values[section.hull_slider.value]
 	ship.speed *= self.sails_values[section.sails_slider.value]
