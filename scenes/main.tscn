@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dy4kivb4vultd"]
+[gd_scene load_steps=19 format=3 uid="uid://bh1in8rhihltl"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
-[ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
+[ext_resource type="PackedScene" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/wind_particle.png" id="6_gbier"]
 [ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
-[ext_resource type="PackedScene" uid="uid://daq3dji20ld26" path="res://scenes/game_over_menu.tscn" id="16_pt5je"]
+[ext_resource type="PackedScene" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
