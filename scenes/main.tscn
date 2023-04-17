@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c74nrbyrlt82j"]
+[gd_scene load_steps=23 format=3 uid="uid://c74nrbyrlt82j"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
-[ext_resource type="PackedScene" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
+[ext_resource type="PackedScene" uid="uid://by0ui2gqs1ir7" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="PackedScene" uid="uid://das0xoqbeptib" path="res://scenes/menus/main_menu.tscn" id="13_v2k00"]
+[ext_resource type="PackedScene" uid="uid://dygsf1wll52ka" path="res://scenes/menus/options_menu.tscn" id="14_6udvg"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
 [ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://sound/wind_ambience.ogg" id="16_igyk8"]
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
@@ -114,13 +115,11 @@ layout_mode = 2
 [node name="MainMenu" parent="MenuLayer" instance=ExtResource("13_v2k00")]
 visible = false
 
+[node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("14_6udvg")]
+visible = false
+
 [node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
 visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1152.0
-offset_bottom = 648.0
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
@@ -136,9 +135,11 @@ offset_bottom = 648.0
 stream = ExtResource("15_8ixme")
 volume_db = -12.0
 autoplay = true
+bus = &"Ambience"
 
 [node name="WindAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_igyk8")
+bus = &"Ambience"
 script = ExtResource("17_034qo")
 min_volume_db = -12.0
 max_volume_db = -3.0
@@ -149,5 +150,7 @@ max_volume_db = -3.0
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
+[connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
+[connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
