@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbs8f7tcmbrkl"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/customization_section.gd" id="1_sw0ox"]
+[ext_resource type="Script" path="res://scripts/menus/customization_section.gd" id="1_sw0ox"]
 
 [node name="CustomizationSection" type="VBoxContainer"]
 anchors_preset = 15

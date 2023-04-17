@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bs0etbf2qxvdl"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/customization_menu.gd" id="1_i366w"]
-[ext_resource type="PackedScene" uid="uid://bbs8f7tcmbrkl" path="res://scenes/customization_section.tscn" id="1_owfwi"]
+[ext_resource type="Script" path="res://scripts/menus/customization_menu.gd" id="1_i366w"]
+[ext_resource type="PackedScene" uid="uid://bbs8f7tcmbrkl" path="res://scenes/menus/customization_section.tscn" id="1_owfwi"]
 
 [node name="CustomizationMenu" type="MarginContainer"]
 anchors_preset = 15

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cbgcsj18ybvqk"]
 
 [ext_resource type="Script" path="res://scripts/cannonball.gd" id="1_kn4xp"]
-[ext_resource type="PackedScene" path="res://scenes/cannon_splash.tscn" id="2_pmrod"]
+[ext_resource type="PackedScene" uid="uid://b4ru0ac0x1tft" path="res://scenes/cannon_splash.tscn" id="2_pmrod"]
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="2_pv1rt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
