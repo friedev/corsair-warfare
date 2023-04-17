@@ -75,9 +75,9 @@ unique_name_in_owner = true
 position = Vector2(575.5, 323.5)
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
-wind_change_rate = 1.0
-wind_noise_multiplier = 3.0
-initial_wind_noise_position = 10.0
+change_rate = 1.0
+noise_multiplier = 3.0
+initial_noise_position = 10.0
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
 

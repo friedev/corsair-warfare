@@ -5,9 +5,9 @@ signal wind_changed(wind: Vector2)
 
 @export var ship1: Ship
 @export var ship2: Ship
-@export var wind_change_rate: float
-@export var wind_noise_multiplier: float
-@export var initial_wind_noise_position: float
+@export var change_rate: float
+@export var noise_multiplier: float
+@export var initial_noise_position: float
 
 var wind: Vector2:
 	set(value):
@@ -15,25 +15,25 @@ var wind: Vector2:
 		self.set_gravity_direction(self.wind)
 		self.wind_changed.emit(self.wind)
 
-var wind_noise_x := FastNoiseLite.new()
-var wind_noise_y := FastNoiseLite.new()
-var wind_noise_position: float
+var noise_x := FastNoiseLite.new()
+var noise_y := FastNoiseLite.new()
+var noise_position: float
 
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
 
 
 func _ready() -> void:
 	var seed := int(Time.get_unix_time_from_system())
-	self.wind_noise_x.seed = seed
-	self.wind_noise_y.seed = seed + 1
-	self.wind_noise_position = self.initial_wind_noise_position
+	self.noise_x.seed = seed
+	self.noise_y.seed = seed + 1
+	self.noise_position = self.initial_noise_position
 
 
 func _physics_process(delta: float) -> void:
-	self.wind_noise_position += delta * self.wind_change_rate
+	self.noise_position += delta * self.change_rate
 	self.wind = Vector2(
-		self.wind_noise_x.get_noise_1d(self.wind_noise_position) * self.wind_noise_multiplier,
-		self.wind_noise_y.get_noise_1d(self.wind_noise_position) * self.wind_noise_multiplier
+		self.noise_x.get_noise_1d(self.noise_position) * self.noise_multiplier,
+		self.noise_y.get_noise_1d(self.noise_position) * self.noise_multiplier
 	).limit_length()
 
 	if self.wind.x != 0:
