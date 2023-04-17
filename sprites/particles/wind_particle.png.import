@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfdfpuivgxput"
-path="res://.godot/imported/cannon_fire_particle.png-d4b16bfb8d6759cccad8d3d194771170.ctex"
+uid="uid://c02s3d4dov18p"
+path="res://.godot/imported/wind_particle.png-eb4f3a1cf683795d73e3e71bc156aa9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/cannon_fire_particle.png"
-dest_files=["res://.godot/imported/cannon_fire_particle.png-d4b16bfb8d6759cccad8d3d194771170.ctex"]
+source_file="res://sprites/particles/wind_particle.png"
+dest_files=["res://.godot/imported/wind_particle.png-eb4f3a1cf683795d73e3e71bc156aa9e.ctex"]
 
 [params]
 

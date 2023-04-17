@@ -1,13 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bh1in8rhihltl"]
+[gd_scene load_steps=19 format=3 uid="uid://bqelup1o8qalj"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
+[ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
-[ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/wind_particle.png" id="6_gbier"]
 [ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
@@ -50,7 +50,7 @@ unique_name_in_owner = true
 position = Vector2(575.5, 323.5)
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_gbbth")
-texture = ExtResource("6_gbier")
+texture = ExtResource("3_ahd1i")
 lifetime = 2.0
 script = ExtResource("7_0s2p7")
 added_velocity_multiplier = 100.0
