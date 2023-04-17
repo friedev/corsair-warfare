@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c74nrbyrlt82j"]
+[gd_scene load_steps=24 format=3 uid="uid://c74nrbyrlt82j"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
 [ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://sound/wind_ambience.ogg" id="16_igyk8"]
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
+[ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
@@ -125,11 +126,9 @@ ship2 = NodePath("../../Ship2")
 
 [node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
 visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1152.0
-offset_bottom = 648.0
+
+[node name="PauseMenu" parent="MenuLayer" instance=ExtResource("17_2ohqg")]
+visible = false
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_8ixme")
@@ -148,9 +147,12 @@ max_volume_db = -3.0
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
