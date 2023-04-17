@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d22xlyyauxmps"]
+[gd_scene load_steps=9 format=3 uid="uid://b4ru0ac0x1tft"]
 
-[ext_resource type="Script" path="res://scenes/cannon_splash.gd" id="1_qq1ib"]
+[ext_resource type="Script" path="res://scripts/cannon_splash.gd" id="1_is2kv"]
 [ext_resource type="Texture2D" uid="uid://fckospq0ifsg" path="res://sprites/cannon_splash_particle.png" id="1_wnbp1"]
 [ext_resource type="AudioStream" uid="uid://dlab8yw16mk8s" path="res://sound/cannon_splash.wav" id="2_v51s1"]
 
@@ -29,7 +29,7 @@ scale_curve = SubResource("CurveTexture_wulln")
 color_ramp = SubResource("GradientTexture1D_17qbj")
 
 [node name="CannonSplash" type="Node2D"]
-script = ExtResource("1_qq1ib")
+script = ExtResource("1_is2kv")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
