@@ -97,6 +97,12 @@ func _physics_process(delta: float) -> void:
 #	print("Linerar Velocity: ", self.linear_velocity.x)
 
 
+func set_enabled(enabled: bool) -> void:
+	self.visible = enabled
+	self.set_process(enabled)
+	self.set_physics_process(enabled)
+	self.set_process_input(enabled)
+
 
 func apply_collision_damage(delta: float):
 	for body in self.get_colliding_bodies():
