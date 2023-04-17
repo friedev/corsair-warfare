@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonball.png" id="4_aft52"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
-radius = 4.0
+radius = 3.0
 
 [node name="Cannonball" type="RigidBody2D"]
 z_index = -1
@@ -26,7 +26,7 @@ impact_scene = ExtResource("3_6iyyo")
 shape = SubResource("CircleShape2D_0eiya")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.06, 0.06)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_aft52")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
