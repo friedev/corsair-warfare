@@ -26,7 +26,7 @@ impact_scene = ExtResource("3_6iyyo")
 shape = SubResource("CircleShape2D_0eiya")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.016, 0.016)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("2_pv1rt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
