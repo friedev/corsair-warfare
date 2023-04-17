@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dy4kivb4vultd"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
-[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="PackedScene" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
