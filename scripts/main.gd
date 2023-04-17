@@ -15,3 +15,7 @@ func _on_customization_menu_players_ready() -> void:
 	self.ship1.set_enabled(true)
 	self.ship2.set_enabled(true)
 	self.wind_area.collision_shape.disabled = false
+
+
+func _on_game_over_menu_game_restarted() -> void:
+	self.get_tree().reload_current_scene()
