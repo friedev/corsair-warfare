@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfg8mcbfdgfvp"]
+[gd_scene load_steps=6 format=3 uid="uid://coqvjgbm03mhf"]
 
 [ext_resource type="Script" path="res://scripts/cannonball.gd" id="1_kn4xp"]
 [ext_resource type="PackedScene" uid="uid://2hlal8vla504" path="res://scenes/cannonball_splash.tscn" id="2_3t3ka"]
-[ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonBall.png" id="2_pv1rt"]
 [ext_resource type="PackedScene" uid="uid://dll04l5d48uvf" path="res://scenes/cannonball_impact.tscn" id="3_6iyyo"]
+[ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://sprites/cannonball.png" id="4_aft52"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0eiya"]
 radius = 4.0
@@ -27,6 +27,6 @@ shape = SubResource("CircleShape2D_0eiya")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.06, 0.06)
-texture = ExtResource("2_pv1rt")
+texture = ExtResource("4_aft52")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
