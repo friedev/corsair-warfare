@@ -30,6 +30,9 @@ enum Player {
 
 var health: float:
 	set(value):
+		if value < self.health:
+			if not self.damage_sound.playing:
+				self.damage_sound.play()
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
 			self.destroy()
@@ -63,6 +66,8 @@ var can_fire_r := true
 @onready var cannon_point_l2: Node2D = %CannonPointL2
 @onready var cannon_point_r1: Node2D = %CannonPointR1
 @onready var cannon_point_r2: Node2D = %CannonPointR2
+
+@onready var damage_sound: AudioStreamPlayer2D = %DamageSound
 
 
 func _ready() -> void:
