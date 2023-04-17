@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://y4tnpo2kc8lm"]
+[gd_scene load_steps=19 format=3 uid="uid://y4tnpo2kc8lm"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
@@ -10,12 +10,37 @@
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
 [ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://sound/ship_damage.wav" id="10_ytmsd"]
+[ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://sprites/particles/ship_wake_particle.png" id="11_yy8k2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5848p"]
 bg_color = Color(0.945098, 0.219608, 0.196078, 1)
+
+[sub_resource type="Gradient" id="Gradient_ncuge"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ca4hg"]
+gradient = SubResource("Gradient_ncuge")
+
+[sub_resource type="Curve" id="Curve_b4n0l"]
+_data = [Vector2(0, 0.527273), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gdn5k"]
+curve = SubResource("Curve_b4n0l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ae3ss"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_gdn5k")
+color_ramp = SubResource("GradientTexture1D_ca4hg")
 
 [node name="Ship" type="RigidBody2D"]
 max_contacts_reported = 4
@@ -36,6 +61,7 @@ cannonball_scene = ExtResource("5_iubct")
 cannon_count = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
 polygon = PackedVector2Array(-18, -8, 15, -7, 33, 0, 42, 1, 33, 2, 16, 9, -18, 9, -40, 6, -40, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -119,6 +145,14 @@ stream = ExtResource("9_phvo0")
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_ytmsd")
+
+[node name="WakeParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+z_index = -3
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_ae3ss")
+texture = ExtResource("11_yy8k2")
+lifetime = 6.0
 
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
