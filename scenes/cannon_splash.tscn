@@ -33,6 +33,7 @@ script = ExtResource("1_is2kv")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
+z_index = -2
 emitting = false
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_tkylg")
