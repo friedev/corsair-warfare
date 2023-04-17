@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bqelup1o8qalj"]
+[gd_scene load_steps=21 format=3 uid="uid://c74nrbyrlt82j"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
+[ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://sound/wind_ambience.ogg" id="16_igyk8"]
 [ext_resource type="PackedScene" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
+[ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -128,12 +130,20 @@ offset_bottom = 648.0
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_8ixme")
-volume_db = -10.0
+volume_db = -12.0
 autoplay = true
+
+[node name="WindAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_igyk8")
+autoplay = true
+script = ExtResource("17_034qo")
+min_volume_db = -12.0
+max_volume_db = -3.0
 
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
+[connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
