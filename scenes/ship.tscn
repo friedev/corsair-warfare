@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://y4tnpo2kc8lm"]
+[gd_scene load_steps=13 format=3 uid="uid://y4tnpo2kc8lm"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cehkhvu5ki3mn" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
+[ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://sound/ship_damage.wav" id="10_ytmsd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -114,6 +115,10 @@ stream = ExtResource("9_phvo0")
 [node name="CannonSoundR" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_phvo0")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_ytmsd")
 
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
