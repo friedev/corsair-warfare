@@ -45,6 +45,7 @@ ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
 
 [node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
+unique_name_in_owner = true
 position = Vector2(575.5, 323.5)
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_gbbth")
@@ -100,6 +101,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="WindHUD" parent="HUDLayer/MarginContainer" instance=ExtResource("12_4w4eo")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
