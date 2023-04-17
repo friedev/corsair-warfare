@@ -17,3 +17,7 @@ licensed under [CC BY 3.0](https://freesound.org/people/soundscalpel.com/)
 [Wind Houling 1 .wav](https://freesound.org/people/Bosk1/sounds/144083/)
 by [Bosk1](https://freesound.org/people/Bosk1/)
 licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
+[Smash.ogg](https://freesound.org/people/egomassive/sounds/536777/)
+by [egomassive](https://freesound.org/people/egomassive/)
+licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
