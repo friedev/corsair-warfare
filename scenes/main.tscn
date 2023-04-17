@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://duaeydrjcm1bi"]
+[gd_scene load_steps=18 format=3 uid="uid://duaeydrjcm1bi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -12,9 +12,7 @@
 [ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
-[ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://sprites/wind_background.png" id="11_dfaoh"]
-[ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://sprites/wind_arrow.png" id="12_0i2ml"]
-[ext_resource type="Script" path="res://scripts/wind_arrow.gd" id="12_uurxi"]
+[ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="PackedScene" uid="uid://daq3dji20ld26" path="res://scenes/game_over_menu.tscn" id="16_pt5je"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
@@ -111,38 +109,8 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WindHUD" type="Control" parent="HUDLayer/MarginContainer"]
+[node name="WindHUD" parent="HUDLayer/MarginContainer" instance=ExtResource("12_4w4eo")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Background" type="TextureRect" parent="HUDLayer/MarginContainer/WindHUD"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -128.0
-offset_bottom = 128.0
-grow_horizontal = 0
-pivot_offset = Vector2(64, 64)
-texture = ExtResource("11_dfaoh")
-
-[node name="Arrow" type="NinePatchRect" parent="HUDLayer/MarginContainer/WindHUD"]
-layout_mode = 2
-offset_left = 1066.0
-offset_top = 45.0
-offset_right = 1116.0
-offset_bottom = 83.0
-grow_horizontal = 0
-pivot_offset = Vector2(6, 19)
-texture = ExtResource("12_0i2ml")
-region_rect = Rect2(59, 45, 46, 36)
-patch_margin_left = 9
-patch_margin_top = 19
-patch_margin_right = 41
-patch_margin_bottom = 19
-script = ExtResource("12_uurxi")
-minimum_size = 50
-maximum_size = 64
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -167,6 +135,6 @@ offset_bottom = 648.0
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
-[connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD/Arrow" method="_on_wind_area_wind_changed"]
+[connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
