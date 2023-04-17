@@ -24,18 +24,9 @@ text = "Ship 1 Wins!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
-alignment = 1
+size_flags_horizontal = 4
+text = "Back to Main Menu"
 
-[node name="RestartButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Restart"
-
-[node name="QuitButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

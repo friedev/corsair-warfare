@@ -8,12 +8,8 @@ signal game_restarted
 func _on_ship_destroyed(ship: Ship) -> void:
 	if not self.visible:
 		self.show()
-		self.label.text = "Ship %d Wins!" % ship.player
+		self.label.text = "Ship %d Wins!" % (3 - ship.player)
 
 
-func _on_restart_button_pressed() -> void:
+func _on_menu_button_pressed() -> void:
 	self.game_restarted.emit()
-
-
-func _on_quit_button_pressed() -> void:
-	self.get_tree().quit()
