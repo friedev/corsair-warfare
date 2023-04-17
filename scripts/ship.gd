@@ -129,7 +129,7 @@ func set_enabled(enabled: bool) -> void:
 	self.set_process(enabled)
 	self.set_physics_process(enabled)
 	self.set_process_input(enabled)
-	self.collision_polygon.disabled = not enabled
+	self.collision_polygon.set_deferred(&"disabled", not enabled)
 
 
 func apply_collision_damage(delta: float):
