@@ -59,6 +59,15 @@ lifetime = 2.0
 script = ExtResource("7_0s2p7")
 added_velocity_multiplier = 100.0
 
+[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+unique_name_in_owner = true
+position = Vector2(575.5, 323.5)
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
+change_rate = 1.0
+noise_multiplier = 3.0
+initial_noise_position = 10.0
+
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
 position = Vector2(184, 95)
@@ -74,15 +83,6 @@ position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
 metadata/_edit_group_ = true
-
-[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
-unique_name_in_owner = true
-position = Vector2(575.5, 323.5)
-ship1 = NodePath("../Ship1")
-ship2 = NodePath("../Ship2")
-change_rate = 1.0
-noise_multiplier = 3.0
-initial_noise_position = 10.0
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
 
@@ -144,11 +144,11 @@ script = ExtResource("17_034qo")
 min_volume_db = -12.0
 max_volume_db = -3.0
 
-[connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
-[connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
+[connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
