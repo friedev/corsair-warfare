@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4ru0ac0x1tft"]
+[gd_scene load_steps=9 format=3 uid="uid://2hlal8vla504"]
 
 [ext_resource type="Script" path="res://scripts/cannon_splash.gd" id="1_is2kv"]
-[ext_resource type="Texture2D" uid="uid://fckospq0ifsg" path="res://sprites/cannon_splash_particle.png" id="1_wnbp1"]
+[ext_resource type="Texture2D" uid="uid://fckospq0ifsg" path="res://sprites/particles/cannon_splash_particle.png" id="2_2bd7o"]
 [ext_resource type="AudioStream" uid="uid://dlab8yw16mk8s" path="res://sound/cannon_splash.wav" id="2_v51s1"]
 
 [sub_resource type="Gradient" id="Gradient_ux4k5"]
@@ -36,7 +36,7 @@ unique_name_in_owner = true
 emitting = false
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_tkylg")
-texture = ExtResource("1_wnbp1")
+texture = ExtResource("2_2bd7o")
 one_shot = true
 explosiveness = 1.0
 
