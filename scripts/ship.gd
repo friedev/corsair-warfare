@@ -40,10 +40,16 @@ var health: float:
 		# Update sprite based on health
 		if self.health > self.max_health * (2.0 / 3.0):
 			self.sprite.texture = self.texture_health_high
+			self.medium_health_particles.emitting = false
+			self.low_health_particles.emitting = false
 		elif self.health > self.max_health * (1.0 / 3.0):
 			self.sprite.texture = self.texture_health_medium
+			self.medium_health_particles.emitting = true
+			self.low_health_particles.emitting = false
 		else:
 			self.sprite.texture = self.texture_health_low
+			self.medium_health_particles.emitting = false
+			self.low_health_particles.emitting = true
 
 @export var cannon_count: int
 
@@ -70,6 +76,8 @@ var can_fire_r := true
 @onready var collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 @onready var damage_sound: AudioStreamPlayer2D = %DamageSound
 @onready var wake_particles: GPUParticles2D = %WakeParticles
+@onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
+@onready var low_health_particles: GPUParticles2D = %LowHealthParticles
 
 
 
