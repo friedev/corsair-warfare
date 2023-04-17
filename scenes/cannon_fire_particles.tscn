@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmsrkqhdxn7x5"]
 
-[ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/cannon_fire_particle.png" id="1_ujumi"]
+[ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/cannon_fire_particle.png" id="1_kcrl7"]
 
 [sub_resource type="Gradient" id="Gradient_slh6p"]
 colors = PackedColorArray(0.133333, 0.133333, 0.133333, 1, 0.133333, 0.133333, 0.133333, 0)
@@ -32,10 +32,10 @@ scale_curve = SubResource("CurveTexture_elc0i")
 color = Color(0.133333, 0.133333, 0.133333, 1)
 color_ramp = SubResource("GradientTexture1D_i8erf")
 
-[node name="CannonParticles" type="GPUParticles2D"]
+[node name="CannonFireParticles" type="GPUParticles2D"]
 emitting = false
 amount = 24
 process_material = SubResource("ParticleProcessMaterial_5jyyf")
-texture = ExtResource("1_ujumi")
+texture = ExtResource("1_kcrl7")
 one_shot = true
 explosiveness = 1.0
