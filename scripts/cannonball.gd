@@ -5,6 +5,7 @@ class_name Cannonball
 @export var damage: float
 @export var distance: float
 @export var distance_range: float
+@export var cannon_splash: PackedScene
 
 var start_position: Vector2
 var max_distance: float
@@ -18,7 +19,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if self.global_position.distance_to(start_position) > self.max_distance:
+		self.splash()
 		self.queue_free()
+
+
+func splash() -> void:
+	var splash_node := self.cannon_splash.instantiate()
+	splash_node.position = self.position
+	self.add_sibling(splash_node)
 
 
 func _on_body_entered(body: Node) -> void:
