@@ -121,7 +121,6 @@ func _physics_process(delta: float) -> void:
 		self.fire_cannons_left()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
-#	print("Linerar Velocity: ", self.linear_velocity.x)
 
 
 func set_enabled(enabled: bool) -> void:
@@ -150,10 +149,6 @@ func apply_collision_damage(delta: float):
 		else:
 			damage_to_self = self.obstacle_dps
 		damage_to_self *= delta
-#		print("I am P%d" % self.player)
-#		print("other angle: %f" % angle_other_to_self)
-#		print("damage multiplier: %f" % (1.0 - absf(angle_other_to_self) / (PI / 2)))
-#		print("damage to self: %f" % damage_to_self)
 		self.health -= damage_to_self
 
 
