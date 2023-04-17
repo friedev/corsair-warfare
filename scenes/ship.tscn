@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=11 format=3 uid="uid://fmyumo0aq4ua"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
 [ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
 [ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
+[ext_resource type="PackedScene" uid="uid://cbgcsj18ybvqk" path="res://scenes/cannonball.tscn" id="5_iubct"]
 [ext_resource type="PackedScene" uid="uid://dmsrkqhdxn7x5" path="res://scenes/cannon_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 
@@ -29,6 +30,7 @@ ram_dps_min = 0.1
 ram_dps_max = 0.2
 obstacle_dps = 0.15
 max_health = 1.0
+cannonball_scene = ExtResource("5_iubct")
 cannon_count = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
