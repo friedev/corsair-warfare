@@ -7,6 +7,7 @@ signal wind_changed(wind: Vector2)
 @export var ship2: Ship
 @export var wind_change_rate: float
 @export var wind_noise_multiplier: float
+@export var initial_wind_noise_position: float
 
 var wind: Vector2:
 	set(value):
@@ -16,7 +17,7 @@ var wind: Vector2:
 
 var wind_noise_x := FastNoiseLite.new()
 var wind_noise_y := FastNoiseLite.new()
-var wind_noise_position := 0.0
+var wind_noise_position: float
 
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	var seed := int(Time.get_unix_time_from_system())
 	self.wind_noise_x.seed = seed
 	self.wind_noise_y.seed = seed + 1
+	self.wind_noise_position = self.initial_wind_noise_position
 
 
 func _physics_process(delta: float) -> void:

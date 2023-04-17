@@ -77,6 +77,7 @@ ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
 wind_change_rate = 1.0
 wind_noise_multiplier = 3.0
+initial_wind_noise_position = 10.0
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
 
