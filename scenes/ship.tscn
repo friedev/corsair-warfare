@@ -137,14 +137,17 @@ rotation = 3.14159
 [node name="CannonSoundL" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_phvo0")
+bus = &"Sound"
 
 [node name="CannonSoundR" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_phvo0")
+bus = &"Sound"
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_ytmsd")
+bus = &"Sound"
 
 [node name="WakeParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
