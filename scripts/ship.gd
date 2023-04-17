@@ -5,8 +5,6 @@ signal destroyed(ship: Ship)
 
 const max_cannonball_offset := 10.0
 
-const cannonball_scene = preload('res://scenes/cannonball.tscn')
-
 enum Player {
 	P1 = 1,
 	P2 = 2,
@@ -27,6 +25,8 @@ enum Player {
 @export var obstacle_dps: float
 
 @export var max_health: float
+
+@export var cannonball_scene: PackedScene
 
 var health: float:
 	set(value):
