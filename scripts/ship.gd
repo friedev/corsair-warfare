@@ -158,7 +158,6 @@ func fire_cannons_left():
 	)
 	self.can_fire_l = false
 	self.cooldown_timer_l.start()
-	print_debug("ran timer function")
 
 
 func destroy() -> void:
