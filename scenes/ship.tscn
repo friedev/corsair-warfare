@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=11 format=3 uid="uid://fmyumo0aq4ua"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
 [ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
 [ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
+[ext_resource type="PackedScene" uid="uid://dmsrkqhdxn7x5" path="res://scenes/cannon_particles.tscn" id="6_kok1b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u3v2"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -73,22 +74,22 @@ one_shot = true
 
 [node name="CannonPointL1" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
-position = Vector2(-20, -10)
+position = Vector2(-20, -8)
 gizmo_extents = 4.0
 
 [node name="CannonPointL2" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
-position = Vector2(10, -10)
+position = Vector2(14, -8)
 gizmo_extents = 4.0
 
 [node name="CannonPointR1" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
-position = Vector2(-20, 10)
+position = Vector2(-20, 8)
 gizmo_extents = 4.0
 
 [node name="CannonPointR2" type="Marker2D" parent="CannonSpawnPoints"]
 unique_name_in_owner = true
-position = Vector2(10, 10)
+position = Vector2(14, 8)
 gizmo_extents = 4.0
 
 [node name="CannonBarL" type="ProgressBar" parent="."]
@@ -121,6 +122,17 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="CannonParticlesL" parent="." instance=ExtResource("6_kok1b")]
+unique_name_in_owner = true
+position = Vector2(-3, -8)
+emitting = false
+
+[node name="CannonParticlesR" parent="." instance=ExtResource("6_kok1b")]
+unique_name_in_owner = true
+position = Vector2(-3, 8)
+rotation = 3.14159
+emitting = false
 
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
