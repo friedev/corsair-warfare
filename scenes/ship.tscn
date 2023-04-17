@@ -61,12 +61,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CooldownTimerL" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.5
+wait_time = 2.0
 one_shot = true
 
 [node name="CooldownTimerR" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.5
+wait_time = 2.0
 one_shot = true
 
 [node name="CannonSpawnPoints" type="Node2D" parent="."]
