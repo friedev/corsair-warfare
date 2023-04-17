@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://by0ui2gqs1ir7"]
 
 [ext_resource type="Script" path="res://scripts/menus/customization_menu.gd" id="1_i366w"]
-[ext_resource type="PackedScene" uid="uid://bbs8f7tcmbrkl" path="res://scenes/menus/customization_section.tscn" id="1_owfwi"]
+[ext_resource type="PackedScene" uid="uid://1gtcrev6yrg4" path="res://scenes/menus/customization_section.tscn" id="1_owfwi"]
 
 [node name="CustomizationMenu" type="MarginContainer"]
 anchors_preset = 15
