@@ -45,5 +45,6 @@ explosiveness = 1.0
 unique_name_in_owner = true
 stream = ExtResource("3_04wm0")
 volume_db = -6.0
+bus = &"Sound"
 
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
