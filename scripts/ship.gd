@@ -67,16 +67,24 @@ var can_fire_r := true
 @onready var cannon_point_r1: Node2D = %CannonPointR1
 @onready var cannon_point_r2: Node2D = %CannonPointR2
 
+@onready var collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 @onready var damage_sound: AudioStreamPlayer2D = %DamageSound
+@onready var wake_particles: GPUParticles2D = %WakeParticles
+
 
 
 func _ready() -> void:
 	self.sprite.texture = self.texture_health_high
 	self.health = self.max_health
-
+	# Duplicate material so that changes by one ship don't affect the other
+	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
+	self.wake_particles.process_material = particle_material.duplicate()
 
 func _process(delta: float) -> void:
 	self.control_parent.global_rotation = 0
+	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
+	particle_material.angle_min = -self.rotation_degrees
+	particle_material.angle_max = -self.rotation_degrees
 
 
 func _physics_process(delta: float) -> void:
@@ -113,6 +121,7 @@ func set_enabled(enabled: bool) -> void:
 	self.set_process(enabled)
 	self.set_physics_process(enabled)
 	self.set_process_input(enabled)
+	self.collision_polygon.disabled = not enabled
 
 
 func apply_collision_damage(delta: float):
