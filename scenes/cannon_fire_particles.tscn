@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cehkhvu5ki3mn"]
+[gd_scene load_steps=7 format=3 uid="uid://b7g73ymbg4q4y"]
 
-[ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/particles/cannon_fire_particle.png" id="1_4ui02"]
+[ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/particles/smoke_particle.png" id="1_4m75a"]
 
 [sub_resource type="Gradient" id="Gradient_slh6p"]
 colors = PackedColorArray(0.133333, 0.133333, 0.133333, 1, 0.133333, 0.133333, 0.133333, 0)
@@ -23,11 +23,15 @@ direction = Vector3(0, -1, 0)
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 20.0
 initial_velocity_max = 100.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 damping_min = 20.0
 damping_max = 40.0
-scale_max = 2.0
+angle_max = 360.0
+scale_min = 0.25
+scale_max = 0.5
 scale_curve = SubResource("CurveTexture_elc0i")
 color = Color(0.133333, 0.133333, 0.133333, 1)
 color_ramp = SubResource("GradientTexture1D_i8erf")
@@ -36,6 +40,6 @@ color_ramp = SubResource("GradientTexture1D_i8erf")
 emitting = false
 amount = 24
 process_material = SubResource("ParticleProcessMaterial_5jyyf")
-texture = ExtResource("1_4ui02")
+texture = ExtResource("1_4m75a")
 one_shot = true
 explosiveness = 1.0
