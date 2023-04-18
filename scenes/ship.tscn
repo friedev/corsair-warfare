@@ -218,7 +218,7 @@ lifetime = 6.0
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 32
+amount = 24
 process_material = SubResource("ParticleProcessMaterial_8xlol")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
@@ -227,7 +227,7 @@ draw_order = 2
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 32
+amount = 24
 process_material = SubResource("ParticleProcessMaterial_xll58")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
