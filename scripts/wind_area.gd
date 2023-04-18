@@ -12,12 +12,14 @@ signal wind_changed(wind: Vector2)
 var wind: Vector2:
 	set(value):
 		wind = value
-		self.set_gravity_direction(self.wind)
+		self.gravity_direction = self.wind
+		self.gravity = self.initial_gravity * wind.length()
 		self.wind_changed.emit(self.wind)
 
 var noise_x := FastNoiseLite.new()
 var noise_y := FastNoiseLite.new()
 var noise_position: float
+var initial_gravity := self.gravity
 
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
 
