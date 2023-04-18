@@ -213,7 +213,7 @@ z_index = -3
 amount = 24
 process_material = SubResource("ParticleProcessMaterial_ae3ss")
 texture = ExtResource("11_yy8k2")
-lifetime = 6.0
+lifetime = 3.0
 
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
