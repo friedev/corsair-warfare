@@ -12,13 +12,14 @@ signal players_ready
 var player_1_ready := false
 var player_2_ready := false
 
-var hull_values: Array[float] = [1.0, (4.0 / 3.0), (5.0 / 3.0), 2.0]
+var hull_values: Array[float] = [1.0, 1.5, 2.0, 2.5]
 var sails_values: Array[float] = [1.0, (4.0 / 3.0), (5.0 / 3.0), 2.0]
 var cannons_values: Array[int] = [3, 4, 5, 6]
 
 
 func apply_customization(ship: Ship, section: CustomizationSection) -> void:
 	ship.max_health = self.hull_values[section.hull_slider.value]
+	ship.health = ship.max_health
 	ship.speed *= self.sails_values[section.sails_slider.value]
 	ship.cannon_count = self.cannons_values[section.cannons_slider.value]
 
