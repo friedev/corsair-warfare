@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Through_Navy's_Heart_1.mp3-37c5660f957aa8479f
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0.0
 bpm=0.0
 beat_count=0
