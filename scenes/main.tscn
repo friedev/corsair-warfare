@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c74nrbyrlt82j"]
+[gd_scene load_steps=25 format=3 uid="uid://cag26sio6jj5m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
 [ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
+[ext_resource type="PackedScene" uid="uid://bwrhipi8d5y4r" path="res://scenes/music.tscn" id="21_w75cq"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -80,7 +81,6 @@ player = 1
 texture_health_high = ExtResource("2_1fgds")
 texture_health_medium = ExtResource("2_1fgds")
 texture_health_low = ExtResource("2_1fgds")
-metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -147,9 +147,12 @@ script = ExtResource("17_034qo")
 min_volume_db = -12.0
 max_volume_db = -3.0
 
+[node name="Music" parent="." instance=ExtResource("21_w75cq")]
+
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
+[connection signal="cannon_fired" from="Ship1" to="Music" method="_on_ship_cannon_fired"]
 [connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
