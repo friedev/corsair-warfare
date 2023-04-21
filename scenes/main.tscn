@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu3bi35hm6ysu"]
+[gd_scene load_steps=13 format=3 uid="uid://dshc4h5lipr26"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
+[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/Through_Navy's_Heart_1.mp3" id="10_lnuum"]
+[ext_resource type="Script" path="res://scenes/Music.gd" id="11_up7a1"]
+[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/Through_Navy's_Heart_2.mp3" id="12_dxtda"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
@@ -20,7 +23,6 @@ player = 1
 texture_health_high = ExtResource("2_1fgds")
 texture_health_medium = ExtResource("2_1fgds")
 texture_health_low = ExtResource("2_1fgds")
-metadata/_edit_group_ = true
 
 [node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -64,4 +66,32 @@ layout_mode = 2
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
+[node name="MusicPhase1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_lnuum")
+autoplay = true
+panning_strength = 0.0
+script = ExtResource("11_up7a1")
+phase = 1
+
+[node name="MusicPhase2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dxtda")
+volume_db = -80.0
+autoplay = true
+panning_strength = 0.0
+script = ExtResource("11_up7a1")
+phase = 2
+
+[node name="music_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+
+[connection signal="cannon_fired" from="Ship1" to="MusicPhase1" method="_on_ship_cannon_fired"]
+[connection signal="cannon_fired" from="Ship1" to="MusicPhase2" method="_on_ship_cannon_fired"]
+[connection signal="cannon_fired" from="Ship2" to="MusicPhase1" method="_on_ship_cannon_fired"]
+[connection signal="cannon_fired" from="Ship2" to="MusicPhase2" method="_on_ship_cannon_fired"]
 [connection signal="players_ready" from="Menus/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="Menus/CustomizationMenu" to="MusicPhase1" method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="Menus/CustomizationMenu" to="MusicPhase2" method="_on_customization_menu_players_ready"]
+[connection signal="finished" from="MusicPhase1" to="MusicPhase1" method="_on_finished"]
+[connection signal="finished" from="MusicPhase2" to="." method="_on_finished"]
+[connection signal="timeout" from="music_timer" to="MusicPhase1" method="_on_music_timer_timeout"]
