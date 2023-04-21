@@ -16,8 +16,7 @@ var wind: Vector2:
 		self.gravity = self.initial_gravity * wind.length()
 		self.wind_changed.emit(self.wind)
 
-var noise_x := FastNoiseLite.new()
-var noise_y := FastNoiseLite.new()
+var noise := FastNoiseLite.new()
 var noise_position: float
 var initial_gravity := self.gravity
 
@@ -25,17 +24,15 @@ var initial_gravity := self.gravity
 
 
 func _ready() -> void:
-	var seed := int(Time.get_unix_time_from_system())
-	self.noise_x.seed = seed
-	self.noise_y.seed = seed + 1
+	self.noise.seed = randi()
 	self.noise_position = self.initial_noise_position
 
 
 func _physics_process(delta: float) -> void:
 	self.noise_position += delta * self.change_rate
 	self.wind = Vector2(
-		self.noise_x.get_noise_1d(self.noise_position) * self.noise_multiplier,
-		self.noise_y.get_noise_1d(self.noise_position) * self.noise_multiplier
+		self.noise.get_noise_1d(self.noise_position) * self.noise_multiplier,
+		self.noise.get_noise_1d(-self.noise_position) * self.noise_multiplier
 	).limit_length()
 
 	if self.wind.x != 0:

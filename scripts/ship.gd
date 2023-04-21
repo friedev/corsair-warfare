@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name Ship
 
 signal cannon_fired
+signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
 const max_cannonball_offset := 10.0
@@ -31,11 +32,14 @@ enum Player {
 var health: float:
 	set(value):
 		if value < self.health:
+			self.damage_taken.emit(self.health - value)
 			if not self.damage_sound.playing:
 				self.damage_sound.play()
+
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
 			self.destroy()
+
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 		# Update sprite based on health
 		if self.health > self.max_health * (2.0 / 3.0):
@@ -87,6 +91,7 @@ func _ready() -> void:
 	# Duplicate material so that changes by one ship don't affect the other
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
 	self.wake_particles.process_material = particle_material.duplicate()
+
 
 func _process(delta: float) -> void:
 	self.control_parent.global_rotation = 0
