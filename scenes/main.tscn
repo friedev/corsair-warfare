@@ -49,6 +49,10 @@ script = ExtResource("1_dq6dd")
 script = ExtResource("4_6ifil")
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
+shake_rate = 1.0
+shake_per_damage = 100.0
+max_offset = 24.0
+shake_reduction = 0.05
 
 [node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
 unique_name_in_owner = true
@@ -146,8 +150,10 @@ max_volume_db = -3.0
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
+[connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="damage_taken" from="Ship2" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
