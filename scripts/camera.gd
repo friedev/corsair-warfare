@@ -3,23 +3,33 @@ extends Camera2D
 @export var ship1: Node2D
 @export var ship2: Node2D
 
+@export var shake_rate: float
+@export var shake_per_damage: float
+@export var max_offset: float
+@export var shake_reduction: float
 
-func _process(delta: float) -> void:
+var shake := 0.0:
+	set(value):
+		shake = clamp(value, 0.0, 1.0)
+var noise := FastNoiseLite.new()
+
+
+func _ready() -> void:
+	self.noise.seed = randi()
+
+
+func apply_shake() -> void:
+	var noise_position := Time.get_ticks_msec() * self.shake_rate
+	self.offset = Vector2(
+		self.noise.get_noise_1d(noise_position),
+		self.noise.get_noise_1d(-noise_position)
+	) * self.max_offset * (self.shake * self.shake)
+	self.shake -= self.shake_reduction
+
+
+func center_on_ships() -> void:
 	self.position.x = (ship1.position.x + ship2.position.x) * 0.5
 	self.position.y = (ship1.position.y + ship2.position.y) * 0.5
-
-	# Distance isn't the best way to do this. Since the viewport is a rectangle,
-	# I need to find a way to implement zoom only when they're x distance away
-	# from the edge of the screen.
-	# I should handle the x and y distances differently in order to accommodate
-	# for the longer size.
-	# TODO: Figure out a way to use x & y coordinates instead of distance.
-
-	# The current problem is that I'm not scaling the numbers up to the distance
-	# they are away.
-	# If they're outside of the bounds, then x and y won't apply, even when
-	# they should.
-	# Find a way to scale the minimum values up.
 
 	var dimensions := self.get_viewport_rect().size
 
@@ -41,3 +51,12 @@ func _process(delta: float) -> void:
 		zoom_val = Vector2(y_min / y_dist, y_min / y_dist)
 
 	self.set_zoom(self.get_zoom().lerp(zoom_val, 0.05))
+
+
+func _process(delta: float) -> void:
+	self.center_on_ships()
+	self.apply_shake()
+
+
+func _on_ship_damage_taken(damage: float) -> void:
+	self.shake = max(self.shake, damage * shake_per_damage)
