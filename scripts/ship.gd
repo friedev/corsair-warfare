@@ -1,6 +1,7 @@
 extends RigidBody2D
 class_name Ship
 
+signal cannon_fired
 signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
@@ -10,7 +11,6 @@ enum Player {
 	P1 = 1,
 	P2 = 2,
 }
-
 
 @export var player: Player
 
@@ -122,8 +122,10 @@ func _physics_process(delta: float) -> void:
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
 		self.fire_cannons_right()
+		self.cannon_fired.emit()
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
 		self.fire_cannons_left()
+		self.cannon_fired.emit()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
 	self.apply_collision_damage(delta)
 
