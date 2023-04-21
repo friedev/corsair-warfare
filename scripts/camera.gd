@@ -4,9 +4,8 @@ extends Camera2D
 @export var ship2: Node2D
 
 func _process(delta: float) -> void:
-	var x_val := (ship1.position.x + ship2.position.x) * 0.5
-	var y_val := (ship1.position.y + ship2.position.y) * 0.5
-	self.set_offset(Vector2(x_val, y_val))
+	self.position.x = (ship1.position.x + ship2.position.x) * 0.5
+	self.position.y = (ship1.position.y + ship2.position.y) * 0.5
 
 	var dimensions := self.get_viewport_rect().size
 
