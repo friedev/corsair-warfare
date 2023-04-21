@@ -1,20 +1,76 @@
-[gd_scene load_steps=13 format=3 uid="uid://dshc4h5lipr26"]
+[gd_scene load_steps=24 format=3 uid="uid://c74nrbyrlt82j"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
-[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
+[ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
+[ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
-[ext_resource type="PackedScene" uid="uid://bs0etbf2qxvdl" path="res://scenes/customization_menu.tscn" id="5_ke02y"]
-[ext_resource type="Texture2D" uid="uid://cod7sn5unigje" path="res://sprites/border.png" id="5_xsw8y"]
+[ext_resource type="PackedScene" uid="uid://by0ui2gqs1ir7" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
+[ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 [ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/Through_Navy's_Heart_1.mp3" id="10_lnuum"]
 [ext_resource type="Script" path="res://scenes/Music.gd" id="11_up7a1"]
 [ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/Through_Navy's_Heart_2.mp3" id="12_dxtda"]
+[ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
+[ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
+[ext_resource type="PackedScene" uid="uid://das0xoqbeptib" path="res://scenes/menus/main_menu.tscn" id="13_v2k00"]
+[ext_resource type="PackedScene" uid="uid://dygsf1wll52ka" path="res://scenes/menus/options_menu.tscn" id="14_6udvg"]
+[ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
+[ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://sound/wind_ambience.ogg" id="16_igyk8"]
+[ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
+[ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
+[ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
+
+[sub_resource type="Gradient" id="Gradient_3bfk4"]
+offsets = PackedFloat32Array(0, 0.496296, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_plouj"]
+gradient = SubResource("Gradient_3bfk4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gbbth"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2000.0
+particle_flag_disable_z = true
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_plouj")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
+script = ExtResource("4_6ifil")
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
+
+[node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
+unique_name_in_owner = true
+position = Vector2(575.5, 323.5)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_gbbth")
+texture = ExtResource("3_ahd1i")
+lifetime = 2.0
+script = ExtResource("7_0s2p7")
+added_velocity_multiplier = 100.0
+
+[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+unique_name_in_owner = true
+position = Vector2(575.5, 323.5)
+ship1 = NodePath("../Ship1")
+ship2 = NodePath("../Ship2")
+change_rate = 1.0
+noise_multiplier = 3.0
+initial_noise_position = 10.0
 
 [node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -31,22 +87,7 @@ rotation = 3.14159
 player = 2
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
-script = ExtResource("4_6ifil")
-ship1 = NodePath("../Ship1")
-ship2 = NodePath("../Ship2")
-
-[node name="Border" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
-position = Vector2(589, 325)
-polygon = PackedVector2Array(0, -1500, 574.03, -1385.82, 1060.66, -1060.66, 1385.82, -574.03, 1500, 0, 1385.82, 574.03, 1060.66, 1060.66, 574.03, 1385.82, 0, 1500, -574.03, 1385.82, -1060.66, 1060.66, -1385.82, 574.03, -1500, 0, -1385.82, -574.03, -1060.66, -1060.66, -574.03, -1385.82, 0, -1500, 0, -2000, -2000, -2000, -2000, 2000, 2000, 2000, 2000, -2000, 0, -2000)
-one_way_collision_margin = 0.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Border"]
-position = Vector2(585, 257)
-scale = Vector2(3.47823, 3.47823)
-texture = ExtResource("5_xsw8y")
+[node name="Border" parent="." instance=ExtResource("8_xltam")]
 
 [node name="RockLong" parent="." instance=ExtResource("6_fsva3")]
 
@@ -54,15 +95,34 @@ texture = ExtResource("5_xsw8y")
 
 [node name="RockSmall" parent="." instance=ExtResource("8_eo5qm")]
 
-[node name="Menus" type="MarginContainer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="CustomizationMenu" parent="Menus" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
+[node name="WindHUD" parent="HUDLayer/MarginContainer" instance=ExtResource("12_4w4eo")]
+unique_name_in_owner = true
 layout_mode = 2
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="MenuLayer" instance=ExtResource("13_v2k00")]
+visible = false
+
+[node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("14_6udvg")]
+visible = false
+
+[node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
+visible = false
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
@@ -85,6 +145,38 @@ phase = 2
 unique_name_in_owner = true
 wait_time = 5.0
 
+[node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
+visible = false
+
+[node name="PauseMenu" parent="MenuLayer" instance=ExtResource("17_2ohqg")]
+visible = false
+
+[node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_8ixme")
+volume_db = -12.0
+autoplay = true
+bus = &"Ambience"
+
+[node name="WindAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_igyk8")
+bus = &"Ambience"
+script = ExtResource("17_034qo")
+min_volume_db = -12.0
+max_volume_db = -3.0
+
+[connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
+[connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
+[connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
+[connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
+[connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
+[connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
+[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
+[connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
 [connection signal="cannon_fired" from="Ship1" to="MusicPhase1" method="_on_ship_cannon_fired"]
 [connection signal="cannon_fired" from="Ship1" to="MusicPhase2" method="_on_ship_cannon_fired"]
 [connection signal="cannon_fired" from="Ship2" to="MusicPhase1" method="_on_ship_cannon_fired"]

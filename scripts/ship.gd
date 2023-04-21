@@ -2,16 +2,14 @@ extends RigidBody2D
 class_name Ship
 
 signal cannon_fired
+signal destroyed(ship: Ship)
 
 const max_cannonball_offset := 10.0
-
-const cannonball_scene = preload('res://scenes/cannonball.tscn')
 
 enum Player {
 	P1 = 1,
 	P2 = 2,
 }
-
 
 @export var player: Player
 
@@ -28,8 +26,13 @@ enum Player {
 
 @export var max_health: float
 
+@export var cannonball_scene: PackedScene
+
 var health: float:
 	set(value):
+		if value < self.health:
+			if not self.damage_sound.playing:
+				self.damage_sound.play()
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
 			self.destroy()
@@ -37,10 +40,16 @@ var health: float:
 		# Update sprite based on health
 		if self.health > self.max_health * (2.0 / 3.0):
 			self.sprite.texture = self.texture_health_high
+			self.medium_health_particles.emitting = false
+			self.low_health_particles.emitting = false
 		elif self.health > self.max_health * (1.0 / 3.0):
 			self.sprite.texture = self.texture_health_medium
+			self.medium_health_particles.emitting = true
+			self.low_health_particles.emitting = false
 		else:
 			self.sprite.texture = self.texture_health_low
+			self.medium_health_particles.emitting = false
+			self.low_health_particles.emitting = true
 
 @export var cannon_count: int
 
@@ -55,19 +64,35 @@ var can_fire_r := true
 
 @onready var cooldown_timer_l: Timer = %CooldownTimerL
 @onready var cooldown_timer_r: Timer = %CooldownTimerR
+@onready var cannon_particles_l: GPUParticles2D = %CannonParticlesL
+@onready var cannon_particles_r: GPUParticles2D = %CannonParticlesR
+@onready var cannon_sound_l: AudioStreamPlayer2D = %CannonSoundL
+@onready var cannon_sound_r: AudioStreamPlayer2D = %CannonSoundR
 @onready var cannon_point_l1: Node2D = %CannonPointL1
 @onready var cannon_point_l2: Node2D = %CannonPointL2
 @onready var cannon_point_r1: Node2D = %CannonPointR1
 @onready var cannon_point_r2: Node2D = %CannonPointR2
 
+@onready var collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
+@onready var damage_sound: AudioStreamPlayer2D = %DamageSound
+@onready var wake_particles: GPUParticles2D = %WakeParticles
+@onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
+@onready var low_health_particles: GPUParticles2D = %LowHealthParticles
+
+
 
 func _ready() -> void:
 	self.sprite.texture = self.texture_health_high
 	self.health = self.max_health
-
+	# Duplicate material so that changes by one ship don't affect the other
+	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
+	self.wake_particles.process_material = particle_material.duplicate()
 
 func _process(delta: float) -> void:
 	self.control_parent.global_rotation = 0
+	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
+	particle_material.angle_min = -self.rotation_degrees
+	particle_material.angle_max = -self.rotation_degrees
 
 
 func _physics_process(delta: float) -> void:
@@ -100,6 +125,14 @@ func _physics_process(delta: float) -> void:
 	self.apply_collision_damage(delta)
 
 
+func set_enabled(enabled: bool) -> void:
+	self.visible = enabled
+	self.set_process(enabled)
+	self.set_physics_process(enabled)
+	self.set_process_input(enabled)
+	self.collision_polygon.set_deferred(&"disabled", not enabled)
+
+
 func apply_collision_damage(delta: float):
 	for body in self.get_colliding_bodies():
 		# Take damage from colliding ships or other obstacles over time
@@ -118,10 +151,6 @@ func apply_collision_damage(delta: float):
 		else:
 			damage_to_self = self.obstacle_dps
 		damage_to_self *= delta
-#		print("I am P%d" % self.player)
-#		print("other angle: %f" % angle_other_to_self)
-#		print("damage multiplier: %f" % (1.0 - absf(angle_other_to_self) / (PI / 2)))
-#		print("damage to self: %f" % damage_to_self)
 		self.health -= damage_to_self
 
 
@@ -149,6 +178,9 @@ func fire_cannons_right():
 		PI / 2 + self.rotation
 	)
 	self.can_fire_r = false
+	self.cannon_sound_r.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_sound_r.play()
+	self.cannon_particles_r.restart()
 	self.cooldown_timer_r.start()
 
 
@@ -159,13 +191,43 @@ func fire_cannons_left():
 		-PI / 2 + self.rotation
 	)
 	self.can_fire_l = false
+	self.cannon_sound_l.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_sound_l.play()
+	self.cannon_particles_l.restart()
 	self.cooldown_timer_l.start()
-	print_debug("ran timer function")
 
 
 func destroy() -> void:
-	print("Player %d died" % self.player)
-	self.queue_free()
+	self.set_enabled(false)
+	self.destroyed.emit(self)
+
+
+func correctYMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.x = self.mass * 0.43
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
+
+
+func correctNYMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.x = self.mass * .043
+	impulse *= current_wind
+	self.apply_central_impulse(impulse)
+
+
+func correctXMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.y = self.mass * .5
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
+
+
+func correctNXMovement(current_wind):
+	var impulse = Vector2.ZERO
+	impulse.y = self.mass * .5
+	impulse *= -current_wind
+	self.apply_central_impulse(impulse)
 
 
 func _on_cooldown_timer_l_timeout() -> void:
