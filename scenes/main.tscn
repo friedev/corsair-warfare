@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c74nrbyrlt82j"]
+[gd_scene load_steps=25 format=3 uid="uid://cag26sio6jj5m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -12,10 +12,7 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
-[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/Through_Navy's_Heart_1.mp3" id="10_lnuum"]
-[ext_resource type="Script" path="res://scenes/Music.gd" id="11_up7a1"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
-[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/Through_Navy's_Heart_2.mp3" id="12_dxtda"]
 [ext_resource type="PackedScene" uid="uid://das0xoqbeptib" path="res://scenes/menus/main_menu.tscn" id="13_v2k00"]
 [ext_resource type="PackedScene" uid="uid://dygsf1wll52ka" path="res://scenes/menus/options_menu.tscn" id="14_6udvg"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
@@ -23,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
 [ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
+[ext_resource type="PackedScene" uid="uid://bwrhipi8d5y4r" path="res://scenes/music.tscn" id="21_w75cq"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -136,25 +134,6 @@ visible = false
 [node name="PauseMenu" parent="MenuLayer" instance=ExtResource("17_2ohqg")]
 visible = false
 
-[node name="MusicPhase1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_lnuum")
-autoplay = true
-panning_strength = 0.0
-script = ExtResource("11_up7a1")
-phase = 1
-
-[node name="MusicPhase2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_dxtda")
-volume_db = -80.0
-autoplay = true
-panning_strength = 0.0
-script = ExtResource("11_up7a1")
-phase = 2
-
-[node name="music_timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 5.0
-
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_8ixme")
 volume_db = -12.0
@@ -168,16 +147,15 @@ script = ExtResource("17_034qo")
 min_volume_db = -12.0
 max_volume_db = -3.0
 
+[node name="Music" parent="." instance=ExtResource("21_w75cq")]
+
 [connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
 [connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
-[connection signal="cannon_fired" from="Ship1" to="MusicPhase1" method="_on_ship_cannon_fired"]
-[connection signal="cannon_fired" from="Ship1" to="MusicPhase2" method="_on_ship_cannon_fired"]
+[connection signal="cannon_fired" from="Ship1" to="Music" method="_on_ship_cannon_fired"]
 [connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
-[connection signal="cannon_fired" from="Ship2" to="MusicPhase1" method="_on_ship_cannon_fired"]
-[connection signal="cannon_fired" from="Ship2" to="MusicPhase2" method="_on_ship_cannon_fired"]
 [connection signal="damage_taken" from="Ship2" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
@@ -187,6 +165,3 @@ max_volume_db = -3.0
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
-[connection signal="finished" from="MusicPhase1" to="MusicPhase1" method="_on_finished"]
-[connection signal="finished" from="MusicPhase2" to="." method="_on_finished"]
-[connection signal="timeout" from="music_timer" to="MusicPhase1" method="_on_music_timer_timeout"]
