@@ -8,18 +8,23 @@
 [node name="Music" type="Node"]
 script = ExtResource("2_02xhd")
 
-[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+[node name="NoncombatMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_0hov6")
 autoplay = true
+bus = &"Music"
 script = ExtResource("2_ki2pg")
+fade_duration = 0.5
 
-[node name="NoncombatMusic" type="AudioStreamPlayer" parent="."]
+[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5moud")
 volume_db = -80.0
 autoplay = true
+bus = &"Music"
 script = ExtResource("2_ki2pg")
+play_during_timer = true
+fade_duration = 0.5
 
 [node name="MusicTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true

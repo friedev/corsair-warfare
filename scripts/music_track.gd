@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 
 @export var play_during_timer: bool
 @export var fade_duration: float
@@ -7,9 +7,9 @@ extends AudioStreamPlayer2D
 
 
 func _process(delta: float):
-	var volume_linear := db_to_linear(volume_db)
+	var volume_linear := db_to_linear(self.volume_db)
 	var increment := delta / self.fade_duration
-	if play_during_timer and not music_timer.is_stopped():
+	if play_during_timer == not music_timer.is_stopped():
 		volume_linear += increment
 	else:
 		volume_linear -= increment
