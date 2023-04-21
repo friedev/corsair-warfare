@@ -3,6 +3,7 @@ extends MarginContainer
 
 signal game_started
 signal options
+signal credits_button_pressed
 
 
 func _ready() -> void:
@@ -24,4 +25,13 @@ func _on_options_button_pressed() -> void:
 
 
 func _on_options_menu_go_back() -> void:
+	self.show()
+
+
+func _on_credits_button_pressed() -> void:
+	self.credits_button_pressed.emit()
+	self.hide()
+
+
+func _on_credits_menu_back_button_pressed() -> void:
 	self.show()

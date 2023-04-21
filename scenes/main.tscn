@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c74nrbyrlt82j"]
+[gd_scene load_steps=25 format=3 uid="uid://c74nrbyrlt82j"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
 [ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
+[ext_resource type="PackedScene" uid="uid://cr3188k7w4w2q" path="res://scenes/menus/credits_menu.tscn" id="18_t046q"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -130,6 +131,9 @@ visible = false
 [node name="PauseMenu" parent="MenuLayer" instance=ExtResource("17_2ohqg")]
 visible = false
 
+[node name="CreditsMenu" parent="MenuLayer" instance=ExtResource("18_t046q")]
+visible = false
+
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_8ixme")
 volume_db = -12.0
@@ -150,9 +154,11 @@ max_volume_db = -3.0
 [connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="credits_button_pressed" from="MenuLayer/MainMenu" to="MenuLayer/CreditsMenu" method="_on_main_menu_credits_button_pressed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
+[connection signal="back_button_pressed" from="MenuLayer/CreditsMenu" to="MenuLayer/MainMenu" method="_on_credits_menu_back_button_pressed"]
