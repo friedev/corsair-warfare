@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckh7l5k4spvgl"]
+
+[ext_resource type="Texture2D" uid="uid://mbhj6jbb4tht" path="res://sprites/hazards/island3.png" id="1_ffl7e"]
+
+[node name="Island3" type="StaticBody2D"]
+position = Vector2(2, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(459, 236, 524, 213, 585, 183, 628, 190, 656, 187, 706, 221, 780, 244, 800, 257, 829, 253, 860, 268, 896, 314, 907, 357, 844, 488, 811, 527, 729, 542, 661, 619, 607, 638, 564, 638, 518, 612, 480, 571, 462, 524, 449, 459, 429, 441, 409, 389, 421, 344, 424, 298, 436, 271, 450, 261, 447, 248)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.400944, 0.400944)
+texture = ExtResource("1_ffl7e")
