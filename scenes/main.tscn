@@ -164,4 +164,5 @@ max_volume_db = -3.0
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_options_menu_go_back"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
-[connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_over_menu_game_restarted"]
+[connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_restarted"]
+[connection signal="game_restarted" from="MenuLayer/PauseMenu" to="." method="_on_game_restarted"]
