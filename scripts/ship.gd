@@ -36,7 +36,6 @@ var health: float:
 		if value < self.health:
 			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
 			self.damage_taken.emit(self.health - value)
-			print_debug((self.health - value) * 100.0)
 			if not self.damage_sound.playing:
 				self.damage_sound.play()
 
