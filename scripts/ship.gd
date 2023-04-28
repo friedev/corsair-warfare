@@ -33,8 +33,9 @@ var health: float:
 	set(value):
 		if value < self.health:
 			self.damage_taken.emit(self.health - value)
-			if not self.damage_sound.playing:
+			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
+			self.damage_timer.start()
 
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
@@ -82,7 +83,7 @@ var can_fire_r := true
 @onready var wake_particles: GPUParticles2D = %WakeParticles
 @onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
 @onready var low_health_particles: GPUParticles2D = %LowHealthParticles
-
+@onready var damage_timer: Timer = %DamageTimer
 
 
 func _ready() -> void:
