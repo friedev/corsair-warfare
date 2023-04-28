@@ -195,6 +195,7 @@ max_volume_db = -3.0
 [connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="cannon_fired" from="Ship2" to="Music" method="_on_ship_cannon_fired"]
 [connection signal="damage_taken" from="Ship2" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
