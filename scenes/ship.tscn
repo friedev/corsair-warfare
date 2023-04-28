@@ -51,7 +51,7 @@ colors = PackedColorArray(0.133333, 0.133333, 0.133333, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_j4sih")
 
 [sub_resource type="Curve" id="Curve_wcvbx"]
-_data = [Vector2(0, 0), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0363636), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_1g5gc"]
@@ -218,7 +218,7 @@ lifetime = 3.0
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_8xlol")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
@@ -227,7 +227,7 @@ draw_order = 2
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_xll58")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
