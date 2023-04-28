@@ -233,5 +233,10 @@ texture = ExtResource("12_vokgj")
 lifetime = 4.0
 draw_order = 2
 
+[node name="DamageTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
