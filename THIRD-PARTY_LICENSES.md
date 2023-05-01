@@ -25,3 +25,11 @@ licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 [Smash.ogg](https://freesound.org/people/egomassive/sounds/536777/)
 by [egomassive](https://freesound.org/people/egomassive/)
 licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+
+[knife cling](https://freesound.org/people/sgarrison2127/sounds/178079/)
+by [sgarrison2127](https://freesound.org/people/sgarrison2127/)
+licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+
+[War Ready.wav](https://freesound.org/people/MATRIXXX_/sounds/658273/)
+by [MATRIXXX_](https://freesound.org/people/MATRIXXX_/)
+licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
