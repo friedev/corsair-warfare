@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1sd5q2a8ipii"]
+
+[ext_resource type="Script" path="res://scripts/cannons.gd" id="1_12xu5"]
+[ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="1_13w3n"]
+[ext_resource type="PackedScene" uid="uid://b7g73ymbg4q4y" path="res://scenes/cannon_fire_particles.tscn" id="2_tydm3"]
+[ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="3_nn8nd"]
+[ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://sound/Cannon_Reload.wav" id="5_pkxem"]
+
+[node name="Cannons" type="Node2D"]
+script = ExtResource("1_12xu5")
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -17)
+gizmo_extents = 4.0
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 17)
+gizmo_extents = 4.0
+
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="ReloadBar" parent="." instance=ExtResource("1_13w3n")]
+unique_name_in_owner = true
+rotation = 0.0
+
+[node name="FireParticles" parent="." instance=ExtResource("2_tydm3")]
+unique_name_in_owner = true
+emitting = false
+
+[node name="FireSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_nn8nd")
+bus = &"Sound"
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_pkxem")
+volume_db = 16.0
+bus = &"Sound"
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
