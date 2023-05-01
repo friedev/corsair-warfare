@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
 [ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
 [ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
-[ext_resource type="PackedScene" path="res://scenes/cannonball.tscn" id="5_iubct"]
-[ext_resource type="PackedScene" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
-[ext_resource type="PackedScene" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
+[ext_resource type="PackedScene" uid="uid://coqvjgbm03mhf" path="res://scenes/cannonball.tscn" id="5_iubct"]
+[ext_resource type="PackedScene" uid="uid://b7g73ymbg4q4y" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
+[ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
 [ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://sound/Cannon_Reload.wav" id="10_850h8"]
 [ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://sprites/particles/ship_wake_particle.png" id="11_yy8k2"]
@@ -51,7 +51,7 @@ colors = PackedColorArray(0.133333, 0.133333, 0.133333, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_j4sih")
 
 [sub_resource type="Curve" id="Curve_wcvbx"]
-_data = [Vector2(0, 0), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0363636), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_1g5gc"]
@@ -224,7 +224,7 @@ lifetime = 3.0
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_8xlol")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
@@ -233,11 +233,16 @@ draw_order = 2
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_xll58")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
 draw_order = 2
+
+[node name="DamageTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
