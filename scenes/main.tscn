@@ -61,6 +61,7 @@ unique_name_in_owner = true
 script = ExtResource("4_6ifil")
 content_to_margin_ratio = 0.75
 zoom_speed = 0.05
+shake_enabled = true
 shake_rate = 1.0
 shake_per_damage = 100.0
 max_offset = 24.0
@@ -210,6 +211,7 @@ process_mode = 3
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_menu_open"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_menu_open"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
+[connection signal="screen_shake_toggled" from="MenuLayer/OptionsMenu" to="World/Camera2D" method="_on_options_menu_screen_shake_toggled"]
 [connection signal="go_back" from="MenuLayer/CustomizationMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
 [connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
