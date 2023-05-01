@@ -29,9 +29,12 @@ enum Player {
 
 @export var cannonball_scene: PackedScene
 
+
+
 var health: float:
 	set(value):
 		if value < self.health:
+			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -73,6 +76,7 @@ var can_fire_r := true
 @onready var cannon_particles_r: GPUParticles2D = %CannonParticlesR
 @onready var cannon_sound_l: AudioStreamPlayer2D = %CannonSoundL
 @onready var cannon_sound_r: AudioStreamPlayer2D = %CannonSoundR
+@onready var cannon_reload_sound: AudioStreamPlayer2D = %CannonReload
 @onready var cannon_point_l1: Node2D = %CannonPointL1
 @onready var cannon_point_l2: Node2D = %CannonPointL2
 @onready var cannon_point_r1: Node2D = %CannonPointR1
@@ -122,9 +126,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
+		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
 		self.fire_cannons_right()
 		self.cannon_fired.emit()
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
+		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
 		self.fire_cannons_left()
 		self.cannon_fired.emit()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
@@ -197,7 +203,7 @@ func fire_cannons_left():
 		-PI / 2 + self.rotation
 	)
 	self.can_fire_l = false
-	self.cannon_sound_l.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_sound_l.pitch_scale = 1 + (randf() - 0.1) * 0.4
 	self.cannon_sound_l.play()
 	self.cannon_particles_l.restart()
 	self.cooldown_timer_l.start()
@@ -238,7 +244,20 @@ func correctNXMovement(current_wind):
 
 func _on_cooldown_timer_l_timeout() -> void:
 	self.can_fire_l = true
+	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_reload_sound.play()
 
 
 func _on_cooldown_timer_r_timeout() -> void:
 	self.can_fire_r = true
+	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_reload_sound.play()
+
+
+func getDevice() -> int:
+	var device: int
+	if self.player == Player.P1:
+		device = 1
+	elif self.player == Player.P2:
+		device = 0
+	return device
