@@ -8,5 +8,5 @@ func _on_back_button_pressed() -> void:
 	self.hide()
 
 
-func _on_main_menu_credits_button_pressed() -> void:
+func _on_menu_open() -> void:
 	self.show()
