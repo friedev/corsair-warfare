@@ -9,11 +9,6 @@ var wind: Vector2
 var noise := FastNoiseLite.new()
 var noise_position: float
 
-var enabled := true:
-	set(value):
-		enabled = value
-		self.set_physics_process(self.enabled)
-
 
 func _ready() -> void:
 	self.noise.seed = randi()
