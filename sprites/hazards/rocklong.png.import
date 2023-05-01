@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hc16yq2nj5sp"
-path="res://.godot/imported/rock_big.png-70a8c396aa472233dbdfbd2739a1d069.ctex"
+uid="uid://cgxeqxo6mkrt0"
+path="res://.godot/imported/rocklong.png-d12cbf6ef7c287862e8ecd2bd15ef886.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/hazards/rock_big.png"
-dest_files=["res://.godot/imported/rock_big.png-70a8c396aa472233dbdfbd2739a1d069.ctex"]
+source_file="res://sprites/hazards/rocklong.png"
+dest_files=["res://.godot/imported/rocklong.png-d12cbf6ef7c287862e8ecd2bd15ef886.ctex"]
 
 [params]
 

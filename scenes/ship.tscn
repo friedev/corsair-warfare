@@ -1,15 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://y4tnpo2kc8lm"]
+[gd_scene load_steps=25 format=3 uid="uid://br6t7rkbtydwg"]
 
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
+[ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://sprites/white_ship.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
-[ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
-[ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
-[ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
 [ext_resource type="PackedScene" uid="uid://coqvjgbm03mhf" path="res://scenes/cannonball.tscn" id="5_iubct"]
 [ext_resource type="PackedScene" uid="uid://b7g73ymbg4q4y" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
-[ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://sound/ship_damage.wav" id="10_ytmsd"]
+[ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://sound/Cannon_Reload.wav" id="10_850h8"]
 [ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://sprites/particles/ship_wake_particle.png" id="11_yy8k2"]
 [ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/particles/smoke_particle.png" id="12_vokgj"]
 
@@ -51,7 +48,7 @@ colors = PackedColorArray(0.133333, 0.133333, 0.133333, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_j4sih")
 
 [sub_resource type="Curve" id="Curve_wcvbx"]
-_data = [Vector2(0, 0), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0363636), 0.0, 3.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_1g5gc"]
@@ -106,17 +103,14 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
-texture_health_high = ExtResource("2_4hfof")
-texture_health_medium = ExtResource("3_gtpjx")
-texture_health_low = ExtResource("4_3ogfv")
-speed = 75.0
+speed = 150.0
+min_speed = 50.0
 rotation_speed = 2500.0
 ram_dps_min = 0.1
 ram_dps_max = 0.2
 obstacle_dps = 0.15
 max_health = 1.0
 cannonball_scene = ExtResource("5_iubct")
-cannon_count = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 unique_name_in_owner = true
@@ -202,9 +196,15 @@ unique_name_in_owner = true
 stream = ExtResource("9_phvo0")
 bus = &"Sound"
 
+[node name="CannonReload" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_850h8")
+volume_db = 20.612
+bus = &"Sound"
+
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("10_ytmsd")
+stream = ExtResource("10_850h8")
 bus = &"Sound"
 
 [node name="WakeParticles" type="GPUParticles2D" parent="."]
@@ -218,7 +218,7 @@ lifetime = 3.0
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_8xlol")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
@@ -227,11 +227,16 @@ draw_order = 2
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
-amount = 24
+amount = 32
 process_material = SubResource("ParticleProcessMaterial_xll58")
 texture = ExtResource("12_vokgj")
 lifetime = 4.0
 draw_order = 2
+
+[node name="DamageTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="CooldownTimerL" to="." method="_on_cooldown_timer_l_timeout"]
 [connection signal="timeout" from="CooldownTimerR" to="." method="_on_cooldown_timer_r_timeout"]
