@@ -18,6 +18,7 @@ script = ExtResource("1_i366w")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
@@ -78,5 +79,11 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
 [connection signal="player_ready" from="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CustomizationSection1" to="." method="_on_customization_section_1_player_ready"]
 [connection signal="player_ready" from="VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer2/CustomizationSection2" to="." method="_on_customization_section_2_player_ready"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

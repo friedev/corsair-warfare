@@ -28,7 +28,7 @@ func _on_ambience_slider_value_changed(value: float) -> void:
 	self.set_volume("Ambience", value)
 
 
-func _on_main_menu_options() -> void:
+func _on_menu_open() -> void:
 	self.show()
 
 

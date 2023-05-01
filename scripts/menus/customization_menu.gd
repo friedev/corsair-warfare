@@ -2,6 +2,7 @@ extends Container
 class_name CustomizationMenu
 
 signal players_ready
+signal go_back
 
 @export var ship1: Ship
 @export var ship2: Ship
@@ -40,5 +41,10 @@ func _on_customization_section_2_player_ready() -> void:
 		self.hide()
 
 
-func _on_main_menu_game_started() -> void:
+func _on_menu_open() -> void:
 	self.show()
+
+
+func _on_back_button_pressed() -> void:
+	self.go_back.emit()
+	self.hide()
