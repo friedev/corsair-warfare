@@ -5,6 +5,7 @@ extends Camera2D
 
 @export var zoom_speed: float
 
+@export var shake_enabled: bool
 @export var shake_rate: float
 @export var shake_per_damage: float
 @export var max_offset: float
@@ -21,6 +22,8 @@ func _ready() -> void:
 
 
 func apply_shake() -> void:
+	if not self.shake_enabled:
+		self.shake = 0.0
 	var noise_position := Time.get_ticks_msec() * self.shake_rate
 	var x := self.noise.get_noise_1d(noise_position)
 	var y := self.noise.get_noise_1d(-noise_position)
@@ -66,3 +69,7 @@ func _process(delta: float) -> void:
 
 func _on_ship_damage_taken(damage: float) -> void:
 	self.shake = max(self.shake, damage * shake_per_damage)
+
+
+func _on_options_menu_screen_shake_toggled(enabled: bool) -> void:
+	self.shake_enabled = enabled
