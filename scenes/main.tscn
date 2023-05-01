@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cag26sio6jj5m"]
+[gd_scene load_steps=32 format=3 uid="uid://cag26sio6jj5m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dci4jm0vsuauj" path="res://scenes/hazards/island2.tscn" id="13_61suq"]
 [ext_resource type="PackedScene" uid="uid://das0xoqbeptib" path="res://scenes/menus/main_menu.tscn" id="13_v2k00"]
 [ext_resource type="PackedScene" uid="uid://dygsf1wll52ka" path="res://scenes/menus/options_menu.tscn" id="14_6udvg"]
+[ext_resource type="Theme" path="res://new_theme.tres" id="14_rc056"]
 [ext_resource type="PackedScene" uid="uid://ckh7l5k4spvgl" path="res://scenes/hazards/island3.tscn" id="14_w4d56"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
 [ext_resource type="PackedScene" uid="uid://cn31g048t3xtq" path="res://scenes/hazards/island4.tscn" id="15_t7nps"]
@@ -158,20 +159,25 @@ layout_mode = 2
 
 [node name="MainMenu" parent="MenuLayer" instance=ExtResource("13_v2k00")]
 visible = false
+theme = ExtResource("14_rc056")
 
 [node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("14_6udvg")]
 visible = false
+theme = ExtResource("14_rc056")
 
 [node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
 visible = false
+theme = ExtResource("14_rc056")
 ship1 = NodePath("../../Ship1")
 ship2 = NodePath("../../Ship2")
 
 [node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
 visible = false
+theme = ExtResource("14_rc056")
 
 [node name="PauseMenu" parent="MenuLayer" instance=ExtResource("17_2ohqg")]
 visible = false
+theme = ExtResource("14_rc056")
 
 [node name="OceanAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_8ixme")
