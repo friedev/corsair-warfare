@@ -133,17 +133,13 @@ func _physics_process(delta: float) -> void:
 		action_prefix = "p2"
 
 	if Input.is_action_pressed("%s_left" % action_prefix):
-		self.apply_torque(-rotation_speed)
+		self.apply_torque(-self.rotation_speed)
 	if Input.is_action_pressed("%s_right" % action_prefix):
-		self.apply_torque(rotation_speed)
+		self.apply_torque(self.rotation_speed)
 	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
-		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
 		self.fire_cannons_right()
-		self.cannon_fired.emit()
 	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
-		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
 		self.fire_cannons_left()
-		self.cannon_fired.emit()
 	self.apply_wind_force()
 	self.apply_collision_damage(delta)
 
@@ -195,6 +191,8 @@ func fire_cannons(point1: Vector2, point2: Vector2, ball_rotation: float):
 		var ball_position := point1 + (point2 - point1) * offset_ratio
 		ball_position -= Vector2(perpendicular_offset, 0).rotated(ball_rotation)
 		self.spawn_cannonball(ball_position, ball_rotation)
+	self.cannon_fired.emit()
+	Input.start_joy_vibration(self.getDevice(), 0.5, 0.0, 0.25)
 
 
 func fire_cannons_right():
@@ -208,6 +206,7 @@ func fire_cannons_right():
 	self.cannon_sound_r.play()
 	self.cannon_particles_r.restart()
 	self.cooldown_timer_r.start()
+
 
 
 func fire_cannons_left():
