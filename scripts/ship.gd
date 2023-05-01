@@ -5,8 +5,6 @@ signal cannon_fired
 signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
-const max_cannonball_offset := 10.0
-
 enum Player {
 	P1 = 1,
 	P2 = 2,
@@ -29,7 +27,6 @@ enum Player {
 @export var max_health: float
 
 @export var cannon_count: int
-@export var cannonball_scene: PackedScene
 
 
 var health: float:
@@ -57,9 +54,6 @@ var health: float:
 			self.medium_health_particles.emitting = false
 			self.low_health_particles.emitting = true
 
-var can_fire_l := true
-var can_fire_r := true
-
 var enabled := true:
 	set(value):
 		enabled = value
@@ -72,21 +66,8 @@ var enabled := true:
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
-@onready var cannon_bar_l: ProgressBar = %CannonBarL
-@onready var cannon_bar_r: ProgressBar = %CannonBarR
-
-@onready var cooldown_timer_l: Timer = %CooldownTimerL
-@onready var cooldown_timer_r: Timer = %CooldownTimerR
-@onready var cannon_particles_l: GPUParticles2D = %CannonParticlesL
-@onready var cannon_particles_r: GPUParticles2D = %CannonParticlesR
-@onready var cannon_sound_l: AudioStreamPlayer2D = %CannonSoundL
-@onready var cannon_sound_r: AudioStreamPlayer2D = %CannonSoundR
-@onready var cannon_reload_sound: AudioStreamPlayer2D = %CannonReload
-@onready var cannon_point_l1: Node2D = %CannonPointL1
-@onready var cannon_point_l2: Node2D = %CannonPointL2
-@onready var cannon_point_r1: Node2D = %CannonPointR1
-@onready var cannon_point_r2: Node2D = %CannonPointR2
-
+@onready var left_cannons: Cannons = %LeftCannons
+@onready var right_cannons: Cannons = %RightCannons
 @onready var collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
 @onready var damage_sound: AudioStreamPlayer2D = %DamageSound
 @onready var wake_particles: GPUParticles2D = %WakeParticles
@@ -111,15 +92,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	self.cannon_bar_l.value = (
-		self.cannon_bar_l.max_value
-		* (1 - self.cooldown_timer_l.time_left / self.cooldown_timer_l.wait_time)
-	)
-	self.cannon_bar_r.value = (
-		self.cannon_bar_r.max_value
-		* (1 - self.cooldown_timer_r.time_left / self.cooldown_timer_r.wait_time)
-	)
-
 	var action_prefix: String
 	if self.player == Player.P1:
 		action_prefix = "p1"
@@ -130,12 +102,19 @@ func _physics_process(delta: float) -> void:
 		self.apply_torque(-self.rotation_speed)
 	if Input.is_action_pressed("%s_right" % action_prefix):
 		self.apply_torque(self.rotation_speed)
-	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
-		self.fire_cannons_right()
-	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
-		self.fire_cannons_left()
+	if Input.is_action_pressed("%s_fire_right" % action_prefix):
+		self.fire(self.right_cannons)
+	if Input.is_action_pressed("%s_fire_left" % action_prefix):
+		self.fire(self.left_cannons)
 	self.apply_wind_force()
 	self.apply_collision_damage(delta)
+
+
+func fire(cannons: Cannons) -> void:
+	if cannons.can_fire():
+		cannons.fire(self.cannon_count)
+		Input.start_joy_vibration(self.getDevice(), 0.5, 0.0, 0.25)
+		self.cannon_fired.emit()
 
 
 func apply_wind_force() -> void:
@@ -170,67 +149,9 @@ func apply_collision_damage(delta: float):
 		self.health -= damage_to_self
 
 
-func spawn_cannonball(ball_position: Vector2, ball_rotation: float):
-	var cannonball = self.cannonball_scene.instantiate()
-	cannonball.global_position = ball_position
-	cannonball.rotation = ball_rotation
-	cannonball.add_collision_exception_with(self)
-	self.get_parent().add_child(cannonball)
-
-
-func fire_cannons(point1: Vector2, point2: Vector2, ball_rotation: float):
-	for i in range(self.cannon_count):
-		var offset_ratio := float(i) / float(self.cannon_count)
-		var perpendicular_offset := self.max_cannonball_offset * randf()
-		var ball_position := point1 + (point2 - point1) * offset_ratio
-		ball_position -= Vector2(perpendicular_offset, 0).rotated(ball_rotation)
-		self.spawn_cannonball(ball_position, ball_rotation)
-	self.cannon_fired.emit()
-	Input.start_joy_vibration(self.getDevice(), 0.5, 0.0, 0.25)
-
-
-func fire_cannons_right():
-	self.fire_cannons(
-		self.cannon_point_r1.global_position,
-		self.cannon_point_r2.global_position,
-		PI / 2 + self.rotation
-	)
-	self.can_fire_r = false
-	self.cannon_sound_r.pitch_scale = 1 + (randf() - 0.5) * 0.125
-	self.cannon_sound_r.play()
-	self.cannon_particles_r.restart()
-	self.cooldown_timer_r.start()
-
-
-
-func fire_cannons_left():
-	self.fire_cannons(
-		self.cannon_point_l1.global_position,
-		self.cannon_point_l2.global_position,
-		-PI / 2 + self.rotation
-	)
-	self.can_fire_l = false
-	self.cannon_sound_l.pitch_scale = 1 + (randf() - 0.1) * 0.4
-	self.cannon_sound_l.play()
-	self.cannon_particles_l.restart()
-	self.cooldown_timer_l.start()
-
-
 func destroy() -> void:
 	self.enabled = false
 	self.destroyed.emit(self)
-
-
-func _on_cooldown_timer_l_timeout() -> void:
-	self.can_fire_l = true
-	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
-	self.cannon_reload_sound.play()
-
-
-func _on_cooldown_timer_r_timeout() -> void:
-	self.can_fire_r = true
-	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
-	self.cannon_reload_sound.play()
 
 
 func getDevice() -> int:
