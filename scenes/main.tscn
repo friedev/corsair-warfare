@@ -57,10 +57,10 @@ script = ExtResource("1_dq6dd")
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Camera2D" type="Camera2D" parent="World" node_paths=PackedStringArray("ship1", "ship2")]
+[node name="Camera2D" type="Camera2D" parent="World"]
 script = ExtResource("4_6ifil")
-ship1 = NodePath("../Ship1")
-ship2 = NodePath("../Ship2")
+content_to_margin_ratio = 0.75
+zoom_speed = 0.05
 shake_rate = 1.0
 shake_per_damage = 100.0
 max_offset = 24.0

@@ -1,7 +1,9 @@
 extends Camera2D
 
-@export var ship1: Node2D
-@export var ship2: Node2D
+## Portion of the viewport dedicated to the ships. The remainder is a margin.
+@export var content_to_margin_ratio: float
+
+@export var zoom_speed: float
 
 @export var shake_rate: float
 @export var shake_per_damage: float
@@ -28,29 +30,34 @@ func apply_shake() -> void:
 
 
 func center_on_ships() -> void:
-	self.position.x = (ship1.position.x + ship2.position.x) * 0.5
-	self.position.y = (ship1.position.y + ship2.position.y) * 0.5
+	# Find bounding box for all ships
+	var rect := Rect2()
+	var empty_rect := Rect2()
+	for ship in self.get_tree().get_nodes_in_group(&"ships"):
+		# Expanding a raw Rect2 causes it to keep (0, 0) as one of its bounding
+		# points. Instead of expanding the first time, move to the first point.
+		if rect == empty_rect:
+			rect.position = ship.global_position
+		else:
+			rect = rect.expand((ship as Ship).global_position)
 
+	# Center on the bounding box
+	self.global_position = rect.get_center()
+
+	# Zoom to fit the bounding box
 	var dimensions := self.get_viewport_rect().size
+	var screen_ratio := dimensions.x / dimensions.y
+	var min_dimensions := dimensions * self.content_to_margin_ratio
+	var distance := rect.size.abs()
 
-	var screen_width := dimensions.x
-	var screen_height := dimensions.y
-	var screen_ratio := screen_width / screen_height
+	var zoom_amount := self.get_zoom().x
+	if distance.x > screen_ratio * distance.y and distance.x > min_dimensions.x:
+		zoom_amount = min_dimensions.x / distance.x
+	if screen_ratio * distance.y > distance.x and distance.y > min_dimensions.y:
+		zoom_amount = min_dimensions.y / distance.y
+	var new_zoom := Vector2(zoom_amount, zoom_amount)
 
-	var x_min := screen_width * 0.75
-	var y_min := screen_height * 0.75
-	var dist := ship2.position - ship1.position
-	var x_dist: float = abs(dist.x)
-	var y_dist: float = abs(dist.y)
-
-	var zoom_val := self.get_zoom()
-
-	if x_dist > screen_ratio * y_dist and x_dist > x_min:
-		zoom_val = Vector2(x_min / x_dist, x_min / x_dist)
-	if screen_ratio * y_dist > x_dist and y_dist > y_min:
-		zoom_val = Vector2(y_min / y_dist, y_min / y_dist)
-
-	self.set_zoom(self.get_zoom().lerp(zoom_val, 0.05))
+	self.zoom = lerp(self.get_zoom(), new_zoom, self.zoom_speed)
 
 
 func _process(delta: float) -> void:
