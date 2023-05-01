@@ -1,5 +1,6 @@
 extends Node
 
+@onready var world: Node2D = %World
 @onready var ship1: Ship = %Ship1
 @onready var ship2: Ship = %Ship2
 @onready var wind: Wind = %Wind
@@ -9,6 +10,7 @@ extends Node
 var game_active: bool:
 	set(value):
 		game_active = value
+		self.world.visible = self.game_active
 		self.ship1.enabled = self.game_active
 		self.ship2.enabled = self.game_active
 		self.wind.enabled = self.game_active

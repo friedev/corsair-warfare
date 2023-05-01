@@ -54,7 +54,10 @@ color_ramp = SubResource("GradientTexture1D_plouj")
 [node name="Main" type="Node"]
 script = ExtResource("1_dq6dd")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("ship1", "ship2")]
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="World" node_paths=PackedStringArray("ship1", "ship2")]
 script = ExtResource("4_6ifil")
 ship1 = NodePath("../Ship1")
 ship2 = NodePath("../Ship2")
@@ -63,7 +66,7 @@ shake_per_damage = 100.0
 max_offset = 24.0
 shake_reduction = 0.05
 
-[node name="WindParticles" type="GPUParticles2D" parent="Camera2D" node_paths=PackedStringArray("wind")]
+[node name="WindParticles" type="GPUParticles2D" parent="World/Camera2D" node_paths=PackedStringArray("wind")]
 unique_name_in_owner = true
 z_index = 5
 position = Vector2(575.5, 323.5)
@@ -75,21 +78,21 @@ script = ExtResource("7_0s2p7")
 added_velocity_multiplier = 100.0
 wind = NodePath("../../Wind")
 
-[node name="Wind" type="Node" parent="."]
+[node name="Wind" type="Node" parent="World"]
 unique_name_in_owner = true
 script = ExtResource("3_oc5qr")
 change_rate = 1.0
 noise_multiplier = 3.0
 initial_noise_position = 10.0
 
-[node name="Ship1" parent="." node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
+[node name="Ship1" parent="World" node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
 position = Vector2(184, 95)
 player = 1
 wind = NodePath("../Wind")
 texture = ExtResource("7_ik47c")
 
-[node name="Ship2" parent="." node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
+[node name="Ship2" parent="World" node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
 position = Vector2(972, 506)
 rotation = 3.14159
@@ -98,43 +101,43 @@ wind = NodePath("../Wind")
 texture = ExtResource("8_754b8")
 metadata/_edit_group_ = true
 
-[node name="Border" parent="." instance=ExtResource("8_xltam")]
+[node name="Border" parent="World" instance=ExtResource("8_xltam")]
 
-[node name="Obstacles" type="Node2D" parent="."]
+[node name="Obstacles" type="Node2D" parent="World"]
 
-[node name="RockLong" parent="Obstacles" instance=ExtResource("6_fsva3")]
+[node name="RockLong" parent="World/Obstacles" instance=ExtResource("6_fsva3")]
 
-[node name="RockBig" parent="Obstacles" instance=ExtResource("7_1j5n2")]
+[node name="RockBig" parent="World/Obstacles" instance=ExtResource("7_1j5n2")]
 
-[node name="RockSmall" parent="Obstacles" instance=ExtResource("8_eo5qm")]
+[node name="RockSmall" parent="World/Obstacles" instance=ExtResource("8_eo5qm")]
 
-[node name="Island1" parent="Obstacles" instance=ExtResource("12_yn2q3")]
+[node name="Island1" parent="World/Obstacles" instance=ExtResource("12_yn2q3")]
 position = Vector2(552, -404)
 
-[node name="Island2" parent="Obstacles" instance=ExtResource("13_61suq")]
+[node name="Island2" parent="World/Obstacles" instance=ExtResource("13_61suq")]
 position = Vector2(-253, -7)
 
-[node name="Island3" parent="Obstacles" instance=ExtResource("14_w4d56")]
+[node name="Island3" parent="World/Obstacles" instance=ExtResource("14_w4d56")]
 position = Vector2(1071, 1055)
 
-[node name="Island4" parent="Obstacles" instance=ExtResource("15_t7nps")]
+[node name="Island4" parent="World/Obstacles" instance=ExtResource("15_t7nps")]
 position = Vector2(1461, 253)
 
-[node name="Rock1" parent="Obstacles" instance=ExtResource("16_8b13h")]
+[node name="Rock1" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
 position = Vector2(1230, -310)
 
-[node name="Rock2" parent="Obstacles" instance=ExtResource("16_8b13h")]
+[node name="Rock2" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
 position = Vector2(1292, -517)
 rotation = 1.26885
 
-[node name="Rock3" parent="Obstacles" instance=ExtResource("16_8b13h")]
+[node name="Rock3" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
 position = Vector2(1436, -365)
 rotation = 3.80831
 
-[node name="Sandbar" parent="Obstacles" instance=ExtResource("17_rovm2")]
+[node name="Sandbar" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
 position = Vector2(209, 947)
 
-[node name="Sandbar2" parent="Obstacles" instance=ExtResource("17_rovm2")]
+[node name="Sandbar2" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
 position = Vector2(-343, 455)
 rotation = 4.82409
 
@@ -155,7 +158,7 @@ theme_override_constants/margin_bottom = 8
 [node name="WindHUD" parent="HUDLayer/MarginContainer" node_paths=PackedStringArray("wind") instance=ExtResource("12_4w4eo")]
 unique_name_in_owner = true
 layout_mode = 2
-wind = NodePath("../../../Wind")
+wind = NodePath("../../../World/Wind")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -167,8 +170,8 @@ visible = false
 
 [node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
 visible = false
-ship1 = NodePath("../../Ship1")
-ship2 = NodePath("../../Ship2")
+ship1 = NodePath("../../World/Ship1")
+ship2 = NodePath("../../World/Ship2")
 
 [node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
 visible = false
@@ -194,14 +197,14 @@ max_volume_db = -3.0
 
 [node name="Music" parent="." instance=ExtResource("21_w75cq")]
 
-[connection signal="cannon_fired" from="Ship1" to="Music" method="_on_ship_cannon_fired"]
-[connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
-[connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
-[connection signal="destroyed" from="Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
-[connection signal="cannon_fired" from="Ship2" to="Music" method="_on_ship_cannon_fired"]
-[connection signal="damage_taken" from="Ship2" to="Camera2D" method="_on_ship_damage_taken"]
-[connection signal="destroyed" from="Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
-[connection signal="destroyed" from="Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="cannon_fired" from="World/Ship1" to="Music" method="_on_ship_cannon_fired"]
+[connection signal="damage_taken" from="World/Ship1" to="World/Camera2D" method="_on_ship_damage_taken"]
+[connection signal="destroyed" from="World/Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="World/Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="cannon_fired" from="World/Ship2" to="Music" method="_on_ship_cannon_fired"]
+[connection signal="damage_taken" from="World/Ship2" to="World/Camera2D" method="_on_ship_damage_taken"]
+[connection signal="destroyed" from="World/Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
+[connection signal="destroyed" from="World/Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="credits_button_pressed" from="MenuLayer/MainMenu" to="MenuLayer/CreditsMenu" method="_on_main_menu_credits_button_pressed"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_main_menu_game_started"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_main_menu_options"]
