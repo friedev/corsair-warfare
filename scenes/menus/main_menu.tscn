@@ -25,9 +25,9 @@ theme = ExtResource("2_m7nol")
 text = "Corsair Warfare"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer"]
@@ -40,6 +40,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Options"
 
+[node name="CreditsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Credits"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -47,4 +52,5 @@ text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
