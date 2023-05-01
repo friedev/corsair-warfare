@@ -94,7 +94,7 @@ angle_max = 360.0
 scale_curve = SubResource("CurveTexture_1g5gc")
 color_ramp = SubResource("GradientTexture1D_aeyvo")
 
-[node name="Ship" type="RigidBody2D"]
+[node name="Ship" type="RigidBody2D" groups=["ships"]]
 max_contacts_reported = 4
 contact_monitor = true
 linear_damp = 2.0
