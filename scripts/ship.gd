@@ -196,7 +196,7 @@ func fire_cannons_right():
 		PI / 2 + self.rotation
 	)
 	self.can_fire_r = false
-	self.cannon_sound_r.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	self.cannon_sound_r.pitch_scale = 1 + (randf() - 0.5) * 0.125
 	self.cannon_sound_r.play()
 	self.cannon_particles_r.restart()
 	self.cooldown_timer_r.start()
