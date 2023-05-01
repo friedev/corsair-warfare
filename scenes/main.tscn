@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://cag26sio6jj5m"]
+[gd_scene load_steps=32 format=3 uid="uid://cag26sio6jj5m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
-[ext_resource type="PackedScene" uid="uid://y4tnpo2kc8lm" path="res://scenes/ship.tscn" id="1_ra0tt"]
+[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
 [ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
@@ -13,14 +13,20 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
+[ext_resource type="PackedScene" uid="uid://c6q8354khvbgw" path="res://scenes/hazards/island1.tscn" id="12_yn2q3"]
+[ext_resource type="PackedScene" uid="uid://dci4jm0vsuauj" path="res://scenes/hazards/island2.tscn" id="13_61suq"]
 [ext_resource type="PackedScene" uid="uid://das0xoqbeptib" path="res://scenes/menus/main_menu.tscn" id="13_v2k00"]
 [ext_resource type="PackedScene" uid="uid://dygsf1wll52ka" path="res://scenes/menus/options_menu.tscn" id="14_6udvg"]
-[ext_resource type="Theme" uid="uid://bgqfekgj750jm" path="res://new_theme.tres" id="14_rc056"]
+[ext_resource type="Theme" path="res://new_theme.tres" id="14_rc056"]
+[ext_resource type="PackedScene" uid="uid://ckh7l5k4spvgl" path="res://scenes/hazards/island3.tscn" id="14_w4d56"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://sound/ocean_ambience.ogg" id="15_8ixme"]
+[ext_resource type="PackedScene" uid="uid://cn31g048t3xtq" path="res://scenes/hazards/island4.tscn" id="15_t7nps"]
+[ext_resource type="PackedScene" uid="uid://db3iscvb1pggf" path="res://scenes/hazards/rock1.tscn" id="16_8b13h"]
 [ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://sound/wind_ambience.ogg" id="16_igyk8"]
 [ext_resource type="PackedScene" uid="uid://xps5ocgpfvd8" path="res://scenes/menus/game_over_menu.tscn" id="16_pt5je"]
 [ext_resource type="PackedScene" uid="uid://bfwvvlnrlnhw6" path="res://scenes/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="Script" path="res://scripts/wind_ambience.gd" id="17_034qo"]
+[ext_resource type="PackedScene" uid="uid://clhpyj8jwb6ce" path="res://scenes/hazards/sandbar.tscn" id="17_rovm2"]
 [ext_resource type="PackedScene" uid="uid://bwrhipi8d5y4r" path="res://scenes/music.tscn" id="21_w75cq"]
 
 [sub_resource type="Gradient" id="Gradient_3bfk4"]
@@ -58,6 +64,7 @@ shake_reduction = 0.05
 
 [node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
 unique_name_in_owner = true
+z_index = 5
 position = Vector2(575.5, 323.5)
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_gbbth")
@@ -92,11 +99,43 @@ metadata/_edit_group_ = true
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
 
-[node name="RockLong" parent="." instance=ExtResource("6_fsva3")]
+[node name="Obstacles" type="Node2D" parent="."]
 
-[node name="RockBig" parent="." instance=ExtResource("7_1j5n2")]
+[node name="RockLong" parent="Obstacles" instance=ExtResource("6_fsva3")]
 
-[node name="RockSmall" parent="." instance=ExtResource("8_eo5qm")]
+[node name="RockBig" parent="Obstacles" instance=ExtResource("7_1j5n2")]
+
+[node name="RockSmall" parent="Obstacles" instance=ExtResource("8_eo5qm")]
+
+[node name="Island1" parent="Obstacles" instance=ExtResource("12_yn2q3")]
+position = Vector2(552, -404)
+
+[node name="Island2" parent="Obstacles" instance=ExtResource("13_61suq")]
+position = Vector2(-253, -7)
+
+[node name="Island3" parent="Obstacles" instance=ExtResource("14_w4d56")]
+position = Vector2(1071, 1055)
+
+[node name="Island4" parent="Obstacles" instance=ExtResource("15_t7nps")]
+position = Vector2(1461, 253)
+
+[node name="Rock1" parent="Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(1230, -310)
+
+[node name="Rock2" parent="Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(1292, -517)
+rotation = 1.26885
+
+[node name="Rock3" parent="Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(1436, -365)
+rotation = 3.80831
+
+[node name="Sandbar" parent="Obstacles" instance=ExtResource("17_rovm2")]
+position = Vector2(209, 947)
+
+[node name="Sandbar2" parent="Obstacles" instance=ExtResource("17_rovm2")]
+position = Vector2(-343, 455)
+rotation = 4.82409
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 
