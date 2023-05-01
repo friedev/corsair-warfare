@@ -22,10 +22,9 @@ func _ready() -> void:
 
 func apply_shake() -> void:
 	var noise_position := Time.get_ticks_msec() * self.shake_rate
-	self.offset = Vector2(
-		self.noise.get_noise_1d(noise_position),
-		self.noise.get_noise_1d(-noise_position)
-	) * self.max_offset * (self.shake * self.shake)
+	var x := self.noise.get_noise_1d(noise_position)
+	var y := self.noise.get_noise_1d(-noise_position)
+	self.offset = Vector2(x, y) * self.max_offset * (self.shake ** 2)
 	self.shake -= self.shake_reduction
 
 
