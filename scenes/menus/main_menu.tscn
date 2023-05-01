@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://das0xoqbeptib"]
+[gd_scene load_steps=3 format=3 uid="uid://das0xoqbeptib"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_q3n4f"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://title_theme.tres" id="2_m7nol"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -20,7 +21,7 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("2_m7nol")
 text = "Corsair Warfare"
 horizontal_alignment = 1
 

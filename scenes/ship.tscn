@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://y4tnpo2kc8lm"]
+[gd_scene load_steps=28 format=3 uid="uid://fmyumo0aq4ua"]
 
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b7g73ymbg4q4y" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://sound/cannon_fire.wav" id="9_phvo0"]
-[ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://sound/ship_damage.wav" id="10_ytmsd"]
+[ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://sound/Cannon_Reload.wav" id="10_850h8"]
 [ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://sprites/particles/ship_wake_particle.png" id="11_yy8k2"]
 [ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://sprites/particles/smoke_particle.png" id="12_vokgj"]
 
@@ -202,9 +202,15 @@ unique_name_in_owner = true
 stream = ExtResource("9_phvo0")
 bus = &"Sound"
 
+[node name="CannonReload" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_850h8")
+volume_db = 20.612
+bus = &"Sound"
+
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("10_ytmsd")
+stream = ExtResource("10_850h8")
 bus = &"Sound"
 
 [node name="WakeParticles" type="GPUParticles2D" parent="."]

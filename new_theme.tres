@@ -1,8 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bgqfekgj750jm"]
-
-[ext_resource type="FontFile" uid="uid://ck887rhvf8erc" path="res://fonts/Treasuremap-Ea1vj.ttf" id="1_ogo5n"]
-
-[resource]
-default_font = ExtResource("1_ogo5n")
-Fonts/fonts/large = ExtResource("1_ogo5n")
-Fonts/fonts/normal = ExtResource("1_ogo5n")
