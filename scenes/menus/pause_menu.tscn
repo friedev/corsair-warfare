@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfwvvlnrlnhw6"]
+[gd_scene load_steps=3 format=3 uid="uid://bfwvvlnrlnhw6"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_duwyh"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://title_theme.tres" id="2_locs7"]
 
 [node name="PauseMenu" type="MarginContainer"]
 process_mode = 3
@@ -17,7 +18,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("2_locs7")
 text = "PAUSED"
 horizontal_alignment = 1
 
