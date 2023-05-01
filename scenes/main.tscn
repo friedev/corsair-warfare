@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
 [ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
-[ext_resource type="PackedScene" uid="uid://btova3sdipnu" path="res://scenes/wind_area.tscn" id="2_5rqvr"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
+[ext_resource type="Script" path="res://scripts/wind.gd" id="3_oc5qr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
 [ext_resource type="PackedScene" uid="uid://by0ui2gqs1ir7" path="res://scenes/menus/customization_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
@@ -28,14 +28,14 @@
 [ext_resource type="PackedScene" uid="uid://clhpyj8jwb6ce" path="res://scenes/hazards/sandbar.tscn" id="17_rovm2"]
 [ext_resource type="PackedScene" uid="uid://bwrhipi8d5y4r" path="res://scenes/music.tscn" id="21_w75cq"]
 
-[sub_resource type="Gradient" id="Gradient_3bfk4"]
+[sub_resource type="Gradient" id="Gradient_843f8"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_plouj"]
-gradient = SubResource("Gradient_3bfk4")
+gradient = SubResource("Gradient_843f8")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gbbth"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rmtjh"]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2000.0
@@ -61,39 +61,40 @@ shake_per_damage = 100.0
 max_offset = 24.0
 shake_reduction = 0.05
 
-[node name="WindParticles" type="GPUParticles2D" parent="Camera2D"]
+[node name="WindParticles" type="GPUParticles2D" parent="Camera2D" node_paths=PackedStringArray("wind")]
 unique_name_in_owner = true
 z_index = 5
 position = Vector2(575.5, 323.5)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_gbbth")
+process_material = SubResource("ParticleProcessMaterial_rmtjh")
 texture = ExtResource("3_ahd1i")
 lifetime = 2.0
 script = ExtResource("7_0s2p7")
 added_velocity_multiplier = 100.0
+wind = NodePath("../../Wind")
 
-[node name="WindArea" parent="." node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("2_5rqvr")]
+[node name="Wind" type="Node" parent="."]
 unique_name_in_owner = true
-position = Vector2(575.5, 323.5)
-ship1 = NodePath("../Ship1")
-ship2 = NodePath("../Ship2")
+script = ExtResource("3_oc5qr")
 change_rate = 1.0
 noise_multiplier = 3.0
 initial_noise_position = 10.0
 
-[node name="Ship1" parent="." instance=ExtResource("1_ra0tt")]
+[node name="Ship1" parent="." node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
 position = Vector2(184, 95)
 player = 1
+wind = NodePath("../Wind")
 texture_health_high = ExtResource("2_1fgds")
 texture_health_medium = ExtResource("2_1fgds")
 texture_health_low = ExtResource("2_1fgds")
 
-[node name="Ship2" parent="." instance=ExtResource("1_ra0tt")]
+[node name="Ship2" parent="." node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
 position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
+wind = NodePath("../Wind")
 metadata/_edit_group_ = true
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
@@ -150,9 +151,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="WindHUD" parent="HUDLayer/MarginContainer" instance=ExtResource("12_4w4eo")]
+[node name="WindHUD" parent="HUDLayer/MarginContainer" node_paths=PackedStringArray("wind") instance=ExtResource("12_4w4eo")]
 unique_name_in_owner = true
 layout_mode = 2
+wind = NodePath("../../../Wind")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -188,9 +190,6 @@ max_volume_db = -3.0
 
 [node name="Music" parent="." instance=ExtResource("21_w75cq")]
 
-[connection signal="wind_changed" from="WindArea" to="Camera2D/WindParticles" method="_on_wind_area_wind_changed"]
-[connection signal="wind_changed" from="WindArea" to="HUDLayer/MarginContainer/WindHUD" method="_on_wind_area_wind_changed"]
-[connection signal="wind_changed" from="WindArea" to="WindAmbience" method="_on_wind_area_wind_changed"]
 [connection signal="cannon_fired" from="Ship1" to="Music" method="_on_ship_cannon_fired"]
 [connection signal="damage_taken" from="Ship1" to="Camera2D" method="_on_ship_damage_taken"]
 [connection signal="destroyed" from="Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
