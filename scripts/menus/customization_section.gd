@@ -32,7 +32,7 @@ func refresh() -> void:
 	var points_spent := self.get_points_spent()
 	self.points_label.text = "%d/%d Points Spent" % [points_spent, self.max_points]
 	if points_spent > max_points:
-		self.points_label.modulate = Color.RED
+		self.points_label.modulate = Color(1, 0.25, 0.25)
 		self.ready_button.disabled = true
 	else:
 		self.points_label.modulate = Color.WHITE
