@@ -25,47 +25,61 @@ theme = ExtResource("2_u5dac")
 text = "Options"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="FullscreenLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="FullscreenLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/GridContainer"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SoundLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="SoundLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Sound Volume"
 
-[node name="SoundSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+[node name="SoundSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
 value = 5.0
 
-[node name="MusicLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="MusicLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Music Volume"
 
-[node name="MusicSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
 value = 5.0
 
-[node name="AmbienceLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="AmbienceLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Ambience Volume"
 
-[node name="AmbienceSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+[node name="AmbienceSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -77,8 +91,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
-[connection signal="toggled" from="VBoxContainer/GridContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
-[connection signal="value_changed" from="VBoxContainer/GridContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/GridContainer/AmbienceSlider" to="." method="_on_ambience_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/AmbienceSlider" to="." method="_on_ambience_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
