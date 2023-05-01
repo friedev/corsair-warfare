@@ -7,12 +7,7 @@ signal destroyed(ship: Ship)
 
 const max_cannonball_offset := 10.0
 
-enum Player {
-	P1 = 1,
-	P2 = 2,
-}
-
-@export var player: Player
+@export var player: int
 
 @export var texture_health_high: Texture2D
 @export var texture_health_medium: Texture2D
@@ -34,7 +29,7 @@ enum Player {
 var health: float:
 	set(value):
 		if value < self.health:
-			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
+			Input.start_joy_vibration(self.player, 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -115,22 +110,17 @@ func _physics_process(delta: float) -> void:
 		* (1 - self.cooldown_timer_r.time_left / self.cooldown_timer_r.wait_time)
 	)
 
-	var action_prefix: String
-	if self.player == Player.P1:
-		action_prefix = "p1"
-	elif self.player == Player.P2:
-		action_prefix = "p2"
 
-	if Input.is_action_pressed("%s_left" % action_prefix):
+	if (Input.get_joy_axis(self.player,(JOY_AXIS_LEFT_X)) < -0.5):
 		self.apply_torque(-rotation_speed)
-	if Input.is_action_pressed("%s_right" % action_prefix):
+	if (Input.get_joy_axis(self.player,(JOY_AXIS_LEFT_X)) > 0.5):
 		self.apply_torque(rotation_speed)
-	if Input.is_action_pressed("%s_fire_right" % action_prefix) and self.can_fire_r:
-		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
+	if (Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5) and self.can_fire_r:
+		Input.start_joy_vibration(self.player, 0.5, 0.0, 0.25)
 		self.fire_cannons_right()
 		self.cannon_fired.emit()
-	if Input.is_action_pressed("%s_fire_left" % action_prefix) and self.can_fire_l:
-		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
+	if (Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_LEFT) > 0.5) and self.can_fire_l:
+		Input.start_joy_vibration(self.player, 0.5, 0.0, 0.25)
 		self.fire_cannons_left()
 		self.cannon_fired.emit()
 	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
@@ -252,12 +242,3 @@ func _on_cooldown_timer_r_timeout() -> void:
 	self.can_fire_r = true
 	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
 	self.cannon_reload_sound.play()
-
-
-func getDevice() -> int:
-	var device: int
-	if self.player == Player.P1:
-		device = 1
-	elif self.player == Player.P2:
-		device = 0
-	return device

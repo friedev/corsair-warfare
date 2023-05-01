@@ -5,12 +5,13 @@ signal players_ready
 
 @export var ship1: Ship
 @export var ship2: Ship
+@export var ship3: Ship
 
 @onready var section1: CustomizationSection = %CustomizationSection1
 @onready var section2: CustomizationSection = %CustomizationSection2
+@onready var section3: CustomizationSection = %CustomizationSection3
 
-var player_1_ready := false
-var player_2_ready := false
+var all_players_ready: Array[bool] = [false, false, false]
 
 var hull_values: Array[float] = [1.0, 1.5, 2.0, 2.5]
 var sails_values: Array[float] = [1.0, (4.0 / 3.0), (5.0 / 3.0), 2.0]
@@ -25,17 +26,26 @@ func apply_customization(ship: Ship, section: CustomizationSection) -> void:
 
 
 func _on_customization_section_1_player_ready() -> void:
-	self.player_1_ready = true
+	self.all_players_ready[0] = true
 	self.apply_customization(self.ship1, self.section1)
-	if self.player_2_ready:
+	if not false in all_players_ready:
 		self.players_ready.emit()
 		self.hide()
 
 
 func _on_customization_section_2_player_ready() -> void:
-	self.player_2_ready = true
+	print_debug(all_players_ready)
+	self.all_players_ready[1] = true
 	self.apply_customization(self.ship2, self.section2)
-	if self.player_1_ready:
+	if not false in all_players_ready:
+		self.players_ready.emit()
+		self.hide()
+
+
+func _on_customization_section_3_player_ready() -> void:
+	self.all_players_ready[2] = true
+	self.apply_customization(self.ship3, self.section3)
+	if not false in all_players_ready:
 		self.players_ready.emit()
 		self.hide()
 
