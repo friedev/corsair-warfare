@@ -14,11 +14,14 @@ enum Player {
 
 @export var player: Player
 
+@export var wind: Wind
+
 @export var texture_health_high: Texture2D
 @export var texture_health_medium: Texture2D
 @export var texture_health_low: Texture2D
 
 @export var speed: float
+@export var min_speed: float
 @export var rotation_speed: float
 
 @export var ram_dps_min: float
@@ -28,7 +31,6 @@ enum Player {
 @export var max_health: float
 
 @export var cannonball_scene: PackedScene
-
 
 
 var health: float:
@@ -63,6 +65,15 @@ var health: float:
 
 var can_fire_l := true
 var can_fire_r := true
+
+var enabled := true:
+	set(value):
+		enabled = value
+		self.visible = self.enabled
+		self.set_process(self.enabled)
+		self.set_physics_process(self.enabled)
+		self.set_process_input(self.enabled)
+		self.collision_polygon.set_deferred(&"disabled", not self.enabled)
 
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
@@ -133,16 +144,19 @@ func _physics_process(delta: float) -> void:
 		Input.start_joy_vibration(getDevice(), 0.5, 0.0, 0.25)
 		self.fire_cannons_left()
 		self.cannon_fired.emit()
-	self.apply_force(Vector2.RIGHT.rotated(self.rotation) * speed)
+	self.apply_wind_force()
 	self.apply_collision_damage(delta)
 
 
-func set_enabled(enabled: bool) -> void:
-	self.visible = enabled
-	self.set_process(enabled)
-	self.set_physics_process(enabled)
-	self.set_process_input(enabled)
-	self.collision_polygon.set_deferred(&"disabled", not enabled)
+func apply_wind_force() -> void:
+	var difference := self.rotation - self.wind.wind.angle()
+	# https://stackoverflow.com/a/2007355
+	var actual_difference: float = min(abs(difference), abs(difference + TAU), abs(difference - TAU))
+	var alignment := 1.0 - actual_difference / PI
+	var magnitude := self.speed * self.wind.wind.length() * sqrt(alignment)
+	magnitude = max(magnitude, self.min_speed)
+	var force := Vector2(1, 0).rotated(self.rotation) * magnitude
+	self.apply_force(force)
 
 
 func apply_collision_damage(delta: float):
@@ -210,36 +224,8 @@ func fire_cannons_left():
 
 
 func destroy() -> void:
-	self.set_enabled(false)
+	self.enabled = false
 	self.destroyed.emit(self)
-
-
-func correctYMovement(current_wind):
-	var impulse = Vector2.ZERO
-	impulse.x = self.mass * 0.43
-	impulse *= -current_wind
-	self.apply_central_impulse(impulse)
-
-
-func correctNYMovement(current_wind):
-	var impulse = Vector2.ZERO
-	impulse.x = self.mass * .043
-	impulse *= current_wind
-	self.apply_central_impulse(impulse)
-
-
-func correctXMovement(current_wind):
-	var impulse = Vector2.ZERO
-	impulse.y = self.mass * .5
-	impulse *= -current_wind
-	self.apply_central_impulse(impulse)
-
-
-func correctNXMovement(current_wind):
-	var impulse = Vector2.ZERO
-	impulse.y = self.mass * .5
-	impulse *= -current_wind
-	self.apply_central_impulse(impulse)
 
 
 func _on_cooldown_timer_l_timeout() -> void:
