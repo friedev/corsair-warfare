@@ -1,6 +1,6 @@
 extends MarginContainer
 
-
+signal screen_shake_toggled(enabled: bool)
 signal go_back
 
 
@@ -38,3 +38,7 @@ func _on_fullscreen_check_box_toggled(button_pressed: bool) -> void:
 		if button_pressed
 		else DisplayServer.WINDOW_MODE_WINDOWED
 	)
+
+
+func _on_screen_shake_check_box_toggled(button_pressed: bool) -> void:
+	self.screen_shake_toggled.emit(button_pressed)
