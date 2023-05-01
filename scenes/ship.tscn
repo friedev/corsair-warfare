@@ -199,7 +199,7 @@ bus = &"Sound"
 [node name="CannonReload" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_850h8")
-volume_db = 20.612
+volume_db = 16.0
 bus = &"Sound"
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
