@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://cag26sio6jj5m"]
+[gd_scene load_steps=32 format=3 uid="uid://cag26sio6jj5m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dq6dd"]
-[ext_resource type="PackedScene" uid="uid://fmyumo0aq4ua" path="res://scenes/ship.tscn" id="1_ra0tt"]
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="2_1fgds"]
+[ext_resource type="PackedScene" path="res://scenes/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://sprites/particles/wind_particle.png" id="3_ahd1i"]
 [ext_resource type="Script" path="res://scripts/wind.gd" id="3_oc5qr"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_6ifil"]
@@ -10,6 +9,8 @@
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="Script" path="res://scripts/wind_particles.gd" id="7_0s2p7"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_big.tscn" id="7_1j5n2"]
+[ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://sprites/white_ship.png" id="7_ik47c"]
+[ext_resource type="Texture2D" uid="uid://dlrb6107bw2dn" path="res://sprites/black_ship.png" id="8_754b8"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/rock_small.tscn" id="8_eo5qm"]
 [ext_resource type="PackedScene" uid="uid://cv4lphj0dk3wq" path="res://scenes/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://bw3e5pa51ef7s" path="res://scenes/wind_hud.tscn" id="12_4w4eo"]
@@ -85,9 +86,7 @@ unique_name_in_owner = true
 position = Vector2(184, 95)
 player = 1
 wind = NodePath("../Wind")
-texture_health_high = ExtResource("2_1fgds")
-texture_health_medium = ExtResource("2_1fgds")
-texture_health_low = ExtResource("2_1fgds")
+texture = ExtResource("7_ik47c")
 
 [node name="Ship2" parent="." node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
 unique_name_in_owner = true
@@ -95,6 +94,7 @@ position = Vector2(972, 506)
 rotation = 3.14159
 player = 2
 wind = NodePath("../Wind")
+texture = ExtResource("8_754b8")
 metadata/_edit_group_ = true
 
 [node name="Border" parent="." instance=ExtResource("8_xltam")]
