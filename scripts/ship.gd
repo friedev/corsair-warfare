@@ -36,8 +36,9 @@ var health: float:
 		if value < self.health:
 			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
 			self.damage_taken.emit(self.health - value)
-			if not self.damage_sound.playing:
+			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
+			self.damage_timer.start()
 
 		health = clampf(value, 0, self.max_health)
 		if self.health == 0:
@@ -86,7 +87,7 @@ var can_fire_r := true
 @onready var wake_particles: GPUParticles2D = %WakeParticles
 @onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
 @onready var low_health_particles: GPUParticles2D = %LowHealthParticles
-
+@onready var damage_timer: Timer = %DamageTimer
 
 
 func _ready() -> void:
@@ -251,7 +252,7 @@ func _on_cooldown_timer_r_timeout() -> void:
 	self.can_fire_r = true
 	self.cannon_reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
 	self.cannon_reload_sound.play()
-	
+
 
 func getDevice() -> int:
 	var device: int

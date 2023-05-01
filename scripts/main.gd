@@ -24,5 +24,5 @@ func _on_customization_menu_players_ready() -> void:
 	self.set_game_active(true)
 
 
-func _on_game_over_menu_game_restarted() -> void:
+func _on_game_restarted() -> void:
 	self.get_tree().reload_current_scene()
