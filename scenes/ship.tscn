@@ -1,10 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://fmyumo0aq4ua"]
+[gd_scene load_steps=25 format=3 uid="uid://br6t7rkbtydwg"]
 
-[ext_resource type="Texture2D" uid="uid://ccurknedxv85g" path="res://sprites/ships/white/health_high.png" id="1_2f5eh"]
+[ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://sprites/white_ship.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_lvdat"]
-[ext_resource type="Texture2D" uid="uid://bfxb6qalqma3x" path="res://sprites/ships/black/health_high.png" id="2_4hfof"]
-[ext_resource type="Texture2D" uid="uid://dvva17ddm1i5u" path="res://sprites/ships/black/health_medium.png" id="3_gtpjx"]
-[ext_resource type="Texture2D" uid="uid://d27g5vtx1qhj2" path="res://sprites/ships/black/health_low.png" id="4_3ogfv"]
 [ext_resource type="PackedScene" uid="uid://coqvjgbm03mhf" path="res://scenes/cannonball.tscn" id="5_iubct"]
 [ext_resource type="PackedScene" uid="uid://b7g73ymbg4q4y" path="res://scenes/cannon_fire_particles.tscn" id="6_kok1b"]
 [ext_resource type="PackedScene" uid="uid://bjm3sngi2jga5" path="res://scenes/cannon_bar.tscn" id="6_qica2"]
@@ -106,9 +103,6 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
-texture_health_high = ExtResource("2_4hfof")
-texture_health_medium = ExtResource("3_gtpjx")
-texture_health_low = ExtResource("4_3ogfv")
 speed = 150.0
 min_speed = 50.0
 rotation_speed = 2500.0
@@ -117,7 +111,6 @@ ram_dps_max = 0.2
 obstacle_dps = 0.15
 max_health = 1.0
 cannonball_scene = ExtResource("5_iubct")
-cannon_count = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 unique_name_in_owner = true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccurknedxv85g"
-path="res://.godot/imported/health_high.png-5bfe4007fdfcff0ce6070b5295455d17.ctex"
+uid="uid://dlrb6107bw2dn"
+path="res://.godot/imported/black_ship.png-763ea21b72f6043392a8f613ef66ee92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ships/white/health_high.png"
-dest_files=["res://.godot/imported/health_high.png-5bfe4007fdfcff0ce6070b5295455d17.ctex"]
+source_file="res://sprites/black_ship.png"
+dest_files=["res://.godot/imported/black_ship.png-763ea21b72f6043392a8f613ef66ee92.ctex"]
 
 [params]
 

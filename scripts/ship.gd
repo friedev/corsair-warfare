@@ -16,9 +16,7 @@ enum Player {
 
 @export var wind: Wind
 
-@export var texture_health_high: Texture2D
-@export var texture_health_medium: Texture2D
-@export var texture_health_low: Texture2D
+@export var texture: Texture2D
 
 @export var speed: float
 @export var min_speed: float
@@ -30,6 +28,7 @@ enum Player {
 
 @export var max_health: float
 
+@export var cannon_count: int
 @export var cannonball_scene: PackedScene
 
 
@@ -49,19 +48,14 @@ var health: float:
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 		# Update sprite based on health
 		if self.health > self.max_health * (2.0 / 3.0):
-			self.sprite.texture = self.texture_health_high
 			self.medium_health_particles.emitting = false
 			self.low_health_particles.emitting = false
 		elif self.health > self.max_health * (1.0 / 3.0):
-			self.sprite.texture = self.texture_health_medium
 			self.medium_health_particles.emitting = true
 			self.low_health_particles.emitting = false
 		else:
-			self.sprite.texture = self.texture_health_low
 			self.medium_health_particles.emitting = false
 			self.low_health_particles.emitting = true
-
-@export var cannon_count: int
 
 var can_fire_l := true
 var can_fire_r := true
@@ -102,7 +96,7 @@ var enabled := true:
 
 
 func _ready() -> void:
-	self.sprite.texture = self.texture_health_high
+	self.sprite.texture = self.texture
 	self.health = self.max_health
 	# Duplicate material so that changes by one ship don't affect the other
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
