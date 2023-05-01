@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://by0ui2gqs1ir7"]
+[gd_scene load_steps=4 format=3 uid="uid://by0ui2gqs1ir7"]
 
 [ext_resource type="Script" path="res://scripts/menus/customization_menu.gd" id="1_i366w"]
 [ext_resource type="PackedScene" uid="uid://1gtcrev6yrg4" path="res://scenes/menus/customization_section.tscn" id="1_owfwi"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://title_theme.tres" id="2_t00gu"]
 
 [node name="CustomizationMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -19,35 +20,63 @@ script = ExtResource("1_i366w")
 layout_mode = 2
 alignment = 1
 
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_t00gu")
+text = "Customize"
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PlayerLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Player 1"
 horizontal_alignment = 1
 
-[node name="CustomizationSection1" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_owfwi")]
+[node name="CustomizationSection1" parent="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_owfwi")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PlayerLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Player 2"
 horizontal_alignment = 1
 
-[node name="CustomizationSection2" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("1_owfwi")]
+[node name="CustomizationSection2" parent="VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer2" instance=ExtResource("1_owfwi")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="player_ready" from="VBoxContainer/HBoxContainer/VBoxContainer/CustomizationSection1" to="." method="_on_customization_section_1_player_ready"]
-[connection signal="player_ready" from="VBoxContainer/HBoxContainer/VBoxContainer2/CustomizationSection2" to="." method="_on_customization_section_2_player_ready"]
+[connection signal="player_ready" from="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CustomizationSection1" to="." method="_on_customization_section_1_player_ready"]
+[connection signal="player_ready" from="VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer2/CustomizationSection2" to="." method="_on_customization_section_2_player_ready"]
