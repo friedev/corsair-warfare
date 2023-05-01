@@ -53,6 +53,14 @@ text = "Fullscreen"
 [node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 
+[node name="ScreenShakeLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Screen Shake"
+
+[node name="ScreenShakeCheckBox" type="CheckBox" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+button_pressed = true
+
 [node name="SoundLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Sound Volume"
@@ -92,6 +100,7 @@ size_flags_horizontal = 4
 text = "Back"
 
 [connection signal="toggled" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/ScreenShakeCheckBox" to="." method="_on_screen_shake_check_box_toggled"]
 [connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/AmbienceSlider" to="." method="_on_ambience_slider_value_changed"]
