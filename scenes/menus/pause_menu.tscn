@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfwvvlnrlnhw6"]
+[gd_scene load_steps=3 format=3 uid="uid://bfwvvlnrlnhw6"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_duwyh"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://title_theme.tres" id="2_locs7"]
 
 [node name="PauseMenu" type="MarginContainer"]
 process_mode = 3
@@ -17,13 +18,24 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("2_locs7")
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Resume"
 
-[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[node name="MenuButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

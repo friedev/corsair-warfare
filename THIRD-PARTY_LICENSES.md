@@ -1,3 +1,7 @@
+[Treasure Map Font](https://www.fontspace.com/treasure-map-font-f40513)
+by [JoannaVu](https://www.fontspace.com/joannavu)
+licensed as [Freeware, Non-Commercial](https://www.fontspace.com/help#license)
+
 [canon.aif](https://freesound.org/people/man/sounds/14615/)
 by [man](https://freesound.org/people/man/)
 licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)

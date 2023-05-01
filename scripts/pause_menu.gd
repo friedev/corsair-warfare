@@ -1,5 +1,6 @@
 extends MarginContainer
 
+signal game_restarted
 
 var can_pause := false
 
@@ -25,3 +26,8 @@ func _on_customization_menu_players_ready() -> void:
 
 func _on_ship_destroyed(ship: Ship) -> void:
 	self.can_pause = false
+
+
+func _on_menu_button_pressed() -> void:
+	self.set_paused(false)
+	self.game_restarted.emit()

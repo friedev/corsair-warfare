@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://db3iscvb1pggf"]
+
+[ext_resource type="Texture2D" uid="uid://cwm1oav1t7x31" path="res://sprites/hazards/rock1.png" id="1_ilmrf"]
+
+[node name="Rock1" type="StaticBody2D"]
+position = Vector2(2, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(585, 349, 592, 353, 591, 361, 597, 362, 616, 386, 630, 386, 642, 403, 667, 422, 695, 424, 706, 430, 739, 432, 748, 440, 745, 450, 706, 461, 698, 459, 687, 466, 669, 466, 652, 471, 650, 465, 637, 456, 632, 457, 625, 452, 624, 447, 608, 440, 613, 432, 611, 423, 602, 415, 597, 419, 586, 411, 587, 402, 579, 390, 581, 373, 586, 365, 582, 361, 570, 364, 571, 358, 577, 356, 578, 351)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.400944, 0.400944)
+texture = ExtResource("1_ilmrf")

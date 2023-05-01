@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://clhpyj8jwb6ce"]
+
+[ext_resource type="Texture2D" uid="uid://dtpf8mftk3hao" path="res://sprites/hazards/sandbar.png" id="1_p2kuv"]
+
+[node name="Sandbar" type="StaticBody2D"]
+position = Vector2(2, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(783, 202, 783, 225, 752, 276, 717, 377, 714, 445, 721, 470, 645, 537, 580, 613, 561, 623, 537, 623, 530, 613, 545, 599, 562, 587, 601, 522, 637, 485, 700, 366, 708, 335, 747, 268, 777, 222, 779, 201)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.400944, 0.400944)
+texture = ExtResource("1_p2kuv")
