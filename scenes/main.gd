@@ -35,8 +35,8 @@ func spawn_ship(details: PlayerDetails) -> void:
 	# TODO let player choose texture, or choose based on index
 	ship.texture = self.SHIP_TEXTURES[0]
 	# TODO spawn at random safe location
-	ship.position.x += randf() * 64
-	ship.position.y += randf() * 64
+	ship.position.x += randf() * 256
+	ship.position.y += randf() * 256
 	ship.wind = self.wind
 
 
