@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://boj2wmiai8p6r"]
+[gd_scene load_steps=33 format=3 uid="uid://j6lypfe2pyeo"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
 [ext_resource type="PackedScene" uid="uid://chfrwjo8j7og0" path="res://scenes/world/ship/ship.tscn" id="1_ra0tt"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://scenes/world/wind/wind_particle.png" id="3_v1r5n"]
 [ext_resource type="Script" path="res://scenes/world/wind/wind_particles.gd" id="4_i4t2a"]
 [ext_resource type="Script" path="res://scenes/world/wind/wind.gd" id="5_hl8vl"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/customization_menu.tscn" id="5_ke02y"]
+[ext_resource type="PackedScene" uid="uid://q3sofkfm3603" path="res://scenes/ui/menus/lobby_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock_big.tscn" id="7_1j5n2"]
 [ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://scenes/world/ship/white_ship.png" id="7_icndf"]
@@ -165,10 +165,8 @@ visible = false
 [node name="OptionsMenu" parent="MenuLayer" instance=ExtResource("14_6udvg")]
 visible = false
 
-[node name="CustomizationMenu" parent="MenuLayer" node_paths=PackedStringArray("ship1", "ship2") instance=ExtResource("5_ke02y")]
+[node name="LobbyMenu" parent="MenuLayer" instance=ExtResource("5_ke02y")]
 visible = false
-ship1 = NodePath("../../World/Ship1")
-ship2 = NodePath("../../World/Ship2")
 
 [node name="GameOverMenu" parent="MenuLayer" instance=ExtResource("16_pt5je")]
 visible = false
@@ -208,13 +206,13 @@ process_mode = 3
 [connection signal="destroyed" from="World/Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
 [connection signal="destroyed" from="World/Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
 [connection signal="credits_button_pressed" from="MenuLayer/MainMenu" to="MenuLayer/CreditsMenu" method="_on_menu_open"]
-[connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/CustomizationMenu" method="_on_menu_open"]
+[connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/LobbyMenu" method="_on_menu_open"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_menu_open"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="screen_shake_toggled" from="MenuLayer/OptionsMenu" to="World/Camera2D" method="_on_options_menu_screen_shake_toggled"]
-[connection signal="go_back" from="MenuLayer/CustomizationMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
-[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="." method="_on_customization_menu_players_ready"]
-[connection signal="players_ready" from="MenuLayer/CustomizationMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
+[connection signal="go_back" from="MenuLayer/LobbyMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
+[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="." method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_restarted"]
 [connection signal="game_restarted" from="MenuLayer/PauseMenu" to="." method="_on_game_restarted"]
 [connection signal="back_button_pressed" from="MenuLayer/CreditsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]

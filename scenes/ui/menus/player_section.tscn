@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://yk2cbtctwao"]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/player_section.gd" id="1_0lbsc"]
+
+[node name="PlayerSection" type="PanelContainer"]
+script = ExtResource("1_0lbsc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+
+[node name="NotJoinedContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="JoyLabel" type="Label" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
+layout_mode = 2
+text = "Press A to join
+with controller."
+horizontal_alignment = 1
+
+[node name="Keyboard1Button" type="Button" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add keyboard (WASD)"
+
+[node name="Keyboard2Button" type="Button" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add keyboard (IJKL)"
+
+[node name="JoinedContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+layout_mode = 2
+
+[node name="NicknameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Nickname"
+alignment = 1
+max_length = 10
+
+[node name="LeaveButton" type="Button" parent="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="Keyboard1Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Steer: A/D
+Cannons: Q/E"
+horizontal_alignment = 1
+
+[node name="Keyboard2Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Steer: J/L
+Cannons: U/O"
+horizontal_alignment = 1
+
+[node name="JoyControls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Steer: Left Stick
+Cannons: Triggers
+Leave: B"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard1Button" to="." method="_on_keyboard_1_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard2Button" to="." method="_on_keyboard_2_button_pressed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/NicknameEdit" to="." method="_on_nickname_edit_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]
