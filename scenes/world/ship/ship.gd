@@ -27,7 +27,7 @@ signal destroyed(ship: Ship)
 var health: float:
 	set(value):
 		if value < self.health:
-			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
+			Input.start_joy_vibration(self.get_device(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		Input.start_joy_vibration(self.getDevice(), 0.5, 0.0, 0.25)
+		Input.start_joy_vibration(self.get_device(), 0.5, 0.0, 0.25)
 		self.cannon_fired.emit()
 
 
@@ -144,5 +144,5 @@ func destroy() -> void:
 	self.destroyed.emit(self)
 
 
-func getDevice() -> int:
+func get_device() -> int:
 	return player - 1
