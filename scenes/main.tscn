@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://j6lypfe2pyeo"]
+[gd_scene load_steps=28 format=3 uid="uid://j6lypfe2pyeo"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
 [ext_resource type="Script" path="res://scenes/world/camera.gd" id="2_whori"]
@@ -6,10 +6,7 @@
 [ext_resource type="Script" path="res://scenes/world/wind/wind_particles.gd" id="4_i4t2a"]
 [ext_resource type="Script" path="res://scenes/world/wind/wind.gd" id="5_hl8vl"]
 [ext_resource type="PackedScene" uid="uid://q3sofkfm3603" path="res://scenes/ui/menus/lobby_menu.tscn" id="5_ke02y"]
-[ext_resource type="PackedScene" path="res://scenes/world/environment/rock_long.tscn" id="6_fsva3"]
-[ext_resource type="PackedScene" path="res://scenes/world/environment/rock_big.tscn" id="7_1j5n2"]
-[ext_resource type="PackedScene" path="res://scenes/world/environment/rock_small.tscn" id="8_eo5qm"]
-[ext_resource type="PackedScene" path="res://scenes/world/environment/border.tscn" id="8_xltam"]
+[ext_resource type="PackedScene" uid="uid://dqob1rf2731fk" path="res://scenes/world/environment/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud/wind_hud/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island1.tscn" id="12_yn2q3"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island2.tscn" id="13_61suq"]
@@ -48,8 +45,12 @@ orbit_velocity_max = 0.0
 scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_plouj")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_34mys"]
+radius = 256.0
+
 [node name="Main" type="Node"]
 script = ExtResource("1_ndiw8")
+ship_spawn_radius = 1200.0
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -85,42 +86,41 @@ initial_noise_position = 10.0
 
 [node name="Border" parent="World" instance=ExtResource("8_xltam")]
 
+[node name="ShipSpawnCast" type="ShapeCast2D" parent="World"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_34mys")
+target_position = Vector2(0, 0)
+
 [node name="Obstacles" type="Node2D" parent="World"]
 
-[node name="RockLong" parent="World/Obstacles" instance=ExtResource("6_fsva3")]
-
-[node name="RockBig" parent="World/Obstacles" instance=ExtResource("7_1j5n2")]
-
-[node name="RockSmall" parent="World/Obstacles" instance=ExtResource("8_eo5qm")]
-
 [node name="Island1" parent="World/Obstacles" instance=ExtResource("12_yn2q3")]
-position = Vector2(552, -404)
+position = Vector2(-33, -653)
 
 [node name="Island2" parent="World/Obstacles" instance=ExtResource("13_61suq")]
-position = Vector2(-253, -7)
+position = Vector2(-838, -256)
 
 [node name="Island3" parent="World/Obstacles" instance=ExtResource("14_w4d56")]
-position = Vector2(1071, 1055)
+position = Vector2(486, 806)
 
 [node name="Island4" parent="World/Obstacles" instance=ExtResource("15_t7nps")]
-position = Vector2(1461, 253)
+position = Vector2(876, 4)
 
 [node name="Rock1" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(1230, -310)
+position = Vector2(645, -559)
 
 [node name="Rock2" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(1292, -517)
+position = Vector2(707, -766)
 rotation = 1.26885
 
 [node name="Rock3" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(1436, -365)
+position = Vector2(851, -614)
 rotation = 3.80831
 
 [node name="Sandbar" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
-position = Vector2(209, 947)
+position = Vector2(-376, 698)
 
 [node name="Sandbar2" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
-position = Vector2(-343, 455)
+position = Vector2(-928, 206)
 rotation = 4.82409
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]

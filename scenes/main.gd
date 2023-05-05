@@ -9,11 +9,14 @@ const SHIP_TEXTURES := [
 	preload("res://scenes/world/ship/black_ship.png"),
 ]
 
+@export var ship_spawn_radius: float
+
 @onready var world: Node2D = %World
 @onready var camera: ShakeCamera2D = %Camera2D
 @onready var wind: Wind = %Wind
 @onready var music: Music = %Music
 @onready var hud_layer: CanvasLayer = %HUDLayer
+@onready var ship_spawn_cast: ShapeCast2D = %ShipSpawnCast
 
 var game_active: bool:
 	set(value):
@@ -24,8 +27,25 @@ var game_active: bool:
 
 var ships_alive: int
 
+func move_ship_spawn_cast() -> void:
+	self.ship_spawn_cast.position = Vector2(
+		self.ship_spawn_radius * sqrt(randf()), 0
+	).rotated(randf() * TAU)
+	self.ship_spawn_cast.force_shapecast_update()
+
+
+func find_ship_spawn_position() -> Vector2:
+	self.move_ship_spawn_cast()
+	while self.ship_spawn_cast.get_collision_count() > 0:
+		self.move_ship_spawn_cast()
+	return self.ship_spawn_cast.position
+
+
 func spawn_ship(details: PlayerDetails) -> void:
+	var spawn_position := self.find_ship_spawn_position()
 	var ship: Ship = self.SHIP_SCENE.instantiate()
+	ship.position = spawn_position
+	ship.rotation = randf() * TAU
 	ship.cannon_fired.connect(self.music._on_ship_cannon_fired)
 	ship.damage_taken.connect(self.camera._on_ship_damage_taken)
 	ship.destroyed.connect(self._on_ship_destroyed)
@@ -34,9 +54,6 @@ func spawn_ship(details: PlayerDetails) -> void:
 	ship.nickname = details.nickname
 	# TODO let player choose texture, or choose based on index
 	ship.texture = self.SHIP_TEXTURES[0]
-	# TODO spawn at random safe location
-	ship.position.x += randf() * 64
-	ship.position.y += randf() * 64
 	ship.wind = self.wind
 
 
