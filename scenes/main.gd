@@ -45,6 +45,7 @@ func _ready() -> void:
 
 
 func _on_game_restarted() -> void:
+	Globals.players.clear()
 	self.get_tree().reload_current_scene()
 
 
