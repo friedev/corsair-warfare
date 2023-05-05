@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://boj2wmiai8p6r"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
-[ext_resource type="PackedScene" path="res://scenes/world/ship/ship.tscn" id="1_ra0tt"]
+[ext_resource type="PackedScene" uid="uid://chfrwjo8j7og0" path="res://scenes/world/ship/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Script" path="res://scenes/world/camera.gd" id="2_whori"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://scenes/world/wind/wind_particle.png" id="3_v1r5n"]
 [ext_resource type="Script" path="res://scenes/world/wind/wind_particles.gd" id="4_i4t2a"]
