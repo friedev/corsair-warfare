@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/credits_menu.gd" id="1_sbn1y"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://scenes/ui/title_theme.tres" id="2_37cyy"]
+
+[node name="CreditsMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+script = ExtResource("1_sbn1y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_37cyy")
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]Corsair Warfare was made by:
+
+Aaron Friesen
+Kyle Gann
+Preston Pinkelman
+Tristan Maiefski
+Sam Hamacher[/center]
+
+Third-party assets:
+
+- [url=https://www.fontspace.com/treasure-map-font-f40513]Treasure Map Font[/url] by [url=https://www.fontspace.com/joannavu]JoannaVu[/url] licensed as [url=https://www.fontspace.com/help#license]Freeware, Non-Commercial[/url]
+- [url=https://freesound.org/people/man/sounds/14615/]canon.aif[/url] by [url=https://freesound.org/people/man/]man[/url] licensed under [url=http://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url]
+- [url=https://opengameart.org/content/cannon-fire]Cannon fire[/url] by [url=https://opengameart.org/users/thimras]Thimras[/url] licensed under [url=http://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+- [url=https://freesound.org/people/InspectorJ/sounds/400632/]Ambience, Seaside Waves, Close, A.wav[/url] by [url=http://www.jshaw.co.uk/]InspectorJ[/url] licensed under [url=https://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]
+- [url=https://freesound.org/people/soundscalpel.com/sounds/110393/]water_splash.wav[/url] by [url=https://freesound.org/people/soundscalpel.com/]soundscalpel.com[/url] licensed under [url=https://freesound.org/people/soundscalpel.com/]CC BY 3.0[/url]
+- [url=https://freesound.org/people/Bosk1/sounds/144083/]Wind Houling 1 .wav[/url] by [url=https://freesound.org/people/Bosk1/]Bosk1[/url] licensed under [url=https://creativecommons.org/licenses/by-nc/4.0/]CC BY-NC 4.0[/url]
+- [url=https://freesound.org/people/egomassive/sounds/536777/]Smash.ogg[/url] by [url=https://freesound.org/people/egomassive/]egomassive[/url] licensed under [url=http://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+- [url=https://freesound.org/people/sgarrison2127/sounds/178079/]knife cling[/url] by [url=https://freesound.org/people/sgarrison2127/]sgarrison2127[/url] licensed under [url=http://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+- [url=https://freesound.org/people/MATRIXXX_/sounds/658273/]War Ready.wav[/url] by [url=https://freesound.org/people/MATRIXXX_/]MATRIXXX_[/url] licensed under [url=http://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]"
+fit_content = true
+scroll_active = false
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
