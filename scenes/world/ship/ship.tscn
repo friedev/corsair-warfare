@@ -100,13 +100,14 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
-speed = 150.0
+speed = 200.0
 min_speed = 50.0
 rotation_speed = 2500.0
 ram_dps_min = 0.1
 ram_dps_max = 0.2
 obstacle_dps = 0.15
 max_health = 1.0
+cannon_count = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 unique_name_in_owner = true
@@ -133,6 +134,18 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="NicknameLabel" type="Label" parent="ControlParent"]
+unique_name_in_owner = true
+z_index = 3
+offset_left = -84.0
+offset_top = -59.0
+offset_right = 85.0
+offset_bottom = -33.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "WWWWWWWWWW"
+horizontal_alignment = 1
 
 [node name="LeftCannons" parent="." instance=ExtResource("4_dkwe4")]
 unique_name_in_owner = true

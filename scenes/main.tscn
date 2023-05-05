@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://j6lypfe2pyeo"]
+[gd_scene load_steps=30 format=3 uid="uid://j6lypfe2pyeo"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
-[ext_resource type="PackedScene" uid="uid://chfrwjo8j7og0" path="res://scenes/world/ship/ship.tscn" id="1_ra0tt"]
 [ext_resource type="Script" path="res://scenes/world/camera.gd" id="2_whori"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://scenes/world/wind/wind_particle.png" id="3_v1r5n"]
 [ext_resource type="Script" path="res://scenes/world/wind/wind_particles.gd" id="4_i4t2a"]
@@ -9,9 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://q3sofkfm3603" path="res://scenes/ui/menus/lobby_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock_long.tscn" id="6_fsva3"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock_big.tscn" id="7_1j5n2"]
-[ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://scenes/world/ship/white_ship.png" id="7_icndf"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock_small.tscn" id="8_eo5qm"]
-[ext_resource type="Texture2D" uid="uid://dlrb6107bw2dn" path="res://scenes/world/ship/black_ship.png" id="8_oh37s"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud/wind_hud/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island1.tscn" id="12_yn2q3"]
@@ -21,7 +18,7 @@
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island3.tscn" id="14_w4d56"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island4.tscn" id="15_t7nps"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock1.tscn" id="16_8b13h"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/game_over_menu.tscn" id="16_pt5je"]
+[ext_resource type="PackedScene" uid="uid://dxw338ghigg1r" path="res://scenes/ui/menus/game_over_menu.tscn" id="16_pt5je"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/sandbar.tscn" id="17_rovm2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/credits_menu.tscn" id="18_t046q"]
@@ -58,6 +55,7 @@ script = ExtResource("1_ndiw8")
 unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="World"]
+unique_name_in_owner = true
 script = ExtResource("2_whori")
 content_to_margin_ratio = 0.75
 zoom_speed = 0.05
@@ -79,23 +77,11 @@ added_velocity_multiplier = 100.0
 wind = NodePath("../../Wind")
 
 [node name="Wind" type="Node" parent="World"]
+unique_name_in_owner = true
 script = ExtResource("5_hl8vl")
 change_rate = 1.0
 noise_multiplier = 3.0
 initial_noise_position = 10.0
-
-[node name="Ship1" parent="World" node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
-position = Vector2(184, 95)
-player = 1
-wind = NodePath("../Wind")
-texture = ExtResource("7_icndf")
-
-[node name="Ship2" parent="World" node_paths=PackedStringArray("wind") instance=ExtResource("1_ra0tt")]
-position = Vector2(972, 506)
-rotation = 3.14159
-player = 2
-wind = NodePath("../Wind")
-texture = ExtResource("8_oh37s")
 
 [node name="Border" parent="World" instance=ExtResource("8_xltam")]
 
@@ -195,24 +181,19 @@ min_volume_db = -12.0
 max_volume_db = -3.0
 
 [node name="Music" parent="." instance=ExtResource("21_w75cq")]
+unique_name_in_owner = true
 process_mode = 3
 
-[connection signal="cannon_fired" from="World/Ship1" to="Music" method="_on_ship_cannon_fired"]
-[connection signal="damage_taken" from="World/Ship1" to="World/Camera2D" method="_on_ship_damage_taken"]
-[connection signal="destroyed" from="World/Ship1" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
-[connection signal="destroyed" from="World/Ship1" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
-[connection signal="cannon_fired" from="World/Ship2" to="Music" method="_on_ship_cannon_fired"]
-[connection signal="damage_taken" from="World/Ship2" to="World/Camera2D" method="_on_ship_damage_taken"]
-[connection signal="destroyed" from="World/Ship2" to="MenuLayer/GameOverMenu" method="_on_ship_destroyed"]
-[connection signal="destroyed" from="World/Ship2" to="MenuLayer/PauseMenu" method="_on_ship_destroyed"]
+[connection signal="game_over" from="." to="MenuLayer/GameOverMenu" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="MenuLayer/PauseMenu" method="_on_main_game_over"]
 [connection signal="credits_button_pressed" from="MenuLayer/MainMenu" to="MenuLayer/CreditsMenu" method="_on_menu_open"]
 [connection signal="game_started" from="MenuLayer/MainMenu" to="MenuLayer/LobbyMenu" method="_on_menu_open"]
 [connection signal="options" from="MenuLayer/MainMenu" to="MenuLayer/OptionsMenu" method="_on_menu_open"]
 [connection signal="go_back" from="MenuLayer/OptionsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="screen_shake_toggled" from="MenuLayer/OptionsMenu" to="World/Camera2D" method="_on_options_menu_screen_shake_toggled"]
 [connection signal="go_back" from="MenuLayer/LobbyMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
-[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="." method="_on_customization_menu_players_ready"]
-[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="MenuLayer/PauseMenu" method="_on_customization_menu_players_ready"]
+[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="." method="_on_lobby_menu_players_ready"]
+[connection signal="players_ready" from="MenuLayer/LobbyMenu" to="MenuLayer/PauseMenu" method="_on_lobby_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_restarted"]
 [connection signal="game_restarted" from="MenuLayer/PauseMenu" to="." method="_on_game_restarted"]
 [connection signal="back_button_pressed" from="MenuLayer/CreditsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]

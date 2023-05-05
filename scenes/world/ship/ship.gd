@@ -9,7 +9,10 @@ signal destroyed(ship: Ship)
 
 @export var wind: Wind
 
-@export var texture: Texture2D
+@export var texture: Texture2D:
+	set(value):
+		texture = value
+		self.sprite.texture = texture
 
 @export var speed: float
 @export var min_speed: float
@@ -63,6 +66,11 @@ var enabled := true:
 		self.set_process_input(self.enabled)
 		self.collision_polygon.set_deferred(&"disabled", not self.enabled)
 
+var nickname: String:
+	set(value):
+		nickname = value
+		nickname_label.text = self.nickname
+
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
@@ -74,10 +82,10 @@ var enabled := true:
 @onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
 @onready var low_health_particles: GPUParticles2D = %LowHealthParticles
 @onready var damage_timer: Timer = %DamageTimer
+@onready var nickname_label: Label = %NicknameLabel
 
 
 func _ready() -> void:
-	self.sprite.texture = self.texture
 	self.health = self.max_health
 	# Duplicate material so that changes by one ship don't affect the other
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
@@ -91,16 +99,39 @@ func _process(delta: float) -> void:
 	particle_material.angle_max = -self.rotation_degrees
 
 
+func handle_input() -> void:
+	# TODO DRY
+	if self.player == Globals.KEYBOARD_1_PLAYER:
+		if Input.is_key_pressed(KEY_A):
+			self.apply_torque(-self.rotation_speed)
+		if Input.is_key_pressed(KEY_D):
+			self.apply_torque(self.rotation_speed)
+		if Input.is_key_pressed(KEY_Q):
+			self.fire(self.left_cannons)
+		if Input.is_key_pressed(KEY_E):
+			self.fire(self.right_cannons)
+	elif self.player == Globals.KEYBOARD_2_PLAYER:
+		if Input.is_key_pressed(KEY_J):
+			self.apply_torque(-self.rotation_speed)
+		if Input.is_key_pressed(KEY_L):
+			self.apply_torque(self.rotation_speed)
+		if Input.is_key_pressed(KEY_U):
+			self.fire(self.left_cannons)
+		if Input.is_key_pressed(KEY_O):
+			self.fire(self.right_cannons)
+	else:
+		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) < -0.5:
+			self.apply_torque(-self.rotation_speed)
+		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) > 0.5:
+			self.apply_torque(self.rotation_speed)
+		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
+			self.fire(self.left_cannons)
+		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
+			self.fire(self.right_cannons)
+
+
 func _physics_process(delta: float) -> void:
-	var action_prefix := "p%d" % self.player
-	if Input.is_action_pressed("%s_left" % action_prefix):
-		self.apply_torque(-self.rotation_speed)
-	if Input.is_action_pressed("%s_right" % action_prefix):
-		self.apply_torque(self.rotation_speed)
-	if Input.is_action_pressed("%s_fire_right" % action_prefix):
-		self.fire(self.right_cannons)
-	if Input.is_action_pressed("%s_fire_left" % action_prefix):
-		self.fire(self.left_cannons)
+	self.handle_input()
 	self.apply_wind_force()
 	self.apply_collision_damage(delta)
 
