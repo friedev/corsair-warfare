@@ -27,7 +27,12 @@ signal destroyed(ship: Ship)
 var health: float:
 	set(value):
 		if value < self.health:
-			Input.start_joy_vibration(self.get_device(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
+			Input.start_joy_vibration(
+				self.get_device(),
+				0.1,
+				clamp((self.health - value) * 10, 0.1, 1),
+				0.15
+			)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -110,7 +115,11 @@ func fire(cannons: Cannons) -> void:
 func apply_wind_force() -> void:
 	var difference := self.rotation - self.wind.wind.angle()
 	# https://stackoverflow.com/a/2007355
-	var actual_difference: float = min(abs(difference), abs(difference + TAU), abs(difference - TAU))
+	var actual_difference: float = min(
+		abs(difference),
+		abs(difference + TAU),
+		abs(difference - TAU)
+	)
 	var alignment := 1.0 - actual_difference / PI
 	var magnitude := self.speed * self.wind.wind.length() * sqrt(alignment)
 	magnitude = max(magnitude, self.min_speed)
