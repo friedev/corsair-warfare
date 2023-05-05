@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://chfrwjo8j7og0"]
 
 [ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://scenes/world/ship/white_ship.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scenes/world/ship/ship.gd" id="1_lvdat"]
-[ext_resource type="PackedScene" path="res://scenes/world/ship/cannons/cannons.tscn" id="4_dkwe4"]
+[ext_resource type="PackedScene" uid="uid://p73xe0fbsd8v" path="res://scenes/world/ship/cannons/cannons.tscn" id="4_dkwe4"]
 [ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://scenes/world/ship/cannons/cannon_reload.wav" id="10_850h8"]
 [ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://scenes/world/ship/ship_wake_particle.png" id="11_yy8k2"]
 [ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://scenes/world/ship/smoke_particle.png" id="12_vokgj"]

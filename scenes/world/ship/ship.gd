@@ -5,12 +5,7 @@ signal cannon_fired
 signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
-enum Player {
-	P1 = 1,
-	P2 = 2,
-}
-
-@export var player: Player
+@export var player: int
 
 @export var wind: Wind
 
@@ -92,12 +87,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var action_prefix: String
-	if self.player == Player.P1:
-		action_prefix = "p1"
-	elif self.player == Player.P2:
-		action_prefix = "p2"
-
+	var action_prefix := "p%d" % self.player
 	if Input.is_action_pressed("%s_left" % action_prefix):
 		self.apply_torque(-self.rotation_speed)
 	if Input.is_action_pressed("%s_right" % action_prefix):
@@ -155,9 +145,4 @@ func destroy() -> void:
 
 
 func getDevice() -> int:
-	var device: int
-	if self.player == Player.P1:
-		device = 1
-	elif self.player == Player.P2:
-		device = 0
-	return device
+	return player - 1
