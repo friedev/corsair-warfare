@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/options_menu.gd" id="1_5mk8j"]
+[ext_resource type="Theme" uid="uid://bo14ja623frqf" path="res://scenes/ui/title_theme.tres" id="2_u5dac"]
+
+[node name="OptionsMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+script = ExtResource("1_5mk8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="OptionsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_u5dac")
+text = "Options"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="FullscreenLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ScreenShakeLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Screen Shake"
+
+[node name="ScreenShakeCheckBox" type="CheckBox" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Sound Volume"
+
+[node name="SoundSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="AmbienceLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Ambience Volume"
+
+[node name="AmbienceSlider" type="HSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="toggled" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/ScreenShakeCheckBox" to="." method="_on_screen_shake_check_box_toggled"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer/AmbienceSlider" to="." method="_on_ambience_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
