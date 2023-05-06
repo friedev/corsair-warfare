@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island1.tscn" id="12_yn2q3"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island2.tscn" id="13_61suq"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/main_menu.tscn" id="13_v2k00"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/options_menu.tscn" id="14_6udvg"]
+[ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/ui/menus/options_menu.tscn" id="14_6udvg"]
 [ext_resource type="PackedScene" uid="uid://bwkoa1c2fc6xy" path="res://scenes/world/environment/rock2.tscn" id="14_by7tl"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island3.tscn" id="14_w4d56"]
 [ext_resource type="PackedScene" uid="uid://60el12vfsgto" path="res://scenes/world/environment/rock3.tscn" id="15_r40nt"]

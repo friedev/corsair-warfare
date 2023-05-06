@@ -40,3 +40,7 @@ func _on_fullscreen_check_box_toggled(button_pressed: bool) -> void:
 
 func _on_screen_shake_check_box_toggled(button_pressed: bool) -> void:
 	self.screen_shake_toggled.emit(button_pressed)
+
+
+func _on_vibrate_check_box_toggled(button_pressed: bool) -> void:
+	Globals.vibrate = button_pressed

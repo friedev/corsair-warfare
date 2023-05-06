@@ -125,7 +125,7 @@ func _physics_process(delta: float) -> void:
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		if self.details.player >= 0:
+		if Globals.is_joy(self.details.player) and Globals.vibrate:
 			Input.start_joy_vibration(self.details.player, 0.5, 0.0, 0.25)
 		self.cannon_fired.emit()
 
@@ -169,7 +169,7 @@ func apply_collision_damage(delta: float):
 
 
 func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
-	if self.details.player >= 0:
+	if Globals.is_joy(self.details.player) and Globals.vibrate:
 		Input.start_joy_vibration(
 			self.details.player,
 			0.1,
