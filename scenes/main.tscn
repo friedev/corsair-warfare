@@ -60,6 +60,11 @@ deathmatch_kill_score = 2
 deathmatch_death_score = -1
 deathmatch_self_destruct_score = -3
 
+[node name="SeaSprite" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("16_gehpl")
+
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -144,13 +149,9 @@ scale = Vector2(2, 2)
 position = Vector2(634, 542)
 scale = Vector2(1.5, 1.5)
 
-[node name="Rock10" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
-position = Vector2(1158, 251)
-rotation = -1.77849
-
 [node name="Rock11" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
-position = Vector2(1221, 231)
-rotation = 1.2706
+position = Vector2(1189, 145)
+rotation = -5.58331
 scale = Vector2(1.25, 1.25)
 
 [node name="Rock4" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
@@ -173,14 +174,9 @@ rotation = 2.79253
 scale = Vector2(1.25, 1.25)
 
 [node name="Rock6" parent="World/Obstacles" instance=ExtResource("15_r40nt")]
-position = Vector2(1076, 126)
+position = Vector2(1036, 81.9999)
 rotation = 2.66686
 scale = Vector2(-0.75, -0.75)
-
-[node name="SeaSprite" type="Sprite2D" parent="."]
-z_index = -5
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("16_gehpl")
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
