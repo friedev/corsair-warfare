@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://j6lypfe2pyeo"]
+[gd_scene load_steps=31 format=3 uid="uid://j6lypfe2pyeo"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
 [ext_resource type="Script" path="res://scenes/world/camera.gd" id="2_whori"]
@@ -7,12 +7,15 @@
 [ext_resource type="Script" path="res://scenes/world/wind/wind.gd" id="5_hl8vl"]
 [ext_resource type="PackedScene" uid="uid://q3sofkfm3603" path="res://scenes/ui/menus/lobby_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" uid="uid://dqob1rf2731fk" path="res://scenes/world/environment/border.tscn" id="8_xltam"]
+[ext_resource type="PackedScene" uid="uid://cu44tbtwjopms" path="res://scenes/world/environment/crater.tscn" id="11_wp5vs"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud/wind_hud/wind_hud.tscn" id="12_4w4eo"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island1.tscn" id="12_yn2q3"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island2.tscn" id="13_61suq"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/main_menu.tscn" id="13_v2k00"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_menu.tscn" id="14_6udvg"]
+[ext_resource type="PackedScene" uid="uid://bwkoa1c2fc6xy" path="res://scenes/world/environment/rock2.tscn" id="14_by7tl"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/island3.tscn" id="14_w4d56"]
+[ext_resource type="PackedScene" uid="uid://60el12vfsgto" path="res://scenes/world/environment/rock3.tscn" id="15_r40nt"]
 [ext_resource type="PackedScene" uid="uid://y3sd02fijcb3" path="res://scenes/world/environment/island4.tscn" id="15_t7nps"]
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock1.tscn" id="16_8b13h"]
 [ext_resource type="PackedScene" uid="uid://dxw338ghigg1r" path="res://scenes/ui/menus/game_over_menu.tscn" id="16_pt5je"]
@@ -94,37 +97,80 @@ target_position = Vector2(0, 0)
 [node name="Obstacles" type="Node2D" parent="World"]
 
 [node name="Island1" parent="World/Obstacles" instance=ExtResource("12_yn2q3")]
-position = Vector2(-33, -653)
+position = Vector2(-287, -847)
 
 [node name="Island2" parent="World/Obstacles" instance=ExtResource("13_61suq")]
-position = Vector2(-838, -256)
+position = Vector2(-548, 807)
 
 [node name="Island3" parent="World/Obstacles" instance=ExtResource("14_w4d56")]
 position = Vector2(486, 806)
 
 [node name="Island4" parent="World/Obstacles" instance=ExtResource("15_t7nps")]
-position = Vector2(876, 4)
+position = Vector2(768, -481)
 
-[node name="Rock1" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(645, -559)
-
-[node name="Rock2" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(707, -766)
-rotation = 1.26885
-
-[node name="Rock3" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
-position = Vector2(851, -614)
-rotation = 3.80831
+[node name="Crater" parent="World/Obstacles" instance=ExtResource("11_wp5vs")]
+position = Vector2(-959, -6.00003)
+rotation = -3.55349
 
 [node name="Sandbar" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
-position = Vector2(-376, 698)
+position = Vector2(-32, -881)
+rotation = -1.14145
+scale = Vector2(0.5, 0.5)
 
-[node name="Sandbar2" parent="World/Obstacles" instance=ExtResource("17_rovm2")]
-position = Vector2(-928, 206)
-rotation = 4.82409
+[node name="Rock1" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(270, 1064)
+rotation = 0.380482
+
+[node name="Rock8" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(-932, -372)
+rotation = -3.68264
+scale = Vector2(0.75, 0.75)
+
+[node name="Rock7" parent="World/Obstacles" instance=ExtResource("16_8b13h")]
+position = Vector2(699, -825)
+rotation = 2.53945
+scale = Vector2(2, 2)
+
+[node name="Rock2" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(634, 542)
+scale = Vector2(1.5, 1.5)
+
+[node name="Rock10" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(1158, 251)
+rotation = -1.77849
+
+[node name="Rock11" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(1221, 231)
+rotation = 1.2706
+scale = Vector2(1.25, 1.25)
+
+[node name="Rock4" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(603, 1000)
+rotation = 3.6809
+
+[node name="Rock5" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(-354, 1120)
+rotation = 1.64934
+scale = Vector2(2, 2)
+
+[node name="Rock9" parent="World/Obstacles" instance=ExtResource("14_by7tl")]
+position = Vector2(-926, -38)
+rotation = -0.127409
+scale = Vector2(2, 2)
+
+[node name="Rock3" parent="World/Obstacles" instance=ExtResource("15_r40nt")]
+position = Vector2(1087, -673)
+rotation = 2.79253
+scale = Vector2(1.25, 1.25)
+
+[node name="Rock6" parent="World/Obstacles" instance=ExtResource("15_r40nt")]
+position = Vector2(1076, 126)
+rotation = 2.66686
+scale = Vector2(-0.75, -0.75)
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDLayer"]
 anchors_preset = 15
