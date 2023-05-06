@@ -174,12 +174,7 @@ func apply_collision_damage(delta: float):
 
 func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
 	if Globals.is_joy(self.details.player) and self.is_vibrate_enabled():
-		Input.start_joy_vibration(
-			self.details.player,
-			0.1,
-			clamp((self.health - damage) * 10, 0.1, 1),
-			0.15
-		)
+		Input.start_joy_vibration(self.details.player, 0.5, 0.25, 0.25)
 	self.damage_taken.emit(damage)
 	if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 		self.damage_sound.play()
