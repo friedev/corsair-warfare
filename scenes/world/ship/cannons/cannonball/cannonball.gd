@@ -10,6 +10,7 @@ class_name Cannonball
 
 var start_position: Vector2
 var max_distance: float
+var player: int
 
 
 func _ready() -> void:
@@ -26,8 +27,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Ship:
-		var ship = body as Ship
-		ship.health -= self.damage
+		var ship := body as Ship
+		ship.take_damage(self.damage, self.player)
 	self.impact()
 	self.queue_free()
 

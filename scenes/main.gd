@@ -7,6 +7,10 @@ const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 @export var ship_spawn_radius: float
 @export var low_time_threshold: float
 
+@export var deathmatch_kill_score: int
+@export var deathmatch_death_score: int
+@export var deathmatch_self_destruct_score: int
+
 @onready var world: Node2D = %World
 @onready var camera: ShakeCamera2D = %Camera2D
 @onready var ship_spawn_cast: ShapeCast2D = %ShipSpawnCast
@@ -14,6 +18,7 @@ const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 @onready var music: Music = %Music
 @onready var hud_layer: CanvasLayer = %HUDLayer
 @onready var time_limit_label: Label = %TimeLimitLabel
+@onready var score_label: Label = %ScoreLabel
 @onready var game_timer: Timer = %GameTimer
 
 var game_active: bool:
@@ -24,6 +29,7 @@ var game_active: bool:
 		self.get_tree().paused = not self.game_active
 
 var ships_alive: int
+
 
 func move_ship_spawn_cast() -> void:
 	self.ship_spawn_cast.position = Vector2(
@@ -48,7 +54,7 @@ func spawn_ship(details: PlayerDetails) -> void:
 	ship.cannon_fired.connect(self.music._on_ship_cannon_fired)
 	ship.damage_taken.connect(self.camera._on_ship_damage_taken)
 	ship.destroyed.connect(self._on_ship_destroyed)
-	self.world.add_child(ship)
+	self.world.add_child.call_deferred(ship)
 	ship.wind = self.wind
 
 
@@ -68,9 +74,16 @@ func _process(delta: float) -> void:
 
 
 func _on_game_restarted() -> void:
-	Globals.players.clear()
-	Globals.time_limit_seconds = 0
+	Globals.reset_game_settings()
 	self.get_tree().reload_current_scene()
+
+
+func update_score_label() -> void:
+	# TODO sort players by score
+	# TODO highlight player with highest score
+	self.score_label.text = ""
+	for details in Globals.players.values():
+		self.score_label.text += "%d: %s\n" % [details.score, details.nickname]
 
 
 func _on_lobby_menu_players_ready() -> void:
@@ -83,12 +96,23 @@ func _on_lobby_menu_players_ready() -> void:
 		self.time_limit_label.show()
 	else:
 		self.time_limit_label.hide()
+	self.score_label.visible = Globals.game_mode == Globals.GameMode.DEATHMATCH
+	self.update_score_label()
 
 
-func _on_ship_destroyed(ship: Ship) -> void:
-	self.ships_alive -= 1
-	if self.ships_alive <= 1:
-		self.game_over.emit()
+func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
+	if Globals.game_mode == Globals.GameMode.LAST_MAN_STANDING:
+		self.ships_alive -= 1
+		if self.ships_alive <= 1:
+			self.game_over.emit()
+	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
+		if destroyer == Globals.NO_PLAYER or destroyer == ship.details.player:
+			ship.details.score += deathmatch_self_destruct_score
+		else:
+			Globals.players[destroyer].score += deathmatch_kill_score
+			ship.details.score += deathmatch_death_score
+		self.update_score_label()
+		self.spawn_ship(ship.details)
 
 
 func _on_game_timer_timeout() -> void:

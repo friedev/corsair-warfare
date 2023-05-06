@@ -27,6 +27,8 @@ func spawn_cannonball(ball_position: Vector2) -> void:
 	var cannonball = self.cannonball_scene.instantiate()
 	cannonball.global_position = ball_position
 	cannonball.global_rotation = self.global_rotation
+	# TODO find a better way to access the ship firing these cannons
+	cannonball.player = self.get_parent().details.player
 	cannonball.add_collision_exception_with(self.get_parent())
 	# TODO find a better way to access the World node
 	self.get_parent().get_parent().add_child(cannonball)

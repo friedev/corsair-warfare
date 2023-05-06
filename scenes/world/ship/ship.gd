@@ -3,7 +3,7 @@ class_name Ship
 
 signal cannon_fired
 signal damage_taken(damage: float)
-signal destroyed(ship: Ship)
+signal destroyed(ship: Ship, destoyer: int)
 
 const level_values := {
 	"Hull": [1.0, 1.5, 2.0, 2.5],
@@ -31,23 +31,7 @@ const level_values := {
 
 var health: float:
 	set(value):
-		if value < self.health:
-			if self.details.player >= 0:
-				Input.start_joy_vibration(
-					self.details.player,
-					0.1,
-					clamp((self.health - value) * 10, 0.1, 1),
-					0.15
-				)
-			self.damage_taken.emit(self.health - value)
-			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
-				self.damage_sound.play()
-			self.damage_timer.start()
-
 		health = clampf(value, 0, self.max_health)
-		if self.health == 0:
-			self.destroy()
-
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
 		if self.health > self.max_health * (2.0 / 3.0):
 			self.medium_health_particles.emitting = false
@@ -58,15 +42,6 @@ var health: float:
 		else:
 			self.medium_health_particles.emitting = false
 			self.low_health_particles.emitting = true
-
-var enabled := true:
-	set(value):
-		enabled = value
-		self.visible = self.enabled
-		self.set_process(self.enabled)
-		self.set_physics_process(self.enabled)
-		self.set_process_input(self.enabled)
-		self.collision_polygon.set_deferred(&"disabled", not self.enabled)
 
 var nickname: String:
 	set(value):
@@ -174,8 +149,10 @@ func apply_collision_damage(delta: float):
 	for body in self.get_colliding_bodies():
 		# Take damage from colliding ships or other obstacles over time
 		var damage_to_self: float
+		var damager := Globals.NO_PLAYER
 		if body is Ship:
 			var other := body as Ship
+			damager = other.details.player
 			# Always take some damage while ramming
 			damage_to_self = other.ram_dps_min
 			# Take more damage if the other ship is hitting me straight on
@@ -188,9 +165,27 @@ func apply_collision_damage(delta: float):
 		else:
 			damage_to_self = self.obstacle_dps
 		damage_to_self *= delta
-		self.health -= damage_to_self
+		self.take_damage(damage_to_self, damager)
 
 
-func destroy() -> void:
-	self.enabled = false
-	self.destroyed.emit(self)
+func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
+	if self.details.player >= 0:
+		Input.start_joy_vibration(
+			self.details.player,
+			0.1,
+			clamp((self.health - damage) * 10, 0.1, 1),
+			0.15
+		)
+	self.damage_taken.emit(damage)
+	if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
+		self.damage_sound.play()
+	self.damage_timer.start()
+	var previous_health := self.health
+	self.health -= damage
+	if previous_health > 0.0 and self.health <= 0:
+		self.destroy(damager)
+
+
+func destroy(destroyer := Globals.NO_PLAYER) -> void:
+	self.destroyed.emit(self, destroyer)
+	self.queue_free()

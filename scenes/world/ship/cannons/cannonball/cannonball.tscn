@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://6n17k76557br"]
 
 [ext_resource type="Script" path="res://scenes/world/ship/cannons/cannonball/cannonball.gd" id="1_dcmav"]
 [ext_resource type="PackedScene" path="res://scenes/world/ship/cannons/cannonball/splash/cannonball_splash.tscn" id="2_qmfqx"]

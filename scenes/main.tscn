@@ -55,12 +55,17 @@ radius = 256.0
 script = ExtResource("1_ndiw8")
 ship_spawn_radius = 1200.0
 low_time_threshold = 0.167
+deathmatch_kill_score = 2
+deathmatch_death_score = -1
+deathmatch_self_destruct_score = -3
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 unique_name_in_owner = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("2_whori")
 content_to_margin_ratio = 0.75
 zoom_speed = 0.05
@@ -197,6 +202,21 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "88:88"
+
+[node name="ScoreLabel" type="Label" parent="HUDLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "WWWWWWWWWW: 888
+WWWWWWWWWW: 888
+WWWWWWWWWW: 888
+WWWWWWWWWW: 888
+WWWWWWWWWW: 888
+WWWWWWWWWW: 888"
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3

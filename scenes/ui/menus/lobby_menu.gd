@@ -81,3 +81,7 @@ func _on_player_section_customization_updated() -> void:
 
 func _on_time_limit_spin_box_value_changed(value: float) -> void:
 	Globals.time_limit_seconds = int(value)
+
+
+func _on_option_button_item_selected(index: int) -> void:
+	Globals.game_mode = index
