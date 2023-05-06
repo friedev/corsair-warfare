@@ -1,9 +1,14 @@
+# Used for both Sprite2Ds and TextureRects
 extends Node
 class_name ShipSprite
 
+@onready var base_hull := $BaseHull
+@onready var base_sails := $BaseSails
+
 
 func apply_style(style: ShipStyle) -> void:
-	self.texture = style.base
+	self.base_hull.texture = style.base_hull
+	self.base_sails.texture = style.base_sails
 	# TODO DRY
 	for level in range(len(style.hull_levels)):
 		self.get_node("Hull%d" % (level + 1)).texture = style.hull_levels[level]
@@ -16,12 +21,9 @@ func apply_style(style: ShipStyle) -> void:
 func apply_levels(levels: Dictionary) -> void:
 	for child in self.get_children():
 		child.hide()
+	self.base_hull.show()
+	self.base_sails.show()
 	# TODO make this less fragile
 	for component in levels:
 		for level in range(levels[component]):
 			self.get_node("%s%d" % [component, level + 1]).show()
-
-
-func _ready() -> void:
-	pass
-

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0e3olsmfun76"
-path="res://.godot/imported/base.png-fe78f11264ee860a055d8c2f6e3d3064.ctex"
+uid="uid://buqmwcj3dnhbt"
+path="res://.godot/imported/base_sails.png-4f469e3f078b2e1b08374b824f92de80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/ship/sprite/hunter/base.png"
-dest_files=["res://.godot/imported/base.png-fe78f11264ee860a055d8c2f6e3d3064.ctex"]
+source_file="res://scenes/world/ship/sprite/hunter/base_sails.png"
+dest_files=["res://.godot/imported/base_sails.png-4f469e3f078b2e1b08374b824f92de80.ctex"]
 
 [params]
 

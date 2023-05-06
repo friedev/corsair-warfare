@@ -1,17 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm6lliew3ph6v"]
+[gd_scene load_steps=2 format=3 uid="uid://cm6lliew3ph6v"]
 
-[ext_resource type="Texture2D" uid="uid://7ol1nkhp5yqi" path="res://scenes/world/ship/sprite/navy/base.png" id="1_aerqu"]
 [ext_resource type="Script" path="res://scenes/world/ship/sprite/ship_sprite.gd" id="2_irt3b"]
 
-[node name="ShipTextureRect" type="TextureRect"]
-anchors_preset = 10
+[node name="ShipTextureRect" type="Control"]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-offset_bottom = 433.389
+anchor_bottom = 0.5
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_aerqu")
-expand_mode = 5
 script = ExtResource("2_irt3b")
+
+[node name="BaseHull" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
 
 [node name="Hull1" type="TextureRect" parent="."]
 visible = false
@@ -70,6 +80,16 @@ expand_mode = 5
 
 [node name="Cannons3" type="TextureRect" parent="."]
 visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
+
+[node name="BaseSails" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5

@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/world/ship/sprite/ship_sprite.gd" id="1_n1naw"]
 
-[node name="ShipSprite" type="Sprite2D"]
+[node name="ShipSprite" type="Node2D"]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_n1naw")
+
+[node name="BaseHull" type="Sprite2D" parent="."]
 
 [node name="Hull1" type="Sprite2D" parent="."]
 visible = false
@@ -23,6 +25,8 @@ visible = false
 
 [node name="Cannons3" type="Sprite2D" parent="."]
 visible = false
+
+[node name="BaseSails" type="Sprite2D" parent="."]
 
 [node name="Sails1" type="Sprite2D" parent="."]
 visible = false

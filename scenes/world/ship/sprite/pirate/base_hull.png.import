@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ck4ibgxyw2j87"
-path="res://.godot/imported/base.png-ac93803a29baabb5ba21a83cd5ea173c.ctex"
+path="res://.godot/imported/base_hull.png-83ce2c84553910ff0682d7323a8973d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/ship/sprite/pirate/base.png"
-dest_files=["res://.godot/imported/base.png-ac93803a29baabb5ba21a83cd5ea173c.ctex"]
+source_file="res://scenes/world/ship/sprite/pirate/base_hull.png"
+dest_files=["res://.godot/imported/base_hull.png-83ce2c84553910ff0682d7323a8973d6.ctex"]
 
 [params]
 

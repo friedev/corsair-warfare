@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bupxdeo715dha"
-path="res://.godot/imported/base.png-3d416dcd41db5bbbdcc2b5f56dd3b516.ctex"
+uid="uid://gg2kvrwue8tr"
+path="res://.godot/imported/base_sails.png-1dbd9367bce5157127926bdc6813f0fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/ship/sprite/ghost/base.png"
-dest_files=["res://.godot/imported/base.png-3d416dcd41db5bbbdcc2b5f56dd3b516.ctex"]
+source_file="res://scenes/world/ship/sprite/ghost/base_sails.png"
+dest_files=["res://.godot/imported/base_sails.png-1dbd9367bce5157127926bdc6813f0fb.ctex"]
 
 [params]
 
