@@ -10,6 +10,8 @@ func _on_menu_button_pressed() -> void:
 
 
 func _on_main_game_over() -> void:
+	if self.visible:
+		return
 	self.label.text = "Game Over"
 	for ship in self.get_tree().get_nodes_in_group(&"ships"):
 		if ship.health > 0.0:
