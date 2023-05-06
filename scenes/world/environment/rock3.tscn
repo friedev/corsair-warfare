@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://60el12vfsgto"]
+
+[ext_resource type="Texture2D" uid="uid://dob0rh5cwisvh" path="res://scenes/world/environment/rock3.png" id="1_f3pd0"]
+
+[node name="Rock3" type="StaticBody2D"]
+position = Vector2(2, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(616, 264, 629, 290, 631, 315, 655, 370, 660, 407, 681, 435, 683, 469, 710, 495, 720, 521, 707, 558, 673, 533, 628, 472, 604, 393, 606, 322, 597, 282, 604, 263)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.400944, 0.400944)
+texture = ExtResource("1_f3pd0")
