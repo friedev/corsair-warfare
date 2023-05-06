@@ -122,10 +122,14 @@ func _physics_process(delta: float) -> void:
 	self.apply_collision_damage(delta)
 
 
+func is_vibrate_enabled() -> bool:
+	return Globals.options.get("vibrate", true)
+
+
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		if Globals.is_joy(self.details.player) and Globals.vibrate:
+		if Globals.is_joy(self.details.player) and self.is_vibrate_enabled():
 			Input.start_joy_vibration(self.details.player, 0.5, 0.0, 0.25)
 		self.cannon_fired.emit()
 
@@ -169,7 +173,7 @@ func apply_collision_damage(delta: float):
 
 
 func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
-	if Globals.is_joy(self.details.player) and Globals.vibrate:
+	if Globals.is_joy(self.details.player) and self.is_vibrate_enabled():
 		Input.start_joy_vibration(
 			self.details.player,
 			0.1,

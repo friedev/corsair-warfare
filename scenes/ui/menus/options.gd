@@ -1,52 +1,32 @@
-extends Control
-
-signal go_back
-
+extends Node
 
 const CONFIG_PATH := "user://options.cfg"
 const OPTIONS_SECTION := "options"
 const OPTIONS_GROUP := &"options"
 
 
-func load_config() -> bool:
+func load_config():
 	var config := ConfigFile.new()
-	var err := config.load(self.CONFIG_PATH)
-	if err != OK:
-		return false
+	config.load(self.CONFIG_PATH)
 	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
 		var option := option_node as Option
 		if config.has_section_key(self.OPTIONS_SECTION, option.key):
 			option.set_option(
 				config.get_value(self.OPTIONS_SECTION, option.key), false
 			)
-	return true
 
 
-func save_config() -> bool:
+func save_config():
 	var config := ConfigFile.new()
 	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
 		var option := option_node as Option
 		config.set_value(self.OPTIONS_SECTION, option.key, option.get_option())
-	return config.save(self.CONFIG_PATH) == OK
+	config.save(self.CONFIG_PATH)
 
 
 func _ready() -> void:
-	var loaded := self.load_config()
-	if not loaded:
-		self.save_config()
-
-
-func _on_menu_open() -> void:
-	self.show()
-
-
-func _on_save_button_pressed() -> void:
-	self.save_config()
-	self.go_back.emit()
-	self.hide()
-
-
-func _on_cancel_button_pressed() -> void:
 	self.load_config()
-	self.go_back.emit()
-	self.hide()
+
+
+func _on_option_changed(value) -> void:
+	self.save_config()

@@ -15,10 +15,11 @@ const NO_PLAYER := -3
 
 const DEFAULT_GAME_MODE := GameMode.LAST_MAN_STANDING
 
+var options := {}
+
 var players := {}
 var time_limit_seconds := 0
 var game_mode := self.DEFAULT_GAME_MODE
-var vibrate := true
 
 
 func register_player(player: int, ship_details: PlayerDetails) -> void:
