@@ -2,7 +2,7 @@ extends Node2D
 class_name Cannons
 
 const max_cannonball_offset := 10.0
-const cannonball_scene := preload("cannonball/cannonball.tscn")
+const cannonball_scene := preload("res://scenes/world/ship/cannons/cannonball/cannonball.tscn")
 
 @onready var spawn_point_1: Node2D = %SpawnPoint1
 @onready var spawn_point_2: Node2D = %SpawnPoint2

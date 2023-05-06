@@ -16,6 +16,8 @@ var shake := 0.0:
 		shake = clamp(value, 0.0, 1.0)
 var noise := FastNoiseLite.new()
 
+@onready var default_zoom := self.zoom
+
 
 func _ready() -> void:
 	self.noise.seed = randi()
@@ -36,10 +38,17 @@ func apply_shake() -> void:
 
 
 func center_on_ships() -> void:
+	var ships := self.get_tree().get_nodes_in_group(&"ships")
+
+	if len(ships) == 0:
+		self.global_position = Vector2(0, 0)
+		self.zoom = lerp(self.get_zoom(), self.default_zoom, self.zoom_speed)
+		return
+
 	# Find bounding box for all ships
 	var rect := Rect2()
 	var empty_rect := Rect2()
-	for ship in self.get_tree().get_nodes_in_group(&"ships"):
+	for ship in ships:
 		# Expanding a raw Rect2 causes it to keep (0, 0) as one of its bounding
 		# points. Instead of expanding the first time, move to the first point.
 		if rect == empty_rect:
@@ -55,12 +64,11 @@ func center_on_ships() -> void:
 	var screen_ratio := dimensions.x / dimensions.y
 	var min_dimensions := dimensions * self.content_to_margin_ratio
 	var distance := rect.size.abs()
-
-	var zoom_amount := self.get_zoom().x
-	if distance.x > screen_ratio * distance.y and distance.x > min_dimensions.x:
-		zoom_amount = min_dimensions.x / distance.x
-	if screen_ratio * distance.y > distance.x and distance.y > min_dimensions.y:
-		zoom_amount = min_dimensions.y / distance.y
+	var zoom_amount: float = min(
+		1.0,
+		min_dimensions.x / distance.x,
+		min_dimensions.y / distance.y
+	)
 	var new_zoom := Vector2(zoom_amount, zoom_amount)
 
 	self.zoom = lerp(self.get_zoom(), new_zoom, self.zoom_speed)

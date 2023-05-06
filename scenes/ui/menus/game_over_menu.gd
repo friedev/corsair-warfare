@@ -7,6 +7,7 @@ signal game_restarted
 
 func _on_menu_button_pressed() -> void:
 	self.game_restarted.emit()
+	self.hide()
 
 
 func _on_main_game_over() -> void:

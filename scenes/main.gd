@@ -24,7 +24,6 @@ const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 var game_active: bool:
 	set(value):
 		game_active = value
-		self.world.visible = self.game_active
 		self.hud_layer.visible = self.game_active
 		self.get_tree().paused = not self.game_active
 
@@ -74,8 +73,11 @@ func _process(delta: float) -> void:
 
 
 func _on_game_restarted() -> void:
-	Globals.reset_game_settings()
-	self.get_tree().reload_current_scene()
+	# We could also try to free splashes and impacts here, but they have short
+	# lifespans and don't affect the game
+	self.get_tree().call_group(&"ships", &"queue_free")
+	self.get_tree().call_group(&"cannonballs", &"queue_free")
+	self.game_active = false
 
 
 func update_score_label() -> void:

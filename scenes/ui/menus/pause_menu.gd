@@ -22,6 +22,7 @@ func _on_resume_button_pressed() -> void:
 
 func _on_menu_button_pressed() -> void:
 	self.set_paused(false)
+	self.can_pause = false
 	self.game_restarted.emit()
 
 

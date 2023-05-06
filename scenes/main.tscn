@@ -65,10 +65,12 @@ unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 unique_name_in_owner = true
+process_mode = 3
+zoom = Vector2(0.333, 0.333)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("2_whori")
-content_to_margin_ratio = 0.75
+content_to_margin_ratio = 0.667
 zoom_speed = 0.05
 shake_rate = 1.0
 shake_per_damage = 100.0
@@ -76,6 +78,7 @@ max_offset = 24.0
 shake_reduction = 0.05
 
 [node name="WindParticles" type="GPUParticles2D" parent="World/Camera2D" node_paths=PackedStringArray("wind")]
+process_mode = 1
 z_index = 5
 position = Vector2(575.5, 323.5)
 amount = 64
@@ -176,7 +179,7 @@ scale = Vector2(-0.75, -0.75)
 
 [node name="SeaSprite" type="Sprite2D" parent="."]
 z_index = -5
-scale = Vector2(0.425, 0.425)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("16_gehpl")
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
@@ -279,6 +282,8 @@ one_shot = true
 [connection signal="players_ready" from="MenuLayer/LobbyMenu" to="." method="_on_lobby_menu_players_ready"]
 [connection signal="players_ready" from="MenuLayer/LobbyMenu" to="MenuLayer/PauseMenu" method="_on_lobby_menu_players_ready"]
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_restarted"]
+[connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="game_restarted" from="MenuLayer/PauseMenu" to="." method="_on_game_restarted"]
+[connection signal="game_restarted" from="MenuLayer/PauseMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="back_button_pressed" from="MenuLayer/CreditsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

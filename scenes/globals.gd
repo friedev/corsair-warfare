@@ -36,11 +36,5 @@ func deregister_player(player: int) -> void:
 	self.player_deregistered.emit(player)
 
 
-func reset_game_settings() -> void:
-	self.players.clear()
-	self.time_limit_seconds = 0
-	self.game_mode = self.DEFAULT_GAME_MODE
-
-
 func is_joy(player: int) -> bool:
 	return player >= 0
