@@ -5,16 +5,14 @@ signal cannon_fired
 signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
-enum Player {
-	P1 = 1,
-	P2 = 2,
-}
-
-@export var player: Player
+@export var player: int
 
 @export var wind: Wind
 
-@export var texture: Texture2D
+@export var texture: Texture2D:
+	set(value):
+		texture = value
+		self.sprite.texture = texture
 
 @export var speed: float
 @export var min_speed: float
@@ -32,7 +30,12 @@ enum Player {
 var health: float:
 	set(value):
 		if value < self.health:
-			Input.start_joy_vibration(getDevice(), 0.1, clamp((self.health - value) * 10, 0.1, 1), 0.15)
+			Input.start_joy_vibration(
+				self.get_device(),
+				0.1,
+				clamp((self.health - value) * 10, 0.1, 1),
+				0.15
+			)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -63,6 +66,11 @@ var enabled := true:
 		self.set_process_input(self.enabled)
 		self.collision_polygon.set_deferred(&"disabled", not self.enabled)
 
+var nickname: String:
+	set(value):
+		nickname = value
+		nickname_label.text = self.nickname
+
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
@@ -74,10 +82,10 @@ var enabled := true:
 @onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
 @onready var low_health_particles: GPUParticles2D = %LowHealthParticles
 @onready var damage_timer: Timer = %DamageTimer
+@onready var nickname_label: Label = %NicknameLabel
 
 
 func _ready() -> void:
-	self.sprite.texture = self.texture
 	self.health = self.max_health
 	# Duplicate material so that changes by one ship don't affect the other
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
@@ -91,21 +99,39 @@ func _process(delta: float) -> void:
 	particle_material.angle_max = -self.rotation_degrees
 
 
-func _physics_process(delta: float) -> void:
-	var action_prefix: String
-	if self.player == Player.P1:
-		action_prefix = "p1"
-	elif self.player == Player.P2:
-		action_prefix = "p2"
+func handle_input() -> void:
+	# TODO DRY
+	if self.player == Globals.KEYBOARD_1_PLAYER:
+		if Input.is_key_pressed(KEY_A):
+			self.apply_torque(-self.rotation_speed)
+		if Input.is_key_pressed(KEY_D):
+			self.apply_torque(self.rotation_speed)
+		if Input.is_key_pressed(KEY_Q):
+			self.fire(self.left_cannons)
+		if Input.is_key_pressed(KEY_E):
+			self.fire(self.right_cannons)
+	elif self.player == Globals.KEYBOARD_2_PLAYER:
+		if Input.is_key_pressed(KEY_J):
+			self.apply_torque(-self.rotation_speed)
+		if Input.is_key_pressed(KEY_L):
+			self.apply_torque(self.rotation_speed)
+		if Input.is_key_pressed(KEY_U):
+			self.fire(self.left_cannons)
+		if Input.is_key_pressed(KEY_O):
+			self.fire(self.right_cannons)
+	else:
+		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) < -0.5:
+			self.apply_torque(-self.rotation_speed)
+		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) > 0.5:
+			self.apply_torque(self.rotation_speed)
+		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
+			self.fire(self.left_cannons)
+		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
+			self.fire(self.right_cannons)
 
-	if Input.is_action_pressed("%s_left" % action_prefix):
-		self.apply_torque(-self.rotation_speed)
-	if Input.is_action_pressed("%s_right" % action_prefix):
-		self.apply_torque(self.rotation_speed)
-	if Input.is_action_pressed("%s_fire_right" % action_prefix):
-		self.fire(self.right_cannons)
-	if Input.is_action_pressed("%s_fire_left" % action_prefix):
-		self.fire(self.left_cannons)
+
+func _physics_process(delta: float) -> void:
+	self.handle_input()
 	self.apply_wind_force()
 	self.apply_collision_damage(delta)
 
@@ -113,14 +139,18 @@ func _physics_process(delta: float) -> void:
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		Input.start_joy_vibration(self.getDevice(), 0.5, 0.0, 0.25)
+		Input.start_joy_vibration(self.get_device(), 0.5, 0.0, 0.25)
 		self.cannon_fired.emit()
 
 
 func apply_wind_force() -> void:
 	var difference := self.rotation - self.wind.wind.angle()
 	# https://stackoverflow.com/a/2007355
-	var actual_difference: float = min(abs(difference), abs(difference + TAU), abs(difference - TAU))
+	var actual_difference: float = min(
+		abs(difference),
+		abs(difference + TAU),
+		abs(difference - TAU)
+	)
 	var alignment := 1.0 - actual_difference / PI
 	var magnitude := self.speed * self.wind.wind.length() * sqrt(alignment)
 	magnitude = max(magnitude, self.min_speed)
@@ -154,10 +184,5 @@ func destroy() -> void:
 	self.destroyed.emit(self)
 
 
-func getDevice() -> int:
-	var device: int
-	if self.player == Player.P1:
-		device = 1
-	elif self.player == Player.P2:
-		device = 0
-	return device
+func get_device() -> int:
+	return player - 1

@@ -20,14 +20,14 @@ func _on_resume_button_pressed() -> void:
 	self.set_paused(not self.get_tree().paused)
 
 
-func _on_customization_menu_players_ready() -> void:
-	self.can_pause = true
-
-
-func _on_ship_destroyed(ship: Ship) -> void:
-	self.can_pause = false
-
-
 func _on_menu_button_pressed() -> void:
 	self.set_paused(false)
 	self.game_restarted.emit()
+
+
+func _on_lobby_menu_players_ready() -> void:
+	self.can_pause = true
+
+
+func _on_main_game_over() -> void:
+	self.can_pause = false
