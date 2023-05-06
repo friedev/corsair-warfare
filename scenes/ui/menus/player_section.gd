@@ -90,13 +90,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		or not event is InputEventJoypadButton
 	):
 		return
+
 	var joy_event := event as InputEventJoypadButton
-	if self.player == Globals.NO_PLAYER:
-		if joy_event.button_index == JOY_BUTTON_A:
-			self.player = joy_event.device
-	else:
-		if joy_event.button_index == JOY_BUTTON_B:
-			self.leave()
+
+	if self.player == Globals.NO_PLAYER and joy_event.button_index == JOY_BUTTON_A:
+		self.player = joy_event.device
+		return
+
+	if self.player == joy_event.device and joy_event.button_index == JOY_BUTTON_B:
+		self.leave()
+		return
 
 
 func _on_nickname_edit_text_changed(new_text: String) -> void:
