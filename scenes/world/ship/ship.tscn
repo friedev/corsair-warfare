@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://chfrwjo8j7og0"]
+[gd_scene load_steps=22 format=3 uid="uid://d212jkx14sapd"]
 
-[ext_resource type="Texture2D" uid="uid://dpta5trs72k6v" path="res://scenes/world/ship/white_ship.png" id="1_2f5eh"]
 [ext_resource type="Script" path="res://scenes/world/ship/ship.gd" id="1_lvdat"]
+[ext_resource type="PackedScene" uid="uid://cm7u838u14knh" path="res://scenes/world/ship/sprite/ship_sprite.tscn" id="2_casu2"]
 [ext_resource type="PackedScene" uid="uid://p73xe0fbsd8v" path="res://scenes/world/ship/cannons/cannons.tscn" id="4_dkwe4"]
-[ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://scenes/world/ship/cannons/cannon_reload.wav" id="10_850h8"]
+[ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://scenes/world/ship/ship_damage_sound/ship_damage.wav" id="4_mi6ka"]
 [ext_resource type="Texture2D" uid="uid://c6lslv6mc0oy3" path="res://scenes/world/ship/ship_wake_particle.png" id="11_yy8k2"]
 [ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://scenes/world/ship/smoke_particle.png" id="12_vokgj"]
 
@@ -100,9 +100,9 @@ contact_monitor = true
 linear_damp = 2.0
 angular_damp = 10.0
 script = ExtResource("1_lvdat")
-speed = 300.0
+speed = 200.0
 min_speed = 50.0
-rotation_speed = 2500.0
+rotation_speed = 3000.0
 ram_dps_min = 0.1
 ram_dps_max = 0.2
 obstacle_dps = 0.15
@@ -113,11 +113,8 @@ cannon_count = 3
 unique_name_in_owner = true
 polygon = PackedVector2Array(-18, -8, 15, -7, 33, 0, 42, 1, 33, 2, 16, 9, -18, 9, -40, 6, -40, -5)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShipSprite" parent="." instance=ExtResource("2_casu2")]
 unique_name_in_owner = true
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_2f5eh")
-offset = Vector2(0, 8)
 
 [node name="ControlParent" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -159,7 +156,7 @@ rotation = 1.5708
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("10_850h8")
+stream = ExtResource("4_mi6ka")
 bus = &"Sound"
 
 [node name="WakeParticles" type="GPUParticles2D" parent="."]
@@ -172,6 +169,7 @@ lifetime = 3.0
 
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_8xlol")
@@ -181,6 +179,7 @@ draw_order = 2
 
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_xll58")

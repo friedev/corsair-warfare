@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://yk2cbtctwao"]
+[gd_scene load_steps=3 format=3 uid="uid://cl5ui6i5c3mov"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/player_section.gd" id="1_0lbsc"]
+[ext_resource type="PackedScene" uid="uid://b6y2ai5ch5lse" path="res://scenes/ui/menus/customization_section.tscn" id="3_3kk7s"]
 
 [node name="PlayerSection" type="PanelContainer"]
 script = ExtResource("1_0lbsc")
@@ -58,7 +59,15 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
 
-[node name="Keyboard1Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+[node name="CustomizationSection" parent="MarginContainer/VBoxContainer/JoinedContainer" instance=ExtResource("3_3kk7s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ControlsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Keyboard1Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -66,7 +75,7 @@ text = "Steer: A/D
 Cannons: Q/E"
 horizontal_alignment = 1
 
-[node name="Keyboard2Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+[node name="Keyboard2Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -74,7 +83,7 @@ text = "Steer: J/L
 Cannons: U/O"
 horizontal_alignment = 1
 
-[node name="JoyControls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer"]
+[node name="JoyControls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -87,3 +96,5 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard2Button" to="." method="_on_keyboard_2_button_pressed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/NicknameEdit" to="." method="_on_nickname_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="levels_updated" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection" to="." method="_on_customization_section_levels_updated"]
+[connection signal="style_updated" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection" to="." method="_on_customization_section_style_updated"]

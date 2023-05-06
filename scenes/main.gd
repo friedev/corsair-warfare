@@ -4,11 +4,6 @@ signal game_over
 
 const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 
-const SHIP_TEXTURES := [
-	preload("res://scenes/world/ship/white_ship.png"),
-	preload("res://scenes/world/ship/black_ship.png"),
-]
-
 @export var ship_spawn_radius: float
 
 @onready var world: Node2D = %World
@@ -44,19 +39,13 @@ func find_ship_spawn_position() -> Vector2:
 func spawn_ship(details: PlayerDetails) -> void:
 	var spawn_position := self.find_ship_spawn_position()
 	var ship: Ship = self.SHIP_SCENE.instantiate()
+	ship.details = details
 	ship.position = spawn_position
 	ship.rotation = randf() * TAU
 	ship.cannon_fired.connect(self.music._on_ship_cannon_fired)
 	ship.damage_taken.connect(self.camera._on_ship_damage_taken)
 	ship.destroyed.connect(self._on_ship_destroyed)
 	self.world.add_child(ship)
-	ship.player = details.player
-	ship.nickname = details.nickname
-	# TODO let player choose texture, or choose based on index
-	ship.texture = self.SHIP_TEXTURES[0]
-	# TODO spawn at random safe location
-	ship.position.x += randf() * 256
-	ship.position.y += randf() * 256
 	ship.wind = self.wind
 
 

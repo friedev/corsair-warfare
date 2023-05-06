@@ -3,6 +3,7 @@ class_name PlayerSection
 
 signal player_set(player: int)
 signal player_left(player: int)
+signal customization_updated
 
 var index: int
 
@@ -23,12 +24,15 @@ var player := Globals.NO_PLAYER:
 @onready var joined_container := %JoinedContainer as Control
 @onready var not_joined_container := %NotJoinedContainer as Control
 
+@onready var keyboard_1_button := %Keyboard1Button as Button
+@onready var keyboard_2_button := %Keyboard2Button as Button
+
+@onready var customization_section := %CustomizationSection as CustomizationSection
+
+@onready var controls_container := %ControlsContainer as Control
 @onready var keyboard_1_controls := %Keyboard1Controls as Control
 @onready var keyboard_2_controls := %Keyboard2Controls as Control
 @onready var joy_controls := %JoyControls as Control
-
-@onready var keyboard_1_button := %Keyboard1Button as Button
-@onready var keyboard_2_button := %Keyboard2Button as Button
 
 
 func get_controls() -> Control:
@@ -44,9 +48,9 @@ func get_controls() -> Control:
 
 
 func set_controls_visible(visible: bool) -> void:
-	var controls := self.get_controls()
-	if controls != null:
-		controls.visible = visible
+	var my_controls := self.get_controls()
+	for controls in self.controls_container.get_children():
+		controls.visible = controls == my_controls
 
 
 func updated_joined_containers() -> void:
@@ -68,8 +72,15 @@ func update_keyboard_buttons() -> void:
 
 func _ready() -> void:
 	self.update_keyboard_buttons()
+
 	Globals.player_registered.connect(self._on_player_registered)
 	Globals.player_deregistered.connect(self._on_player_deregistered)
+
+	self.customization_section.update_levels()
+	self.customization_section.update_style()
+
+	self.details.levels = self.customization_section.get_levels()
+	self.details.style = self.customization_section.get_style()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -110,3 +121,12 @@ func _on_player_registered(player: int) -> void:
 
 func _on_player_deregistered(player: int) -> void:
 	self.update_keyboard_buttons()
+
+
+func _on_customization_section_levels_updated() -> void:
+	self.details.levels = self.customization_section.get_levels()
+	self.customization_updated.emit()
+
+
+func _on_customization_section_style_updated() -> void:
+	self.details.style = self.customization_section.get_style()

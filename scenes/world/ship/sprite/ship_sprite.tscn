@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm7u838u14knh"]
+
+[ext_resource type="Script" path="res://scenes/world/ship/sprite/ship_sprite.gd" id="1_n1naw"]
+
+[node name="ShipSprite" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_n1naw")
+
+[node name="Hull1" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Hull2" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Hull3" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Cannons1" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Cannons2" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Cannons3" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Sails1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.999999, 0.999999)
+
+[node name="Sails2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.999999, 0.999999)
+
+[node name="Sails3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.999999, 0.999999)

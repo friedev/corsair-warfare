@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6y2ai5ch5lse"]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/customization_section.gd" id="1_sw0ox"]
+[ext_resource type="Resource" uid="uid://cj1jmouy4h856" path="res://scenes/world/ship/sprite/navy/navy_ship_style.tres" id="2_1t41w"]
+[ext_resource type="PackedScene" uid="uid://cm6lliew3ph6v" path="res://scenes/world/ship/sprite/ship_texture_rect.tscn" id="2_7qh87"]
+[ext_resource type="Resource" uid="uid://b0nty5apjirs5" path="res://scenes/world/ship/sprite/pirate/pirate_ship_style.tres" id="3_hei0l"]
+[ext_resource type="Resource" uid="uid://8qbol8ar27of" path="res://scenes/world/ship/sprite/hunter/hunter_ship_style.tres" id="4_nkcfp"]
+[ext_resource type="Resource" uid="uid://b0icwb34d85ox" path="res://scenes/world/ship/sprite/ghost/ghost_ship_style.tres" id="5_ybs3b"]
+
+[node name="CustomizationSection" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_sw0ox")
+max_points = 4
+styles = Array[Resource("res://scenes/world/ship/sprite/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b")])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="PreviousStyleButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
+[node name="ShipTextureRect" parent="HBoxContainer" instance=ExtResource("2_7qh87")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NextStyleButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">"
+
+[node name="PointsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "4/4 Points Spent"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="HullLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Hull"
+
+[node name="HullSlider" type="HSlider" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+
+[node name="CannonsLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Cannons"
+
+[node name="CannonsSlider" type="HSlider" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+
+[node name="SailsLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Sails"
+
+[node name="SailsSlider" type="HSlider" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+
+[connection signal="pressed" from="HBoxContainer/PreviousStyleButton" to="." method="_on_previous_style_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/NextStyleButton" to="." method="_on_next_style_button_pressed"]
+[connection signal="value_changed" from="GridContainer/HullSlider" to="." method="_on_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/CannonsSlider" to="." method="_on_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/SailsSlider" to="." method="_on_slider_value_changed"]

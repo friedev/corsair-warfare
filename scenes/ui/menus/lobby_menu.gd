@@ -1,5 +1,5 @@
 extends Control
-class_name CustomizationMenu
+class_name LobbyMenu
 
 signal players_ready
 signal go_back
@@ -23,12 +23,23 @@ func add_player_section() -> void:
 	self.index += 1
 	new_section.player_set.connect(self._on_player_section_player_set)
 	new_section.player_left.connect(self._on_player_section_player_left)
+	new_section.customization_updated.connect(self._on_player_section_customization_updated)
 	self.player_section_container.add_child(new_section)
 	new_section.show()
 
 
+func is_ready() -> bool:
+	if self.player_count == 0:
+		return false
+	for player_section in self.player_section_container.get_children():
+		player_section = player_section as PlayerSection
+		if not player_section.customization_section.is_valid():
+			return false
+	return true
+
+
 func update_play_button() -> void:
-	self.play_button.disabled = self.player_count == 0
+	self.play_button.disabled = not self.is_ready()
 
 
 func _ready() -> void:
@@ -62,3 +73,7 @@ func _on_player_section_player_set(player: int) -> void:
 
 func _on_player_section_player_left(player: int) -> void:
 	self.player_count -= 1
+
+
+func _on_player_section_customization_updated() -> void:
+	self.update_play_button()

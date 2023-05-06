@@ -5,14 +5,16 @@ signal cannon_fired
 signal damage_taken(damage: float)
 signal destroyed(ship: Ship)
 
+const level_values := {
+	"Hull": [1.0, 1.5, 2.0, 2.5],
+	"Sails": [1.0, (4.0 / 3.0), (5.0 / 3.0), 2.0],
+	"Cannons": [3, 4, 5, 6],
+}
+
 @export var player: int
+@export var details: PlayerDetails
 
 @export var wind: Wind
-
-@export var texture: Texture2D:
-	set(value):
-		texture = value
-		self.sprite.texture = texture
 
 @export var speed: float
 @export var min_speed: float
@@ -30,12 +32,13 @@ signal destroyed(ship: Ship)
 var health: float:
 	set(value):
 		if value < self.health:
-			Input.start_joy_vibration(
-				self.get_device(),
-				0.1,
-				clamp((self.health - value) * 10, 0.1, 1),
-				0.15
-			)
+			if self.details.player >= 0:
+				Input.start_joy_vibration(
+					self.details.player,
+					0.1,
+					clamp((self.health - value) * 10, 0.1, 1),
+					0.15
+				)
 			self.damage_taken.emit(self.health - value)
 			if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 				self.damage_sound.play()
@@ -46,7 +49,6 @@ var health: float:
 			self.destroy()
 
 		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
-		# Update sprite based on health
 		if self.health > self.max_health * (2.0 / 3.0):
 			self.medium_health_particles.emitting = false
 			self.low_health_particles.emitting = false
@@ -71,7 +73,7 @@ var nickname: String:
 		nickname = value
 		nickname_label.text = self.nickname
 
-@onready var sprite: Sprite2D = %Sprite2D
+@onready var sprite: ShipSprite = %ShipSprite
 @onready var control_parent: Node2D = %ControlParent
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var left_cannons: Cannons = %LeftCannons
@@ -86,8 +88,17 @@ var nickname: String:
 
 
 func _ready() -> void:
+	self.nickname = self.details.nickname
+	self.sprite.apply_style(self.details.style)
+	self.sprite.apply_levels(self.details.levels)
+
+	# Apply levels
+	self.max_health = self.level_values["Hull"][self.details.levels["Hull"]]
 	self.health = self.max_health
-	# Duplicate material so that changes by one ship don't affect the other
+	self.cannon_count = self.level_values["Cannons"][self.details.levels["Cannons"]]
+	self.speed *= self.level_values["Sails"][self.details.levels["Sails"]]
+
+	# Duplicate material so that changes by one ship don't affect the others
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
 	self.wake_particles.process_material = particle_material.duplicate()
 
@@ -101,7 +112,7 @@ func _process(delta: float) -> void:
 
 func handle_input() -> void:
 	# TODO DRY
-	if self.player == Globals.KEYBOARD_1_PLAYER:
+	if self.details.player == Globals.KEYBOARD_1_PLAYER:
 		if Input.is_key_pressed(KEY_A):
 			self.apply_torque(-self.rotation_speed)
 		if Input.is_key_pressed(KEY_D):
@@ -110,7 +121,7 @@ func handle_input() -> void:
 			self.fire(self.left_cannons)
 		if Input.is_key_pressed(KEY_E):
 			self.fire(self.right_cannons)
-	elif self.player == Globals.KEYBOARD_2_PLAYER:
+	elif self.details.player == Globals.KEYBOARD_2_PLAYER:
 		if Input.is_key_pressed(KEY_J):
 			self.apply_torque(-self.rotation_speed)
 		if Input.is_key_pressed(KEY_L):
@@ -120,13 +131,13 @@ func handle_input() -> void:
 		if Input.is_key_pressed(KEY_O):
 			self.fire(self.right_cannons)
 	else:
-		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) < -0.5:
+		if Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X) < -0.5:
 			self.apply_torque(-self.rotation_speed)
-		if Input.get_joy_axis(self.player, JOY_AXIS_LEFT_X) > 0.5:
+		if Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X) > 0.5:
 			self.apply_torque(self.rotation_speed)
-		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
+		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
 			self.fire(self.left_cannons)
-		if Input.get_joy_axis(self.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
+		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
 			self.fire(self.right_cannons)
 
 
@@ -139,7 +150,8 @@ func _physics_process(delta: float) -> void:
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		Input.start_joy_vibration(self.get_device(), 0.5, 0.0, 0.25)
+		if self.details.player >= 0:
+			Input.start_joy_vibration(self.details.player, 0.5, 0.0, 0.25)
 		self.cannon_fired.emit()
 
 
@@ -182,7 +194,3 @@ func apply_collision_damage(delta: float):
 func destroy() -> void:
 	self.enabled = false
 	self.destroyed.emit(self)
-
-
-func get_device() -> int:
-	return player - 1

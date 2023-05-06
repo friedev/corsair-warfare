@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpta5trs72k6v"
-path="res://.godot/imported/white_ship.png-0fbc49bc4af86d019ed3930598952ffc.ctex"
+uid="uid://dc2qk3det2ao2"
+path="res://.godot/imported/hull1.png-df3e26c1ef4e41f473a6945c23ba3c17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/ship/white_ship.png"
-dest_files=["res://.godot/imported/white_ship.png-0fbc49bc4af86d019ed3930598952ffc.ctex"]
+source_file="res://scenes/world/ship/sprite/hunter/hull1.png"
+dest_files=["res://.godot/imported/hull1.png-df3e26c1ef4e41f473a6945c23ba3c17.ctex"]
 
 [params]
 

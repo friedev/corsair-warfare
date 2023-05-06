@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ShipStyle" load_steps=12 format=3 uid="uid://8qbol8ar27of"]
+
+[ext_resource type="Texture2D" uid="uid://b0e3olsmfun76" path="res://scenes/world/ship/sprite/hunter/base.png" id="1_romki"]
+[ext_resource type="Texture2D" uid="uid://b1re1xgspoqb6" path="res://scenes/world/ship/sprite/hunter/cannons1.png" id="2_jvujk"]
+[ext_resource type="Texture2D" uid="uid://db0exu6mqkdie" path="res://scenes/world/ship/sprite/hunter/cannons2.png" id="3_4q5wq"]
+[ext_resource type="Texture2D" uid="uid://o6gfp7f7ueyb" path="res://scenes/world/ship/sprite/hunter/cannons3.png" id="4_x0r4g"]
+[ext_resource type="Texture2D" uid="uid://dc2qk3det2ao2" path="res://scenes/world/ship/sprite/hunter/hull1.png" id="5_s6yic"]
+[ext_resource type="Texture2D" uid="uid://b4tjbsa3h5uvy" path="res://scenes/world/ship/sprite/hunter/hull2.png" id="6_3wcbm"]
+[ext_resource type="Texture2D" uid="uid://guc64bbj5wbc" path="res://scenes/world/ship/sprite/hunter/hull3.png" id="7_k2884"]
+[ext_resource type="Texture2D" uid="uid://dusdv3rgu1j6q" path="res://scenes/world/ship/sprite/hunter/sails1.png" id="8_jq5jg"]
+[ext_resource type="Texture2D" uid="uid://brwmg67b6yek7" path="res://scenes/world/ship/sprite/hunter/sails2.png" id="9_asg3f"]
+[ext_resource type="Texture2D" uid="uid://b58ml5b1vh5h8" path="res://scenes/world/ship/sprite/hunter/sails3.png" id="10_arnpv"]
+[ext_resource type="Script" path="res://scenes/world/ship/sprite/ship_style.gd" id="10_lbb2v"]
+
+[resource]
+script = ExtResource("10_lbb2v")
+base = ExtResource("1_romki")
+hull_levels = Array[Texture]([ExtResource("5_s6yic"), ExtResource("6_3wcbm"), ExtResource("7_k2884")])
+cannons_levels = Array[Texture]([ExtResource("2_jvujk"), ExtResource("3_4q5wq"), ExtResource("4_x0r4g")])
+sails_levels = Array[Texture]([ExtResource("8_jq5jg"), ExtResource("9_asg3f"), ExtResource("10_arnpv")])
