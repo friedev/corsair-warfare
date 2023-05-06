@@ -54,6 +54,7 @@ radius = 256.0
 [node name="Main" type="Node"]
 script = ExtResource("1_ndiw8")
 ship_spawn_radius = 1200.0
+low_time_threshold = 0.167
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -170,7 +171,6 @@ scale = Vector2(-0.75, -0.75)
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDLayer"]
 anchors_preset = 15
@@ -187,6 +187,16 @@ theme_override_constants/margin_bottom = 8
 [node name="WindHUD" parent="HUDLayer/MarginContainer" node_paths=PackedStringArray("wind") instance=ExtResource("12_4w4eo")]
 layout_mode = 2
 wind = NodePath("../../../World/Wind")
+
+[node name="TimeLimitLabel" type="Label" parent="HUDLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "88:88"
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -230,6 +240,10 @@ max_volume_db = -3.0
 unique_name_in_owner = true
 process_mode = 3
 
+[node name="GameTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [connection signal="game_over" from="." to="MenuLayer/GameOverMenu" method="_on_main_game_over"]
 [connection signal="game_over" from="." to="MenuLayer/PauseMenu" method="_on_main_game_over"]
 [connection signal="credits_button_pressed" from="MenuLayer/MainMenu" to="MenuLayer/CreditsMenu" method="_on_menu_open"]
@@ -243,3 +257,4 @@ process_mode = 3
 [connection signal="game_restarted" from="MenuLayer/GameOverMenu" to="." method="_on_game_restarted"]
 [connection signal="game_restarted" from="MenuLayer/PauseMenu" to="." method="_on_game_restarted"]
 [connection signal="back_button_pressed" from="MenuLayer/CreditsMenu" to="MenuLayer/MainMenu" method="_on_menu_open"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

@@ -5,13 +5,16 @@ signal game_over
 const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 
 @export var ship_spawn_radius: float
+@export var low_time_threshold: float
 
 @onready var world: Node2D = %World
 @onready var camera: ShakeCamera2D = %Camera2D
+@onready var ship_spawn_cast: ShapeCast2D = %ShipSpawnCast
 @onready var wind: Wind = %Wind
 @onready var music: Music = %Music
 @onready var hud_layer: CanvasLayer = %HUDLayer
-@onready var ship_spawn_cast: ShapeCast2D = %ShipSpawnCast
+@onready var time_limit_label: Label = %TimeLimitLabel
+@onready var game_timer: Timer = %GameTimer
 
 var game_active: bool:
 	set(value):
@@ -53,8 +56,20 @@ func _ready() -> void:
 	self.game_active = false
 
 
+func _process(delta: float) -> void:
+	var total_seconds_left := ceili(self.game_timer.time_left)
+	var minutes_left := total_seconds_left / 60
+	var seconds_left := total_seconds_left % 60
+	self.time_limit_label.text = "%d:%02d" % [minutes_left, seconds_left]
+	if total_seconds_left < Globals.time_limit_seconds * self.low_time_threshold:
+		self.time_limit_label.modulate = Color(1, 0.25, 0.25)
+	else:
+		self.time_limit_label.modulate = Color.WHITE
+
+
 func _on_game_restarted() -> void:
 	Globals.players.clear()
+	Globals.time_limit_seconds = 0
 	self.get_tree().reload_current_scene()
 
 
@@ -63,9 +78,18 @@ func _on_lobby_menu_players_ready() -> void:
 	for details in Globals.players.values():
 		self.spawn_ship(details)
 	self.game_active = true
+	if Globals.time_limit_seconds > 0:
+		self.game_timer.start(Globals.time_limit_seconds)
+		self.time_limit_label.show()
+	else:
+		self.time_limit_label.hide()
 
 
 func _on_ship_destroyed(ship: Ship) -> void:
 	self.ships_alive -= 1
 	if self.ships_alive <= 1:
 		self.game_over.emit()
+
+
+func _on_game_timer_timeout() -> void:
+	self.game_over.emit()

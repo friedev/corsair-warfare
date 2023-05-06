@@ -10,6 +10,8 @@ const NO_PLAYER := -3
 
 var players := {}
 
+var time_limit_seconds := 0
+
 
 func register_player(player: int, ship_details: PlayerDetails) -> void:
 	if player == self.NO_PLAYER:

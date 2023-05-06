@@ -77,3 +77,7 @@ func _on_player_section_player_left(player: int) -> void:
 
 func _on_player_section_customization_updated() -> void:
 	self.update_play_button()
+
+
+func _on_time_limit_spin_box_value_changed(value: float) -> void:
+	Globals.time_limit_seconds = int(value)
