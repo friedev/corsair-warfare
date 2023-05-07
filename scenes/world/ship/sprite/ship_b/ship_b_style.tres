@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ShipStyle" load_steps=13 format=3 uid="uid://dpyljyobmytxi"]
+
+[ext_resource type="Texture2D" uid="uid://ctyy4n4xqk2i8" path="res://scenes/world/ship/sprite/ship_b/base_hull.png" id="1_gmoiw"]
+[ext_resource type="Texture2D" uid="uid://mjdah7nt8qqy" path="res://scenes/world/ship/sprite/ship_b/base_sails.png" id="2_ngtm7"]
+[ext_resource type="Texture2D" uid="uid://ceaiem0e0ec34" path="res://scenes/world/ship/sprite/ship_b/cannons1.png" id="3_xaybn"]
+[ext_resource type="Texture2D" uid="uid://bwfedvu63cln8" path="res://scenes/world/ship/sprite/ship_b/cannons2.png" id="4_4oeuj"]
+[ext_resource type="Texture2D" uid="uid://d0x67tol8b6pu" path="res://scenes/world/ship/sprite/ship_b/cannons3.png" id="5_lgecv"]
+[ext_resource type="Texture2D" uid="uid://c2tp06q04w0ox" path="res://scenes/world/ship/sprite/ship_b/hull1.png" id="6_cketh"]
+[ext_resource type="Texture2D" uid="uid://mrier6h38pmx" path="res://scenes/world/ship/sprite/ship_b/hull2.png" id="7_lc6lt"]
+[ext_resource type="Texture2D" uid="uid://dxg01210g87ny" path="res://scenes/world/ship/sprite/ship_b/hull3.png" id="8_ol54b"]
+[ext_resource type="Texture2D" uid="uid://s7e5d3paj7py" path="res://scenes/world/ship/sprite/ship_b/sails1.png" id="9_iabui"]
+[ext_resource type="Texture2D" uid="uid://cb84m0ghidu4c" path="res://scenes/world/ship/sprite/ship_b/sails2.png" id="10_b6vt4"]
+[ext_resource type="Texture2D" uid="uid://dkprmipjld5n3" path="res://scenes/world/ship/sprite/ship_b/sails3.png" id="11_cpfdq"]
+[ext_resource type="Script" path="res://scenes/world/ship/sprite/ship_style.gd" id="12_tcebf"]
+
+[resource]
+script = ExtResource("12_tcebf")
+base_hull = ExtResource("1_gmoiw")
+base_sails = ExtResource("2_ngtm7")
+hull_levels = Array[Texture]([ExtResource("6_cketh"), ExtResource("7_lc6lt"), ExtResource("8_ol54b")])
+cannons_levels = Array[Texture]([ExtResource("3_xaybn"), ExtResource("4_4oeuj"), ExtResource("5_lgecv")])
+sails_levels = Array[Texture]([ExtResource("9_iabui"), ExtResource("10_b6vt4"), ExtResource("11_cpfdq")])

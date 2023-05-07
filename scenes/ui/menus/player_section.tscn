@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl5ui6i5c3mov"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/player_section.gd" id="1_0lbsc"]
-[ext_resource type="PackedScene" uid="uid://b6y2ai5ch5lse" path="res://scenes/ui/menus/customization_section.tscn" id="3_3kk7s"]
+[ext_resource type="PackedScene" uid="uid://c5i67jps1utlg" path="res://scenes/ui/menus/customization_section.tscn" id="3_3kk7s"]
 
 [node name="PlayerSection" type="PanelContainer"]
 script = ExtResource("1_0lbsc")
