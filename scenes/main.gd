@@ -90,8 +90,6 @@ func sort_score_descending(
 
 
 func update_score_label() -> void:
-	# TODO sort players by score
-	# TODO highlight player with highest score
 	self.score_label.clear()
 	var details_list := Globals.players.values()
 	details_list.sort_custom(self.sort_score_descending)
