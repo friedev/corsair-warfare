@@ -6,6 +6,8 @@ signal credits_button_pressed
 
 @export var default_focus: Control
 
+@onready var quit_button := %QuitButton as Button
+
 
 func open_menu() -> void:
 	self.show()
@@ -13,6 +15,7 @@ func open_menu() -> void:
 
 
 func _ready() -> void:
+	self.quit_button.visible = OS.get_name() != "Web"
 	self.open_menu()
 
 

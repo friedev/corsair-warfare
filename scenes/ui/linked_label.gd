@@ -3,8 +3,7 @@ extends RichTextLabel
 
 
 func _ready():
-	if OS.get_name() != "HTML5":
-		self.meta_clicked.connect(self._on_meta_clicked)
+	self.meta_clicked.connect(self._on_meta_clicked)
 
 
 func _on_meta_clicked(meta):
