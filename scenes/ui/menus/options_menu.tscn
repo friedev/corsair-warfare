@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bm2n588heclnw" path="res://scenes/ui/menus/options/volume_option.tscn" id="4_1ludw"]
 [ext_resource type="PackedScene" uid="uid://cgnmle83oa3at" path="res://scenes/ui/menus/options/check_box_option.tscn" id="4_qgek8"]
 
-[node name="OptionsMenu" type="MarginContainer"]
+[node name="OptionsMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,6 +17,7 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 script = ExtResource("1_5mk8j")
+default_focus = NodePath("VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

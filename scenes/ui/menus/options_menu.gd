@@ -7,6 +7,8 @@ const CONFIG_PATH := "user://options.cfg"
 const OPTIONS_SECTION := "options"
 const OPTIONS_GROUP := &"options"
 
+@export var default_focus: Control
+
 
 func load_config() -> bool:
 	var config := ConfigFile.new()
@@ -38,6 +40,7 @@ func _ready() -> void:
 
 func _on_menu_open() -> void:
 	self.show()
+	self.default_focus.grab_focus()
 
 
 func _on_save_button_pressed() -> void:

@@ -1,13 +1,19 @@
-extends MarginContainer
-
+extends Control
 
 signal game_started
 signal options
 signal credits_button_pressed
 
+@export var default_focus: Control
+
+
+func open_menu() -> void:
+	self.show()
+	self.default_focus.grab_focus()
+
 
 func _ready() -> void:
-	self.show()
+	self.open_menu()
 
 
 func _on_play_button_pressed() -> void:
@@ -30,4 +36,5 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_menu_open() -> void:
-	self.show()
+	self.open_menu()
+

@@ -1,6 +1,8 @@
-extends Container
+extends Control
 
 signal game_restarted
+
+@export var default_focus: Control
 
 @onready var label: Label = %Label
 
@@ -31,3 +33,4 @@ func _on_main_game_over() -> void:
 			elif details.score == max_score:
 				self.label.text = "Draw"
 	self.show()
+	self.default_focus.grab_focus()

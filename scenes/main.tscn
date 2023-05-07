@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" path="res://scenes/world/environment/rock1.tscn" id="16_8b13h"]
 [ext_resource type="Texture2D" uid="uid://b0q77vlh2eyhp" path="res://scenes/world/environment/sea.png" id="16_gehpl"]
 [ext_resource type="PackedScene" uid="uid://dxw338ghigg1r" path="res://scenes/ui/menus/game_over_menu.tscn" id="16_pt5je"]
-[ext_resource type="PackedScene" path="res://scenes/ui/menus/pause_menu.tscn" id="17_2ohqg"]
+[ext_resource type="PackedScene" uid="uid://bqku2krmd7fpx" path="res://scenes/ui/menus/pause_menu.tscn" id="17_2ohqg"]
 [ext_resource type="PackedScene" uid="uid://cgpvktabk4qsy" path="res://scenes/world/environment/sandbar.tscn" id="17_rovm2"]
 [ext_resource type="PackedScene" uid="uid://dhqcal3iwc8bl" path="res://scenes/ui/menus/credits_menu.tscn" id="18_t046q"]
 [ext_resource type="PackedScene" path="res://scenes/music/music.tscn" id="21_w75cq"]

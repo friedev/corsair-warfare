@@ -1,14 +1,19 @@
-extends MarginContainer
+extends Control
 
 signal game_restarted
+
+@export var default_focus: Control
 
 var can_pause := false
 
 
 func set_paused(paused: bool) -> void:
-	if self.can_pause:
-		self.get_tree().paused = paused
-		self.visible = paused
+	if not self.can_pause:
+		return
+	self.get_tree().paused = paused
+	self.visible = paused
+	if paused:
+		self.default_focus.grab_focus()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -17,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_resume_button_pressed() -> void:
-	self.set_paused(not self.get_tree().paused)
+	self.set_paused(false)
 
 
 func _on_menu_button_pressed() -> void:

@@ -86,7 +86,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if (
 		not self.is_visible_in_tree()
-		or event.is_pressed()
+		or not event.is_pressed()
 		or not event is InputEventJoypadButton
 	):
 		return

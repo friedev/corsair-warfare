@@ -15,6 +15,9 @@ var player_count := 0:
 @onready var player_section_container := %PlayerSectionContainer as Control
 @onready var play_button := %PlayButton as Button
 
+# default_focus is intentionally omitted because it would cause unintentional UI
+# interaction as players join with their controllers
+
 
 func add_player_section() -> void:
 	var new_section: PlayerSection = self.PLAYER_SECTION_SCENE.instantiate()
