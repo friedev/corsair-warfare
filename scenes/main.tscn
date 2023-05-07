@@ -207,20 +207,20 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "88:88"
 
-[node name="ScoreLabel" type="Label" parent="HUDLayer/MarginContainer"]
+[node name="ScoreLabel" type="RichTextLabel" parent="HUDLayer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/normal_font_size = 24
 text = "WWWWWWWWWW: 888
 WWWWWWWWWW: 888
 WWWWWWWWWW: 888
 WWWWWWWWWW: 888
 WWWWWWWWWW: 888
 WWWWWWWWWW: 888"
+fit_content = true
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3

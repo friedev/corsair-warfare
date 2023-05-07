@@ -18,7 +18,7 @@ const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
 @onready var music: Music = %Music
 @onready var hud_layer: CanvasLayer = %HUDLayer
 @onready var time_limit_label: Label = %TimeLimitLabel
-@onready var score_label: Label = %ScoreLabel
+@onready var score_label: RichTextLabel = %ScoreLabel
 @onready var game_timer: Timer = %GameTimer
 
 var game_active: bool:
@@ -80,12 +80,33 @@ func _on_game_restarted() -> void:
 	self.game_active = false
 
 
+func sort_score_descending(
+	details1: PlayerDetails,
+	details2: PlayerDetails
+) -> bool:
+	return details1.score > details2.score
+
+
 func update_score_label() -> void:
 	# TODO sort players by score
 	# TODO highlight player with highest score
-	self.score_label.text = ""
-	for details in Globals.players.values():
-		self.score_label.text += "%d: %s\n" % [details.score, details.nickname]
+	self.score_label.clear()
+	var details_list := Globals.players.values()
+	details_list.sort_custom(self.sort_score_descending)
+	for i in range(len(details_list)):
+		var details: PlayerDetails = details_list[i]
+		var highest_score: bool = (
+			i == 0
+			and len(details_list) > 1
+			and details_list[1].score < details.score
+		)
+		if highest_score:
+			self.score_label.push_color(Color(1, 0.75, 0))
+		self.score_label.add_text(
+			"%d: %s\n" % [details.score, details.nickname]
+		)
+		if highest_score:
+			self.score_label.pop()
 
 
 func _on_lobby_menu_players_ready() -> void:
