@@ -8,9 +8,9 @@
 [ext_resource type="Resource" uid="uid://b0icwb34d85ox" path="res://scenes/world/ship/sprite/ghost/ghost_ship_style.tres" id="5_ybs3b"]
 [ext_resource type="Resource" uid="uid://c6uowkts3ugjg" path="res://scenes/world/ship/sprite/ship_a/ship_a_style.tres" id="6_2jdr2"]
 [ext_resource type="Resource" uid="uid://dpyljyobmytxi" path="res://scenes/world/ship/sprite/ship_b/ship_b_style.tres" id="7_ibffv"]
+[ext_resource type="Resource" uid="uid://dw4qpxuvh5qve" path="res://scenes/world/ship/sprite/ship_c/ship_c_style.tres" id="8_4kuua"]
 [ext_resource type="Resource" uid="uid://bue2i4hbjy712" path="res://scenes/world/ship/sprite/ship_d/ship_d_style.tres" id="9_053ad"]
 [ext_resource type="Resource" uid="uid://c1fe222jihl61" path="res://scenes/world/ship/sprite/ship_e/ship_e_style.tres" id="10_1aan4"]
-[ext_resource type="Resource" uid="uid://bcfec44pqgpxt" path="res://scenes/world/ship/sprite/ship_c_style.tres" id="20_0k4ok"]
 
 [node name="CustomizationSection" type="VBoxContainer"]
 anchors_preset = 15
@@ -21,7 +21,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_sw0ox")
 max_points = 4
-styles = Array[Resource("res://scenes/world/ship/sprite/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("20_0k4ok"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
+styles = Array[Resource("res://scenes/world/ship/sprite/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("8_4kuua"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
