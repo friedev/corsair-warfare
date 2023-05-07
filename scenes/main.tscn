@@ -78,9 +78,10 @@ script = ExtResource("2_whori")
 content_to_margin_ratio = 0.667
 zoom_speed = 0.05
 shake_rate = 1.0
-shake_per_damage = 100.0
 max_offset = 24.0
 shake_reduction = 0.05
+shake_per_damage = 100.0
+cannon_shake = 1.0
 
 [node name="WindParticles" type="GPUParticles2D" parent="World/Camera2D" node_paths=PackedStringArray("wind")]
 process_mode = 1

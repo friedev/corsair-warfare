@@ -7,9 +7,11 @@ class_name ShakeCamera2D
 @export var zoom_speed: float
 
 @export var shake_rate: float
-@export var shake_per_damage: float
 @export var max_offset: float
 @export var shake_reduction: float
+
+@export var shake_per_damage: float
+@export var cannon_shake: float
 
 var shake := 0.0:
 	set(value):
@@ -80,4 +82,8 @@ func _process(delta: float) -> void:
 
 
 func _on_ship_damage_taken(damage: float) -> void:
-	self.shake = max(self.shake, damage * shake_per_damage)
+	self.shake = max(self.shake, damage * self.shake_per_damage)
+
+
+func _on_ship_cannon_fired() -> void:
+	self.shake = max(self.shake, self.cannon_shake)

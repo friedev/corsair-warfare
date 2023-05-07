@@ -51,6 +51,8 @@ func spawn_ship(details: PlayerDetails) -> void:
 	ship.position = spawn_position
 	ship.rotation = randf() * TAU
 	ship.cannon_fired.connect(self.music._on_ship_cannon_fired)
+	ship.damage_taken.connect(self.music._on_ship_damage_taken)
+	ship.cannon_fired.connect(self.camera._on_ship_cannon_fired)
 	ship.damage_taken.connect(self.camera._on_ship_damage_taken)
 	ship.destroyed.connect(self._on_ship_destroyed)
 	self.world.add_child.call_deferred(ship)
