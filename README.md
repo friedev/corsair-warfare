@@ -29,7 +29,7 @@ Controller players:
 
 ### Tips
 
-Your ship moves much faster if you sail into the wind.
+Your ship moves much faster if you sail with the wind.
 The wind direction is indicated by the arrow in the top right corner of the screen, and by the white streaks in the air.
 Pay attention, because the wind changes in direction and speed over time.
 
