@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_sw0ox")
-max_points = 4
+max_points = 5
 styles = Array[Resource("res://scenes/world/ship/sprite/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("8_4kuua"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
