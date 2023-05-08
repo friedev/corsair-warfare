@@ -75,6 +75,8 @@ func _process(delta: float) -> void:
 
 
 func _on_game_restarted() -> void:
+	for details in Globals.players.values():
+		details.score = 0
 	# We could also try to free splashes and impacts here, but they have short
 	# lifespans and don't affect the game
 	self.get_tree().call_group(&"ships", &"queue_free")
@@ -90,6 +92,8 @@ func sort_score_descending(
 
 
 func update_score_label() -> void:
+	if self.game_timer.is_stopped():
+		return
 	self.score_label.clear()
 	var details_list := Globals.players.values()
 	details_list.sort_custom(self.sort_score_descending)
