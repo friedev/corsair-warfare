@@ -16,16 +16,21 @@ Keyboard player 1:
 
 - Steer: A/D
 - Cannons: Q/E
+- Pause: Escape
 
 Keyboard player 2:
 
 - Steer: J/L
 - Cannons: U/O
+- Pause: Escape
 
 Controller players:
 
 - Steer: Left Stick
 - Cannons: Triggers
+- Join Game: A
+- Leave Game: B
+- Pause: Start
 
 ### Tips
 
