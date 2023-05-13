@@ -61,6 +61,8 @@ Made with [Godot Engine 4](https://godotengine.org).
 
 See `THIRD-PARTY_LICENSES.md`.
 
-## License
+## Licenses
 
-All rights reserved.
+- Code, scenes, and resources: [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.en.html)
+- Art: [Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)
+- Music: All Rights Reserved
