@@ -12,25 +12,35 @@ func _on_menu_button_pressed() -> void:
 	self.hide()
 
 
-func _on_main_game_over() -> void:
-	if self.visible:
-		return
-	self.label.text = "Game Over"
-	var max_health := 0.0
+func get_game_over_text() -> String:
+	var max_health_percent := 0.0
+	var text := "Game Over"
 	if Globals.game_mode == Globals.GameMode.LAST_MAN_STANDING:
-		for ship in self.get_tree().get_nodes_in_group(&"ships"):
-			if ship.health > max_health:
-				self.label.text = "%s Wins" % ship.details.nickname
-				max_health = ship.health
-			elif ship.health == max_health and max_health > 0.0:
-				self.label.text = "Draw"
+		for ship_node in self.get_tree().get_nodes_in_group(&"ships"):
+			var ship := ship_node as Ship
+			var health_percent := ship.health / ship.max_health
+			if health_percent > max_health_percent:
+				text = "%s Wins" % ship.details.nickname
+				max_health_percent = health_percent
+			elif (
+				health_percent == max_health_percent
+				and max_health_percent > 0.0
+			):
+				text = "Draw"
 	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
 		var max_score := -2^63
 		for details in Globals.players.values():
 			if details.score > max_score:
-				self.label.text = "%s Wins" % details.nickname
+				text = "%s Wins" % details.nickname
 				max_score = details.score
 			elif details.score == max_score:
-				self.label.text = "Draw"
+				text = "Draw"
+	return text
+
+
+func _on_main_game_over() -> void:
+	if self.visible:
+		return
+	self.label.text = self.get_game_over_text()
 	self.show()
 	self.default_focus.grab_focus()

@@ -3,6 +3,7 @@
 ## 0.1.3 (unreleased)
 
 - Stop timer after game ends in Last Man Standing mode
+- Tiebreak by percent health remaining, not total health remaining
 
 ## 0.1.2 (2023-05-23)
 

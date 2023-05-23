@@ -2,8 +2,6 @@
 
 ## 0.1.x
 
-- Bugs
-	- Tiebreak by percent health remaining, not total health remaining
 - Juice
 	- Add ship sinking effects
 	- Add burning sound when a ship is at low health
