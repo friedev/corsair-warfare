@@ -9,7 +9,6 @@
 	- Indicate player with most health
 	- Highlight the nametag of the winning player
 	- Indicate location of newly spawned ships
-	- Pause on focus loss
 	- Add option to disable particles
 	- Access the options menu from the pause menu
 	- Player info HUD

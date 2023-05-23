@@ -37,3 +37,8 @@ func _on_lobby_menu_players_ready() -> void:
 
 func _on_main_game_over() -> void:
 	self.can_pause = false
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and self.can_pause:
+		self.set_paused(true)
