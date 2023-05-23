@@ -119,6 +119,7 @@ func _on_lobby_menu_players_ready() -> void:
 		self.spawn_ship(details)
 	self.game_active = true
 	if Globals.time_limit_seconds > 0:
+		self.game_timer.paused = false
 		self.game_timer.start(Globals.time_limit_seconds)
 		self.time_limit_label.show()
 	else:
@@ -132,6 +133,7 @@ func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
 		self.ships_alive -= 1
 		if self.ships_alive <= 1:
 			self.game_over.emit()
+			self.game_timer.paused = true
 	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
 		if destroyer == Globals.NO_PLAYER or destroyer == ship.details.player:
 			ship.details.score += deathmatch_self_destruct_score

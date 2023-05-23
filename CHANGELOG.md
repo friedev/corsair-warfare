@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 (unreleased)
+
+- Stop timer after game ends in Last Man Standing mode
+
 ## 0.1.2 (2023-05-23)
 
 - Add CC BY-SA license for music

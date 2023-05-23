@@ -4,7 +4,6 @@
 
 - Bugs
 	- Tiebreak by percent health remaining, not total health remaining
-	- Stop timer after game ends in Last Man Standing mode
 - Juice
 	- Add ship sinking effects
 	- Add burning sound when a ship is at low health
