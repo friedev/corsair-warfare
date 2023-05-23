@@ -64,5 +64,4 @@ See `THIRD-PARTY_LICENSES.md`.
 ## Licenses
 
 - Code, scenes, and resources: [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.en.html)
-- Art: [Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)
-- Music: All Rights Reserved
+- Art and music: [Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)
