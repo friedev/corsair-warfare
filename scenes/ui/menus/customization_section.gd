@@ -4,7 +4,6 @@ class_name CustomizationSection
 signal levels_updated
 signal style_updated
 
-@export var max_points: int
 @export var styles: Array[ShipStyle]
 
 var style_index := 0
@@ -39,7 +38,7 @@ func get_points_spent() -> int:
 
 
 func is_valid() -> bool:
-	return self.get_points_spent() <= self.max_points
+	return self.get_points_spent() <= Globals.max_points
 
 
 func get_levels() -> Dictionary:
@@ -53,10 +52,10 @@ func get_levels() -> Dictionary:
 
 func update_levels() -> void:
 	var points_spent := self.get_points_spent()
-	self.points_label.text = "%d/%d Points Spent" % [points_spent, self.max_points]
+	self.points_label.text = "%d/%d Points Spent" % [points_spent, Globals.max_points]
 	self.points_label.modulate = (
 		Color.WHITE
-		if points_spent <= max_points
+		if points_spent <= Globals.max_points
 		else Color(1, 0.25, 0.25)
 	)
 	self.texture_rect.apply_levels(self.get_levels())

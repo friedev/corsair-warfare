@@ -14,6 +14,9 @@ var player_count := 0:
 
 @onready var player_section_container := %PlayerSectionContainer as Control
 @onready var play_button := %PlayButton as Button
+@onready var game_mode_option_button := %GameModeOptionButton as OptionButton
+@onready var time_limit_spin_box := %TimeLimitSpinBox as SpinBox
+@onready var max_points_spin_box := %MaxPointsSpinBox as SpinBox
 
 # default_focus is intentionally omitted because it would cause unintentional UI
 # interaction as players join with their controllers
@@ -34,8 +37,8 @@ func add_player_section() -> void:
 func is_ready() -> bool:
 	if self.player_count == 0:
 		return false
-	for player_section in self.player_section_container.get_children():
-		player_section = player_section as PlayerSection
+	for player_section_node in self.player_section_container.get_children():
+		var player_section := player_section_node as PlayerSection
 		if not player_section.customization_section.is_valid():
 			return false
 	return true
@@ -46,6 +49,9 @@ func update_play_button() -> void:
 
 
 func _ready() -> void:
+	self.game_mode_option_button.selected = Globals.game_mode
+	self.time_limit_spin_box.value = Globals.time_limit_seconds
+	self.max_points_spin_box.value = Globals.max_points
 	self.add_player_section()
 
 
@@ -60,7 +66,8 @@ func _on_back_button_pressed() -> void:
 
 func _on_play_button_pressed() -> void:
 	var index := 1
-	for details in Globals.players.values():
+	for details_resource in Globals.players.values():
+		var details := details_resource as PlayerDetails
 		if details.nickname == "":
 			details.nickname = "Player %d" % index
 		index += 1
@@ -88,3 +95,10 @@ func _on_time_limit_spin_box_value_changed(value: float) -> void:
 
 func _on_option_button_item_selected(index: int) -> void:
 	Globals.game_mode = index
+
+
+func _on_max_points_spin_box_value_changed(value: float) -> void:
+	Globals.max_points = int(value)
+	for player_section_node in self.player_section_container.get_children():
+		var player_section := player_section_node as PlayerSection
+		player_section.customization_section.update_levels()

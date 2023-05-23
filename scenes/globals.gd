@@ -20,6 +20,7 @@ var options := {}
 var players := {}
 var time_limit_seconds := 0
 var game_mode := self.DEFAULT_GAME_MODE
+var max_points := 5
 
 
 func register_player(player: int, ship_details: PlayerDetails) -> void:
