@@ -3,6 +3,7 @@
 ## 0.1.3 (unreleased)
 
 - Allow setting max upgrade points in the lobby
+- Scale ship rotation speed by controller axis strength
 - Pause when window loses focus
 - Stop timer after game ends in Last Man Standing mode
 - Tiebreak by percent health remaining, not total health remaining

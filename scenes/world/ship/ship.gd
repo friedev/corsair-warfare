@@ -106,10 +106,8 @@ func handle_input() -> void:
 		if Input.is_key_pressed(KEY_O):
 			self.fire(self.right_cannons)
 	else:
-		if Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X) < -0.5:
-			self.apply_torque(-self.rotation_speed)
-		if Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X) > 0.5:
-			self.apply_torque(self.rotation_speed)
+		var joy_axis := Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X)
+		self.apply_torque(self.rotation_speed * joy_axis)
 		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
 			self.fire(self.left_cannons)
 		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:

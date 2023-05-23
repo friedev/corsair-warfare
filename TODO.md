@@ -12,7 +12,6 @@
 	- Add option to disable particles
 	- Access the options menu from the pause menu
 	- Player info HUD
-	- Scale rotation speed by controller axis strength
 - Refactoring
 	- Refactor styles
 	- Refactor ship upgrades
