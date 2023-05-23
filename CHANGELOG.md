@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2
+## 0.1.2 (2023-05-23)
 
 - Add CC BY-SA license for music
 - Add licenses to credits menu
