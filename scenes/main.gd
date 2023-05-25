@@ -74,16 +74,6 @@ func _process(delta: float) -> void:
 		self.time_limit_label.modulate = Color.WHITE
 
 
-func _on_game_restarted() -> void:
-	for details in Globals.players.values():
-		details.score = 0
-	# We could also try to free splashes and impacts here, but they have short
-	# lifespans and don't affect the game
-	self.get_tree().call_group(&"ships", &"queue_free")
-	self.get_tree().call_group(&"cannonballs", &"queue_free")
-	self.game_active = false
-
-
 func sort_score_descending(
 	details1: PlayerDetails,
 	details2: PlayerDetails
@@ -113,9 +103,10 @@ func update_score_label() -> void:
 			self.score_label.pop()
 
 
-func _on_lobby_menu_players_ready() -> void:
+func start() -> void:
 	self.ships_alive = len(Globals.players)
-	for details in Globals.players.values():
+	for details_resource in Globals.players.values():
+		var details := details_resource as PlayerDetails
 		self.spawn_ship(details)
 	self.game_active = true
 	if Globals.time_limit_seconds > 0:
@@ -126,6 +117,16 @@ func _on_lobby_menu_players_ready() -> void:
 		self.time_limit_label.hide()
 	self.score_label.visible = Globals.game_mode == Globals.GameMode.DEATHMATCH
 	self.update_score_label()
+
+
+func end() -> void:
+	for details in Globals.players.values():
+		details.score = 0
+	# We could also try to free splashes and impacts here, but they have short
+	# lifespans and don't affect the game
+	self.get_tree().call_group(&"ships", &"queue_free")
+	self.get_tree().call_group(&"cannonballs", &"queue_free")
+	self.game_active = false
 
 
 func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
@@ -146,3 +147,15 @@ func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
 
 func _on_game_timer_timeout() -> void:
 	self.game_over.emit()
+
+
+func _on_lobby_menu_play_pressed(previous: Menu) -> void:
+	self.start()
+
+
+func _on_game_over_menu_menu_pressed(previous: Menu) -> void:
+	self.end()
+
+
+func _on_pause_menu_menu_pressed(previous: Menu) -> void:
+	self.end()

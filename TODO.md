@@ -10,8 +10,8 @@
 	- Highlight the nametag of the winning player
 	- Indicate location of newly spawned ships
 	- Add option to disable particles
-	- Access the options menu from the pause menu
 	- Player info HUD
+	- Add screen shake slider
 - Refactoring
 	- Refactor styles
 	- Refactor ship upgrades

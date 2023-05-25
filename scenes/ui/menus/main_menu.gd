@@ -1,43 +1,35 @@
-extends Control
+extends Menu
 
-signal game_started
-signal options
-signal credits_button_pressed
-
-@export var default_focus: Control
+signal play_pressed(previous: Menu)
+signal options_pressed(previous: Menu)
+signal credits_pressed(previous: Menu)
 
 @onready var quit_button := %QuitButton as Button
 
 
-func open_menu() -> void:
-	self.show()
-	self.default_focus.grab_focus()
-
-
 func _ready() -> void:
 	self.quit_button.visible = OS.get_name() != "Web"
-	self.open_menu()
+	self.open()
+
+
+func open(previous: Menu = null) -> void:
+	super.open(null)
 
 
 func _on_play_button_pressed() -> void:
-	self.game_started.emit()
 	self.hide()
+	self.play_pressed.emit(self)
 
 
 func _on_options_button_pressed() -> void:
-	self.options.emit()
 	self.hide()
+	self.options_pressed.emit(self)
 
 
 func _on_credits_button_pressed() -> void:
-	self.credits_button_pressed.emit()
 	self.hide()
+	self.credits_pressed.emit(self)
 
 
 func _on_quit_button_pressed() -> void:
 	self.get_tree().quit()
-
-
-func _on_menu_open() -> void:
-	self.open_menu()
-

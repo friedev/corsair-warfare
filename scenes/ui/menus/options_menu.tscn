@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cgnmle83oa3at" path="res://scenes/ui/menus/options/check_box_option.tscn" id="4_qgek8"]
 
 [node name="OptionsMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

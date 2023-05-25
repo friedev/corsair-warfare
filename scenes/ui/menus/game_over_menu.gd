@@ -1,15 +1,13 @@
-extends Control
+extends Menu
 
-signal game_restarted
-
-@export var default_focus: Control
+signal menu_pressed(previous: Menu)
 
 @onready var label: Label = %Label
 
 
 func _on_menu_button_pressed() -> void:
-	self.game_restarted.emit()
 	self.hide()
+	self.menu_pressed.emit(self)
 
 
 func get_game_over_text() -> String:
@@ -42,5 +40,4 @@ func _on_main_game_over() -> void:
 	if self.visible:
 		return
 	self.label.text = self.get_game_over_text()
-	self.show()
-	self.default_focus.grab_focus()
+	self.open()

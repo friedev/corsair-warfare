@@ -1,10 +1,11 @@
-extends Control
-class_name LobbyMenu
+extends Menu
 
-signal players_ready
-signal go_back
+signal play_pressed(previous: Menu)
 
 const PLAYER_SECTION_SCENE := preload("res://scenes/ui/menus/player_section.tscn")
+
+# default_focus is intentionally omitted because it would cause unintentional UI
+# interaction as players join with their controllers
 
 var index := 1
 var player_count := 0:
@@ -17,9 +18,6 @@ var player_count := 0:
 @onready var game_mode_option_button := %GameModeOptionButton as OptionButton
 @onready var time_limit_spin_box := %TimeLimitSpinBox as SpinBox
 @onready var max_points_spin_box := %MaxPointsSpinBox as SpinBox
-
-# default_focus is intentionally omitted because it would cause unintentional UI
-# interaction as players join with their controllers
 
 
 func add_player_section() -> void:
@@ -55,15 +53,6 @@ func _ready() -> void:
 	self.add_player_section()
 
 
-func _on_menu_open() -> void:
-	self.show()
-
-
-func _on_back_button_pressed() -> void:
-	self.go_back.emit()
-	self.hide()
-
-
 func _on_play_button_pressed() -> void:
 	var index := 1
 	for details_resource in Globals.players.values():
@@ -71,7 +60,7 @@ func _on_play_button_pressed() -> void:
 		if details.nickname == "":
 			details.nickname = "Player %d" % index
 		index += 1
-	self.players_ready.emit()
+	self.play_pressed.emit(self)
 	self.hide()
 
 

@@ -1,13 +1,8 @@
-extends Control
-
-signal go_back
-
+extends Menu
 
 const CONFIG_PATH := "user://options.cfg"
 const OPTIONS_SECTION := "options"
 const OPTIONS_GROUP := &"options"
-
-@export var default_focus: Control
 
 
 func load_config() -> bool:
@@ -38,18 +33,15 @@ func _ready() -> void:
 		self.save_config()
 
 
-func _on_menu_open() -> void:
-	self.show()
-	self.default_focus.grab_focus()
+func close() -> void:
+	self.save_config()
+	super.close()
 
 
 func _on_save_button_pressed() -> void:
-	self.save_config()
-	self.go_back.emit()
-	self.hide()
+	self.close()
 
 
 func _on_cancel_button_pressed() -> void:
 	self.load_config()
-	self.go_back.emit()
-	self.hide()
+	self.close()
