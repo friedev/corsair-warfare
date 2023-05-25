@@ -1,5 +1,4 @@
-extends Control
-class_name CustomizationSection
+class_name CustomizationSection extends Control
 
 signal levels_updated
 signal style_updated

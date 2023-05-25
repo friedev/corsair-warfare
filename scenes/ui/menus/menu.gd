@@ -1,5 +1,4 @@
-extends Control
-class_name Menu
+class_name Menu extends Control
 
 @export var default_focus: Control
 @export var can_go_back := true

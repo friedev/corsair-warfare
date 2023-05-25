@@ -4,6 +4,7 @@ extends AudioStreamPlayer
 @export var min_volume_db: float
 @export var max_volume_db: float
 
+
 func _process(delta: float) -> void:
 	self.volume_db = (
 		min_volume_db

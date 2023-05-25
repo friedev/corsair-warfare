@@ -1,6 +1,5 @@
 extends Control
 
-
 @export var wind: Wind
 @export var minimum_size: int
 @export var maximum_size: int

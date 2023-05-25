@@ -1,5 +1,4 @@
-extends Resource
-class_name ShipStyle
+class_name ShipStyle extends Resource
 
 @export var base_hull: Texture
 @export var base_sails: Texture

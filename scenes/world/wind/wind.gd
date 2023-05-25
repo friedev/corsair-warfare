@@ -1,5 +1,4 @@
-extends Node
-class_name Wind
+class_name Wind extends Node
 
 @export var change_rate: float
 @export var noise_multiplier: float

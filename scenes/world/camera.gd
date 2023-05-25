@@ -1,5 +1,4 @@
-extends Camera2D
-class_name ShakeCamera2D
+class_name ShakeCamera2D extends Camera2D
 
 ## Portion of the viewport dedicated to the ships. The remainder is a margin.
 @export var content_to_margin_ratio: float

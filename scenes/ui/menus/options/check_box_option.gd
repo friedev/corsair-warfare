@@ -1,5 +1,4 @@
-extends Option
-class_name CheckBoxOption
+class_name CheckBoxOption extends Option
 
 @export var default: bool
 

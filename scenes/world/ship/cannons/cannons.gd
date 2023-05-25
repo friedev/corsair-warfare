@@ -1,5 +1,4 @@
-extends Node2D
-class_name Cannons
+class_name Cannons extends Node2D
 
 const max_cannonball_offset := 10.0
 const cannonball_scene := preload("res://scenes/world/ship/cannons/cannonball/cannonball.tscn")

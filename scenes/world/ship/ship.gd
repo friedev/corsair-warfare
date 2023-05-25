@@ -1,5 +1,4 @@
-extends RigidBody2D
-class_name Ship
+class_name Ship extends RigidBody2D
 
 signal cannon_fired
 signal damage_taken(damage: float)

@@ -1,5 +1,4 @@
-extends Node
-class_name Music
+class_name Music extends Node
 
 @onready var music_timer: Timer = %MusicTimer
 

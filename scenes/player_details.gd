@@ -1,5 +1,4 @@
-extends Resource
-class_name PlayerDetails
+class_name PlayerDetails extends Resource
 
 var player: int
 var nickname := ""

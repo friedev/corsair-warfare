@@ -1,5 +1,4 @@
-extends Control
-class_name PlayerSection
+class_name PlayerSection extends Control
 
 signal player_set(player: int)
 signal player_left(player: int)

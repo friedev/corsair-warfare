@@ -1,5 +1,4 @@
-extends Option
-class_name SliderOption
+class_name SliderOption extends Option
 
 @export var default: float
 

@@ -1,6 +1,5 @@
 extends GPUParticles2D
 
-
 @export var added_velocity_multiplier: float
 @export var wind: Wind
 

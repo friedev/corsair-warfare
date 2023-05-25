@@ -1,6 +1,5 @@
 # Used for both Sprite2Ds and TextureRects
-extends Node
-class_name ShipSprite
+class_name ShipSprite extends Node
 
 @onready var base_hull := $BaseHull
 @onready var base_sails := $BaseSails
