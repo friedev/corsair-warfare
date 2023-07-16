@@ -13,7 +13,7 @@ config_version=5
 config/name="Corsair Warfare"
 config/description="Challenge your scurvy mates to a local multiplayer skirmish on the high seas!"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.0", "GL Compatibility")
+config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.png"
 
 [autoload]
