@@ -12,6 +12,8 @@
 	- Add option to disable particles
 	- Player info HUD
 	- Add screen shake slider
+	- Add "first to X points" win condition in deathmatch mode
+	- Wind prediction indicator (second, translucent arrow a few seconds in the future)
 - Refactoring
 	- Refactor styles
 	- Refactor ship upgrades
