@@ -41,7 +41,7 @@ Pay attention, because the wind changes in direction and speed over time.
 ### Game Modes
 
 In Last Man Standing mode, your goal is (more accurately) to be the last ship afloat.
-If time runs out, the playing having the ship with the most health remaining wins.
+If time runs out, the player controlling the ship with the most health remaining wins.
 
 In Deathmatch mode, your goal is to sink as many other ships as possible, while avoiding getting sunk yourself.
 Score 2 points for sinking a ship, lose 1 point for getting sunk, and lose 3 points for getting shipwrecked on rocks or land.
