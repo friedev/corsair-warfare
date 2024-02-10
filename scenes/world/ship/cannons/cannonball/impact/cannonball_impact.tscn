@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://tk2mfrlgaap5"]
 
 [ext_resource type="Texture2D" uid="uid://bc2kvye6n4pl3" path="res://scenes/world/ship/cannons/cannonball/impact/cannon_impact_particle.png" id="1_2uoe6"]
 [ext_resource type="Script" path="res://scenes/world/ship/cannons/cannonball/impact/cannon_impact.gd" id="2_vht4b"]
@@ -12,16 +12,14 @@ curve = SubResource("Curve_romwo")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ebhv1"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
+angle_max = 360.0
 initial_velocity_min = 50.0
 initial_velocity_max = 50.0
 angular_velocity_min = -400.0
 angular_velocity_max = 400.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 damping_min = 30.0
 damping_max = 30.0
-angle_max = 360.0
 scale_curve = SubResource("CurveTexture_gw3md")
 color = Color(0, 0, 0, 1)
 

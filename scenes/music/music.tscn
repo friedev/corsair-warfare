@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://dfhlmkykp54l0"]
 
 [ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://scenes/music/Through_Navy's_Heart_1.mp3" id="1_0hov6"]
 [ext_resource type="Script" path="res://scenes/music/music.gd" id="2_02xhd"]

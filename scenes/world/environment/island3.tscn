@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://b2u48yd330ne3"]
 
 [ext_resource type="Texture2D" uid="uid://mbhj6jbb4tht" path="res://scenes/world/environment/island3.png" id="1_ffl7e"]
 

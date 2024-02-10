@@ -5,4 +5,3 @@
 
 [node name="FullscreenOption" instance=ExtResource("1_u1qee")]
 script = ExtResource("2_vydip")
-key = ""

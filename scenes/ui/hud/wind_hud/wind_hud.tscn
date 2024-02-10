@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://r8e2fyjw2ond"]
 
 [ext_resource type="Script" path="res://scenes/ui/hud/wind_hud/wind_hud.gd" id="1_gshh3"]
 [ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://scenes/ui/hud/wind_hud/wind_background.png" id="1_umi1k"]

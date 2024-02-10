@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://cgxj68waew15o"]
 
 [ext_resource type="Script" path="res://scenes/world/ship/cannons/cannonball/splash/cannon_splash.gd" id="1_qmy8e"]
 [ext_resource type="Texture2D" uid="uid://fckospq0ifsg" path="res://scenes/world/ship/cannons/cannonball/splash/cannon_splash_particle.png" id="2_i4nyy"]
@@ -21,8 +21,6 @@ curve = SubResource("Curve_1f7qu")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tkylg"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 scale_min = 1.5
 scale_max = 2.5
 scale_curve = SubResource("CurveTexture_wulln")
