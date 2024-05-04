@@ -7,10 +7,6 @@ const SHIP_SCENE := preload("res://scenes/ship/ship.tscn")
 @export var ship_spawn_radius: float
 @export var low_time_threshold: float
 
-@export var deathmatch_kill_score: int
-@export var deathmatch_death_score: int
-@export var deathmatch_self_destruct_score: int
-
 @export var world: Node2D
 @export var camera: ShakeCamera2D
 @export var ship_spawn_cast: ShapeCast2D
@@ -148,12 +144,12 @@ func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
 	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
 		var highest_new_score: int
 		if destroyer == Globals.NO_PLAYER or destroyer == ship.details.player:
-			ship.details.score += deathmatch_self_destruct_score
+			ship.details.score += Globals.deathmatch_self_destruct_score
 			highest_new_score = ship.details.score
 		else:
 			var destroyer_details := Globals.players[destroyer] as PlayerDetails
-			destroyer_details.score += deathmatch_kill_score
-			ship.details.score += deathmatch_death_score
+			destroyer_details.score += Globals.deathmatch_kill_score
+			ship.details.score += Globals.deathmatch_death_score
 			highest_new_score = max(ship.details.score, destroyer_details.score)
 		self.update_score_label()
 		if Globals.score_limit > 0 and highest_new_score >= Globals.score_limit:

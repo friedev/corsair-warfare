@@ -22,6 +22,9 @@ var time_limit_seconds := 0
 var score_limit := 0
 var game_mode := self.DEFAULT_GAME_MODE
 var max_points := 5
+var deathmatch_kill_score := 2
+var deathmatch_death_score := -1
+var deathmatch_self_destruct_score := -3
 
 
 func register_player(player: int, ship_details: PlayerDetails) -> void:

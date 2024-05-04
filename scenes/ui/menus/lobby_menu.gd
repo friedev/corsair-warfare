@@ -17,9 +17,12 @@ var player_count := 0:
 @export var play_button: Button
 @export var game_mode_option_button: OptionButton
 @export var time_limit_spin_box: SpinBox
-@export var score_limit_spin_box: SpinBox
 @export var max_points_spin_box: SpinBox
-@export var score_limit_container: Control
+@export var deathmatch_options_container: Control
+@export var score_limit_spin_box: SpinBox
+@export var kill_score_spin_box: SpinBox
+@export var death_score_spin_box: SpinBox
+@export var self_destruct_score_spin_box: SpinBox
 
 
 func add_player_section() -> void:
@@ -48,11 +51,19 @@ func update_play_button() -> void:
 	self.play_button.disabled = not self.is_ready()
 
 
+func update_deathmatch_options_visibility() -> void:
+	self.deathmatch_options_container.visible = Globals.game_mode == Globals.GameMode.DEATHMATCH
+
+
 func _ready() -> void:
 	self.game_mode_option_button.selected = Globals.game_mode
 	self.time_limit_spin_box.value = Globals.time_limit_seconds
-	self.score_limit_spin_box.value = Globals.score_limit
 	self.max_points_spin_box.value = Globals.max_points
+	self.score_limit_spin_box.value = Globals.score_limit
+	self.kill_score_spin_box.value = Globals.deathmatch_kill_score
+	self.death_score_spin_box.value = Globals.deathmatch_death_score
+	self.self_destruct_score_spin_box.value = Globals.deathmatch_self_destruct_score
+	self.update_deathmatch_options_visibility()
 	self.add_player_section()
 
 
@@ -83,7 +94,7 @@ func _on_player_section_customization_updated() -> void:
 
 func _on_game_mode_option_button_item_selected(index: int) -> void:
 	Globals.game_mode = index
-	self.score_limit_container.visible = Globals.game_mode == Globals.GameMode.DEATHMATCH
+	self.update_deathmatch_options_visibility()
 
 
 func _on_time_limit_spin_box_value_changed(value: float) -> void:
@@ -99,3 +110,15 @@ func _on_max_points_spin_box_value_changed(value: float) -> void:
 	for player_section_node in self.player_section_container.get_children():
 		var player_section := player_section_node as PlayerSection
 		player_section.customization_section.update_levels()
+
+
+func _on_kill_score_spin_box_value_changed(value: float) -> void:
+	Globals.deathmatch_kill_score = int(value)
+
+
+func _on_death_score_spin_box_value_changed(value: float) -> void:
+	Globals.deathmatch_death_score = int(value)
+
+
+func _on_self_destruct_score_spin_box_value_changed(value: float) -> void:
+	Globals.deathmatch_self_destruct_score = int(value)
