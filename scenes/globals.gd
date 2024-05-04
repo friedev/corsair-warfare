@@ -13,14 +13,12 @@ const KEYBOARD_1_PLAYER := -1
 const KEYBOARD_2_PLAYER := -2
 const NO_PLAYER := -3
 
-const DEFAULT_GAME_MODE := GameMode.LAST_MAN_STANDING
-
 var options := {}
 
 var players := {}
 var time_limit_seconds := 0
 var score_limit := 0
-var game_mode := self.DEFAULT_GAME_MODE
+var game_mode := GameMode.LAST_MAN_STANDING
 var max_points := 5
 var deathmatch_kill_score := 2
 var deathmatch_death_score := -1
