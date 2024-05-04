@@ -5,7 +5,9 @@ signal style_updated
 
 @export var styles: Array[ShipStyle]
 
-var style_index := 0
+var style_index: int:
+	set(value):
+		style_index = wrapi(value, 0, len(self.styles))
 
 @export var texture_rect: ShipSprite
 @export var points_label: Label
@@ -19,10 +21,6 @@ var style_index := 0
 	self.sails_slider,
 	self.cannons_slider
 ]
-
-
-func _ready() -> void:
-	self.style_index = self.style_index
 
 
 func get_style() -> ShipStyle:
@@ -70,12 +68,12 @@ func update_style() -> void:
 
 
 func _on_previous_style_button_pressed() -> void:
-	self.style_index = wrap(self.style_index - 1, 0, len(self.styles))
+	self.style_index -= 1
 	self.update_style()
 	self.style_updated.emit()
 
 
 func _on_next_style_button_pressed() -> void:
-	self.style_index = wrap(self.style_index + 1, 0, len(self.styles))
+	self.style_index += 1
 	self.update_style()
 	self.style_updated.emit()

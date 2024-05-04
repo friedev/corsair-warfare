@@ -75,6 +75,7 @@ func _ready() -> void:
 	Globals.player_registered.connect(self._on_player_registered)
 	Globals.player_deregistered.connect(self._on_player_deregistered)
 
+	self.customization_section.style_index = self.index
 	self.customization_section.update_levels()
 	self.customization_section.update_style()
 

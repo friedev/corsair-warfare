@@ -7,7 +7,7 @@ const PLAYER_SECTION_SCENE := preload("res://scenes/ui/menus/player_section.tscn
 # default_focus is intentionally omitted because it would cause unintentional UI
 # interaction as players join with their controllers
 
-var index := 1
+var index := 0
 var player_count := 0:
 	set(value):
 		player_count = value
