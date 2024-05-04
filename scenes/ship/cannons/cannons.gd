@@ -22,18 +22,16 @@ func can_fire() -> bool:
 	return self.reload_timer.is_stopped()
 
 
-func spawn_cannonball(ball_position: Vector2) -> void:
+func spawn_cannonball(ball_position: Vector2, player: int) -> void:
 	var cannonball = self.cannonball_scene.instantiate()
 	cannonball.global_position = ball_position
 	cannonball.global_rotation = self.global_rotation
-	# TODO find a better way to access the ship firing these cannons
-	cannonball.player = self.get_parent().details.player
+	cannonball.player = player
 	cannonball.add_collision_exception_with(self.get_parent())
-	# TODO find a better way to access the World node
-	self.get_parent().get_parent().add_child(cannonball)
+	SignalBus.node_spawned.emit(cannonball)
 
 
-func fire(cannon_count: int) -> void:
+func fire(cannon_count: int, player: int) -> void:
 	var p := self.spawn_point_1.global_position
 	var q := self.spawn_point_2.global_position
 	for i in range(cannon_count):
@@ -41,7 +39,7 @@ func fire(cannon_count: int) -> void:
 		var perpendicular_offset := self.max_cannonball_offset * randf()
 		var ball_position := p + (q - p) * offset_ratio
 		ball_position -= Vector2(perpendicular_offset, 0).rotated(self.rotation)
-		self.spawn_cannonball(ball_position)
+		self.spawn_cannonball(ball_position, player)
 	self.fire_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
 	self.fire_sound.play()
 	self.fire_particles.restart()

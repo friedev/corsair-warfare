@@ -57,6 +57,7 @@ func spawn_ship(details: PlayerDetails) -> void:
 
 func _ready() -> void:
 	self.game_active = false
+	SignalBus.node_spawned.connect(self._on_node_spawned)
 
 
 func _process(delta: float) -> void:
@@ -172,3 +173,7 @@ func _on_game_over_menu_menu_pressed(previous: Menu) -> void:
 
 func _on_pause_menu_menu_pressed(previous: Menu) -> void:
 	self.end()
+
+
+func _on_node_spawned(node: Node2D) -> void:
+	self.world.add_child(node)

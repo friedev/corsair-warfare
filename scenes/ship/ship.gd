@@ -10,7 +10,6 @@ const level_values := {
 	"Cannons": [3, 4, 5, 6],
 }
 
-@export var player: int
 @export var details: PlayerDetails
 
 @export var wind: Wind
@@ -143,7 +142,7 @@ func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) ->
 
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
-		cannons.fire(self.cannon_count)
+		cannons.fire(self.cannon_count, self.details.player)
 		self.vibrate(1.0, 0.0, 0.25)
 		self.cannon_fired.emit()
 
