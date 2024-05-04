@@ -7,13 +7,13 @@ signal style_updated
 
 var style_index := 0
 
-@onready var texture_rect: ShipSprite = %ShipTextureRect
-@onready var points_label: Label = %PointsLabel
+@export var texture_rect: ShipSprite
+@export var points_label: Label
 
 # TODO DRY
-@onready var hull_slider: Slider = %HullSlider
-@onready var sails_slider: Slider = %SailsSlider
-@onready var cannons_slider: Slider = %CannonsSlider
+@export var hull_slider: Slider
+@export var sails_slider: Slider
+@export var cannons_slider: Slider
 @onready var sliders: Array[Slider] = [
 	self.hull_slider,
 	self.sails_slider,

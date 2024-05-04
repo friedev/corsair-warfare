@@ -88,7 +88,7 @@ damping_max = 1.0
 scale_curve = SubResource("CurveTexture_1g5gc")
 color_ramp = SubResource("GradientTexture1D_aeyvo")
 
-[node name="Ship" type="RigidBody2D" groups=["ships"]]
+[node name="Ship" type="RigidBody2D" node_paths=PackedStringArray("sprite", "control_parent", "health_bar", "left_cannons", "right_cannons", "collision_polygon", "damage_sound", "wake_particles", "medium_health_particles", "low_health_particles", "damage_timer", "nickname_label") groups=["ships"]]
 max_contacts_reported = 4
 contact_monitor = true
 linear_damp = 2.0
@@ -102,20 +102,28 @@ ram_dps_max = 0.2
 obstacle_dps = 0.15
 max_health = 1.0
 cannon_count = 3
+sprite = NodePath("ShipSprite")
+control_parent = NodePath("ControlParent")
+health_bar = NodePath("ControlParent/HealthBar")
+left_cannons = NodePath("LeftCannons")
+right_cannons = NodePath("RightCannons")
+collision_polygon = NodePath("CollisionPolygon2D")
+damage_sound = NodePath("DamageSound")
+wake_particles = NodePath("WakeParticles")
+medium_health_particles = NodePath("MediumHealthParticles")
+low_health_particles = NodePath("LowHealthParticles")
+damage_timer = NodePath("DamageTimer")
+nickname_label = NodePath("ControlParent/NicknameLabel")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-unique_name_in_owner = true
 polygon = PackedVector2Array(-18, -8, 15, -7, 33, 0, 42, 1, 33, 2, 16, 9, -18, 9, -40, 6, -40, -5)
 
 [node name="ShipSprite" parent="." instance=ExtResource("2_casu2")]
-unique_name_in_owner = true
 
 [node name="ControlParent" type="Node2D" parent="."]
-unique_name_in_owner = true
 z_index = 3
 
 [node name="HealthBar" type="ProgressBar" parent="ControlParent"]
-unique_name_in_owner = true
 offset_left = -32.0
 offset_top = 24.0
 offset_right = 32.0
@@ -128,7 +136,6 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="NicknameLabel" type="Label" parent="ControlParent"]
-unique_name_in_owner = true
 offset_left = -84.0
 offset_top = -59.0
 offset_right = 85.0
@@ -137,24 +144,21 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 text = "WWWWWWWWWW"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="LeftCannons" parent="." instance=ExtResource("4_dkwe4")]
-unique_name_in_owner = true
 position = Vector2(-3, -8)
 rotation = -1.5708
 
 [node name="RightCannons" parent="." instance=ExtResource("4_dkwe4")]
-unique_name_in_owner = true
 position = Vector2(-3, 8)
 rotation = 1.5708
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
 stream = ExtResource("4_mi6ka")
 bus = &"Sound"
 
 [node name="WakeParticles" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
 z_index = -3
 amount = 24
 process_material = SubResource("ParticleProcessMaterial_ae3ss")
@@ -162,7 +166,6 @@ texture = ExtResource("11_yy8k2")
 lifetime = 3.0
 
 [node name="MediumHealthParticles" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
 z_index = 1
 emitting = false
 amount = 32
@@ -172,7 +175,6 @@ lifetime = 4.0
 draw_order = 2
 
 [node name="LowHealthParticles" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
 z_index = 1
 emitting = false
 amount = 32
@@ -182,6 +184,5 @@ lifetime = 4.0
 draw_order = 2
 
 [node name="DamageTimer" type="Timer" parent="."]
-unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true

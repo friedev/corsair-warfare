@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://scenes/ui/options/slider_option.gd" id="2_i2te7"]
 
-[node name="SliderOption" type="MarginContainer" groups=["options"]]
+[node name="SliderOption" type="MarginContainer" node_paths=PackedStringArray("slider") groups=["options"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_i2te7")
+slider = NodePath("Slider")
 
 [node name="Slider" type="HSlider" parent="."]
-unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]

@@ -47,18 +47,18 @@ var nickname: String:
 		nickname = value
 		nickname_label.text = self.nickname
 
-@onready var sprite: ShipSprite = %ShipSprite
-@onready var control_parent: Node2D = %ControlParent
-@onready var health_bar: ProgressBar = %HealthBar
-@onready var left_cannons: Cannons = %LeftCannons
-@onready var right_cannons: Cannons = %RightCannons
-@onready var collision_polygon: CollisionPolygon2D = %CollisionPolygon2D
-@onready var damage_sound: AudioStreamPlayer2D = %DamageSound
-@onready var wake_particles: GPUParticles2D = %WakeParticles
-@onready var medium_health_particles: GPUParticles2D = %MediumHealthParticles
-@onready var low_health_particles: GPUParticles2D = %LowHealthParticles
-@onready var damage_timer: Timer = %DamageTimer
-@onready var nickname_label: Label = %NicknameLabel
+@export var sprite: ShipSprite
+@export var control_parent: Node2D
+@export var health_bar: ProgressBar
+@export var left_cannons: Cannons
+@export var right_cannons: Cannons
+@export var collision_polygon: CollisionPolygon2D
+@export var damage_sound: AudioStreamPlayer2D
+@export var wake_particles: GPUParticles2D
+@export var medium_health_particles: GPUParticles2D
+@export var low_health_particles: GPUParticles2D
+@export var damage_timer: Timer
+@export var nickname_label: Label
 
 
 func _ready() -> void:

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://art/wind/wind_background.png" id="1_umi1k"]
 [ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://art/wind/wind_arrow.png" id="2_mdgvw"]
 
-[node name="WindHUD" type="Control"]
+[node name="WindHUD" type="Control" node_paths=PackedStringArray("arrow")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,7 @@ mouse_filter = 2
 script = ExtResource("1_gshh3")
 minimum_size = 22
 maximum_size = 64
+arrow = NodePath("Arrow")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -28,7 +29,6 @@ pivot_offset = Vector2(64, 64)
 texture = ExtResource("1_umi1k")
 
 [node name="Arrow" type="NinePatchRect" parent="."]
-unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

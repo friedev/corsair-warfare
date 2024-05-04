@@ -4,7 +4,7 @@ extends Control
 @export var minimum_size: int
 @export var maximum_size: int
 
-@onready var arrow: NinePatchRect = %Arrow
+@export var arrow: NinePatchRect
 
 
 func _process(delta: float) -> void:

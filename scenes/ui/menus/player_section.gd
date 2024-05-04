@@ -20,18 +20,18 @@ var player := Globals.NO_PLAYER:
 		Globals.register_player(self.player, self.details)
 		self.player_set.emit(self.player)
 
-@onready var joined_container := %JoinedContainer as Control
-@onready var not_joined_container := %NotJoinedContainer as Control
+@export var joined_container: Control
+@export var not_joined_container: Control
 
-@onready var keyboard_1_button := %Keyboard1Button as Button
-@onready var keyboard_2_button := %Keyboard2Button as Button
+@export var keyboard_1_button: Button
+@export var keyboard_2_button: Button
 
-@onready var customization_section := %CustomizationSection as CustomizationSection
+@export var customization_section: CustomizationSection
 
-@onready var controls_container := %ControlsContainer as Control
-@onready var keyboard_1_controls := %Keyboard1Controls as Control
-@onready var keyboard_2_controls := %Keyboard2Controls as Control
-@onready var joy_controls := %JoyControls as Control
+@export var controls_container: Control
+@export var keyboard_1_controls: Control
+@export var keyboard_2_controls: Control
+@export var joy_controls: Control
 
 
 func get_controls() -> Control:

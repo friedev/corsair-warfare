@@ -1,8 +1,8 @@
 # Used for both Sprite2Ds and TextureRects
-class_name ShipSprite extends Node
+class_name ShipSprite extends CanvasItem
 
-@onready var base_hull := $BaseHull
-@onready var base_sails := $BaseSails
+@export var base_hull: CanvasItem
+@export var base_sails: CanvasItem
 
 
 func apply_style(style: ShipStyle) -> void:

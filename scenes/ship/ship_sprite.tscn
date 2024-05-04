@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/ship/ship_sprite.gd" id="1_n1naw"]
 
-[node name="ShipSprite" type="Node2D"]
+[node name="ShipSprite" type="Node2D" node_paths=PackedStringArray("base_hull", "base_sails")]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_n1naw")
+base_hull = NodePath("BaseHull")
+base_sails = NodePath("BaseSails")
 
 [node name="BaseHull" type="Sprite2D" parent="."]
 

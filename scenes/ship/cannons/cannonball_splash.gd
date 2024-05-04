@@ -1,8 +1,7 @@
 extends Node2D
 
-
-@onready var sound: AudioStreamPlayer2D = %AudioStreamPlayer2D
-@onready var particles: GPUParticles2D = %GPUParticles2D
+@export var sound: AudioStreamPlayer2D
+@export var particles: GPUParticles2D
 
 
 func _ready() -> void:

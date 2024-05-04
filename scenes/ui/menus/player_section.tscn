@@ -3,8 +3,17 @@
 [ext_resource type="Script" path="res://scenes/ui/menus/player_section.gd" id="1_0lbsc"]
 [ext_resource type="PackedScene" uid="uid://c5i67jps1utlg" path="res://scenes/ui/menus/customization_section.tscn" id="3_3kk7s"]
 
-[node name="PlayerSection" type="PanelContainer"]
+[node name="PlayerSection" type="PanelContainer" node_paths=PackedStringArray("joined_container", "not_joined_container", "keyboard_1_button", "keyboard_2_button", "customization_section", "controls_container", "keyboard_1_controls", "keyboard_2_controls", "joy_controls")]
 script = ExtResource("1_0lbsc")
+joined_container = NodePath("MarginContainer/VBoxContainer/JoinedContainer")
+not_joined_container = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer")
+keyboard_1_button = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard1Button")
+keyboard_2_button = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard2Button")
+customization_section = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection")
+controls_container = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer")
+keyboard_1_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/Keyboard1Controls")
+keyboard_2_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/Keyboard2Controls")
+joy_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/JoyControls")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -18,7 +27,6 @@ custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 
 [node name="NotJoinedContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="JoyLabel" type="Label" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
@@ -28,17 +36,14 @@ with controller."
 horizontal_alignment = 1
 
 [node name="Keyboard1Button" type="Button" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Add keyboard (WASD)"
 
 [node name="Keyboard2Button" type="Button" parent="MarginContainer/VBoxContainer/NotJoinedContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Add keyboard (IJKL)"
 
 [node name="JoinedContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
@@ -47,7 +52,6 @@ theme_override_constants/separation = 16
 layout_mode = 2
 
 [node name="NicknameEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Nickname"
@@ -61,15 +65,12 @@ size_flags_vertical = 0
 text = "X"
 
 [node name="CustomizationSection" parent="MarginContainer/VBoxContainer/JoinedContainer" instance=ExtResource("3_3kk7s")]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ControlsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/JoinedContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Keyboard1Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
-unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Steer: A/D
@@ -77,7 +78,6 @@ Cannons: Q/E"
 horizontal_alignment = 1
 
 [node name="Keyboard2Controls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
-unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Steer: J/L
@@ -85,7 +85,6 @@ Cannons: U/O"
 horizontal_alignment = 1
 
 [node name="JoyControls" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer"]
-unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Steer: Left Stick

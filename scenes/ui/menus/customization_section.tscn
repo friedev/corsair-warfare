@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://bue2i4hbjy712" path="res://scenes/ship/styles/ship_d.tres" id="9_053ad"]
 [ext_resource type="Resource" uid="uid://c1fe222jihl61" path="res://scenes/ship/styles/ship_e.tres" id="10_1aan4"]
 
-[node name="CustomizationSection" type="VBoxContainer"]
+[node name="CustomizationSection" type="VBoxContainer" node_paths=PackedStringArray("texture_rect", "points_label", "hull_slider", "sails_slider", "cannons_slider")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,6 +21,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_sw0ox")
 styles = Array[Resource("res://scenes/ship/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("8_4kuua"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
+texture_rect = NodePath("HBoxContainer/ShipTextureRect")
+points_label = NodePath("PointsLabel")
+hull_slider = NodePath("GridContainer/HullSlider")
+sails_slider = NodePath("GridContainer/SailsSlider")
+cannons_slider = NodePath("GridContainer/CannonsSlider")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -33,7 +38,6 @@ size_flags_vertical = 4
 text = "<"
 
 [node name="ShipTextureRect" parent="HBoxContainer" instance=ExtResource("2_7qh87")]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="NextStyleButton" type="Button" parent="HBoxContainer"]
@@ -43,7 +47,6 @@ size_flags_vertical = 4
 text = ">"
 
 [node name="PointsLabel" type="Label" parent="."]
-unique_name_in_owner = true
 layout_mode = 2
 text = "4/4 Points Spent"
 horizontal_alignment = 1
@@ -59,7 +62,6 @@ layout_mode = 2
 text = "Hull"
 
 [node name="HullSlider" type="HSlider" parent="GridContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0
@@ -69,7 +71,6 @@ layout_mode = 2
 text = "Cannons"
 
 [node name="CannonsSlider" type="HSlider" parent="GridContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0
@@ -79,7 +80,6 @@ layout_mode = 2
 text = "Sails"
 
 [node name="SailsSlider" type="HSlider" parent="GridContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0

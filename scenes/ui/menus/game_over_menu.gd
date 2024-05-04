@@ -2,7 +2,7 @@ extends Menu
 
 signal menu_pressed(previous: Menu)
 
-@onready var label: Label = %Label
+@export var label: Label
 
 
 func _on_menu_button_pressed() -> void:

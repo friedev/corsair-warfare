@@ -4,7 +4,7 @@ signal play_pressed(previous: Menu)
 signal options_pressed(previous: Menu)
 signal credits_pressed(previous: Menu)
 
-@onready var quit_button := %QuitButton as Button
+@export var quit_button: Button
 
 
 func _ready() -> void:

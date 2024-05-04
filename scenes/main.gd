@@ -11,15 +11,15 @@ const SHIP_SCENE := preload("res://scenes/ship/ship.tscn")
 @export var deathmatch_death_score: int
 @export var deathmatch_self_destruct_score: int
 
-@onready var world: Node2D = %World
-@onready var camera: ShakeCamera2D = %Camera2D
-@onready var ship_spawn_cast: ShapeCast2D = %ShipSpawnCast
-@onready var wind: Wind = %Wind
-@onready var music: Music = %Music
-@onready var hud_layer: CanvasLayer = %HUDLayer
-@onready var time_limit_label: Label = %TimeLimitLabel
-@onready var score_label: RichTextLabel = %ScoreLabel
-@onready var game_timer: Timer = %GameTimer
+@export var world: Node2D
+@export var camera: ShakeCamera2D
+@export var ship_spawn_cast: ShapeCast2D
+@export var wind: Wind
+@export var music: Music
+@export var hud_layer: CanvasLayer
+@export var time_limit_label: Label
+@export var score_label: RichTextLabel
+@export var game_timer: Timer
 
 var game_active: bool:
 	set(value):

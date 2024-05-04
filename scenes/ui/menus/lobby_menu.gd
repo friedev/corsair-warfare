@@ -13,11 +13,11 @@ var player_count := 0:
 		player_count = value
 		self.update_play_button()
 
-@onready var player_section_container := %PlayerSectionContainer as Control
-@onready var play_button := %PlayButton as Button
-@onready var game_mode_option_button := %GameModeOptionButton as OptionButton
-@onready var time_limit_spin_box := %TimeLimitSpinBox as SpinBox
-@onready var max_points_spin_box := %MaxPointsSpinBox as SpinBox
+@export var player_section_container: Control
+@export var play_button: Button
+@export var game_mode_option_button: OptionButton
+@export var time_limit_spin_box: SpinBox
+@export var max_points_spin_box: SpinBox
 
 
 func add_player_section() -> void:

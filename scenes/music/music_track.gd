@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 @export var play_during_timer: bool
 @export var fade_duration: float
 
-@onready var music_timer: Timer = %MusicTimer
+@export var music_timer: Timer
 
 
 func _process(delta: float):

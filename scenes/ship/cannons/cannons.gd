@@ -3,13 +3,13 @@ class_name Cannons extends Node2D
 const max_cannonball_offset := 10.0
 const cannonball_scene := preload("res://scenes/ship/cannons/cannonball.tscn")
 
-@onready var spawn_point_1: Node2D = %SpawnPoint1
-@onready var spawn_point_2: Node2D = %SpawnPoint2
-@onready var reload_timer: Timer = %ReloadTimer
-@onready var reload_bar: ProgressBar = %ReloadBar
-@onready var fire_particles: GPUParticles2D = %FireParticles
-@onready var fire_sound: AudioStreamPlayer2D = %FireSound
-@onready var reload_sound: AudioStreamPlayer2D = %ReloadSound
+@export var spawn_point_1: Node2D
+@export var spawn_point_2: Node2D
+@export var reload_timer: Timer
+@export var reload_bar: ProgressBar
+@export var fire_particles: GPUParticles2D
+@export var fire_sound: AudioStreamPlayer2D
+@export var reload_sound: AudioStreamPlayer2D
 
 
 func _process(delta: float) -> void:

@@ -1,6 +1,6 @@
 class_name Music extends Node
 
-@onready var music_timer: Timer = %MusicTimer
+@export var music_timer: Timer
 
 
 func _on_ship_cannon_fired() -> void:

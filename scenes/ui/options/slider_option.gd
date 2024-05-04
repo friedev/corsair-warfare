@@ -2,7 +2,7 @@ class_name SliderOption extends Option
 
 @export var default: float
 
-@onready var slider: Slider = %Slider
+@export var slider: Slider
 
 
 func get_option() -> float:

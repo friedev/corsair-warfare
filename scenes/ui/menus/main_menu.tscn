@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/menus/main_menu.gd" id="1_q3n4f"]
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_m7nol"]
 
-[node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
+[node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("quit_button", "default_focus")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,6 +14,7 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 script = ExtResource("1_q3n4f")
+quit_button = NodePath("VBoxContainer/VBoxContainer/QuitButton")
 default_focus = NodePath("VBoxContainer/VBoxContainer/PlayButton")
 can_go_back = false
 
@@ -48,7 +49,6 @@ size_flags_horizontal = 4
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit"

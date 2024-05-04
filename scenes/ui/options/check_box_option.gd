@@ -2,7 +2,7 @@ class_name CheckBoxOption extends Option
 
 @export var default: bool
 
-@onready var check_box: CheckBox = %CheckBox
+@export var check_box: CheckBox
 
 
 func get_option() -> bool:

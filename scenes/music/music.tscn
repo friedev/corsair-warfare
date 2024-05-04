@@ -5,17 +5,19 @@
 [ext_resource type="Script" path="res://scenes/music/music_track.gd" id="2_ki2pg"]
 [ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/music/Through_Navy's_Heart_2.mp3" id="3_5moud"]
 
-[node name="Music" type="Node"]
+[node name="Music" type="Node" node_paths=PackedStringArray("music_timer")]
 script = ExtResource("2_02xhd")
+music_timer = NodePath("MusicTimer")
 
-[node name="NoncombatMusic" type="AudioStreamPlayer" parent="."]
+[node name="NoncombatMusic" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("music_timer")]
 stream = ExtResource("1_0hov6")
 autoplay = true
 bus = &"Music"
 script = ExtResource("2_ki2pg")
 fade_duration = 0.5
+music_timer = NodePath("../MusicTimer")
 
-[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+[node name="CombatMusic" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("music_timer")]
 stream = ExtResource("3_5moud")
 volume_db = -80.0
 autoplay = true
@@ -23,8 +25,8 @@ bus = &"Music"
 script = ExtResource("2_ki2pg")
 play_during_timer = true
 fade_duration = 0.5
+music_timer = NodePath("../MusicTimer")
 
 [node name="MusicTimer" type="Timer" parent="."]
-unique_name_in_owner = true
 wait_time = 10.0
 one_shot = true
