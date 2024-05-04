@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/menus/lobby_menu.gd" id="1_paxxu"]
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_t00gu"]
 
-[node name="LobbyMenu" type="MarginContainer" node_paths=PackedStringArray("player_section_container", "play_button", "game_mode_option_button", "time_limit_spin_box", "max_points_spin_box")]
+[node name="LobbyMenu" type="MarginContainer" node_paths=PackedStringArray("player_section_container", "play_button", "game_mode_option_button", "time_limit_spin_box", "score_limit_spin_box", "max_points_spin_box", "score_limit_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,9 +16,11 @@ theme_override_constants/margin_bottom = 32
 script = ExtResource("1_paxxu")
 player_section_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PlayerSectionContainer")
 play_button = NodePath("VBoxContainer/HBoxContainer/PlayButton")
-game_mode_option_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/GameModeOptionButton")
-time_limit_spin_box = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TimeLimitSpinBox")
-max_points_spin_box = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaxPointsSpinBox")
+game_mode_option_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/GameModeContainer/GameModeOptionButton")
+time_limit_spin_box = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/TimeLimitContainer/TimeLimitSpinBox")
+score_limit_spin_box = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/ScoreLimitContainer/ScoreLimitSpinBox")
+max_points_spin_box = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/MaxPointsContainer/MaxPointsSpinBox")
+score_limit_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/ScoreLimitContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -41,7 +43,6 @@ size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -50,16 +51,20 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/h_separation = 16
 alignment = 1
 
-[node name="GameModeLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="GameModeContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GameModeLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/GameModeContainer"]
 layout_mode = 2
 text = "Game Mode"
 
-[node name="GameModeOptionButton" type="OptionButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="GameModeOptionButton" type="OptionButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/GameModeContainer"]
 layout_mode = 2
 item_count = 2
 selected = 0
@@ -68,22 +73,46 @@ popup/item_0/id = 0
 popup/item_1/text = "Deathmatch"
 popup/item_1/id = 1
 
-[node name="TimeLimitLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="TimeLimitContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TimeLimitLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/TimeLimitContainer"]
 layout_mode = 2
 text = "Time Limit"
 
-[node name="TimeLimitSpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="TimeLimitSpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/TimeLimitContainer"]
 layout_mode = 2
-max_value = 3599.0
+max_value = 3600.0
 rounded = true
 update_on_text_changed = true
 suffix = "s"
 
-[node name="MaxPointsLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="ScoreLimitContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ScoreLimitLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/ScoreLimitContainer"]
+layout_mode = 2
+text = "First To"
+
+[node name="ScoreLimitSpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/ScoreLimitContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+rounded = true
+update_on_text_changed = true
+suffix = "points"
+
+[node name="MaxPointsContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MaxPointsLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/MaxPointsContainer"]
 layout_mode = 2
 text = "Upgrade Points"
 
-[node name="MaxPointsSpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="MaxPointsSpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/MaxPointsContainer"]
 layout_mode = 2
 max_value = 9.0
 value = 5.0
@@ -111,8 +140,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
-[connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/GameModeOptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TimeLimitSpinBox" to="." method="_on_time_limit_spin_box_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaxPointsSpinBox" to="." method="_on_max_points_spin_box_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/GameModeContainer/GameModeOptionButton" to="." method="_on_game_mode_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/TimeLimitContainer/TimeLimitSpinBox" to="." method="_on_time_limit_spin_box_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/ScoreLimitContainer/ScoreLimitSpinBox" to="." method="_on_score_limit_spin_box_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/HFlowContainer/MaxPointsContainer/MaxPointsSpinBox" to="." method="_on_max_points_spin_box_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="close"]

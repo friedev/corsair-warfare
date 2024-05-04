@@ -17,7 +17,9 @@ var player_count := 0:
 @export var play_button: Button
 @export var game_mode_option_button: OptionButton
 @export var time_limit_spin_box: SpinBox
+@export var score_limit_spin_box: SpinBox
 @export var max_points_spin_box: SpinBox
+@export var score_limit_container: Control
 
 
 func add_player_section() -> void:
@@ -49,6 +51,7 @@ func update_play_button() -> void:
 func _ready() -> void:
 	self.game_mode_option_button.selected = Globals.game_mode
 	self.time_limit_spin_box.value = Globals.time_limit_seconds
+	self.score_limit_spin_box.value = Globals.score_limit
 	self.max_points_spin_box.value = Globals.max_points
 	self.add_player_section()
 
@@ -78,12 +81,17 @@ func _on_player_section_customization_updated() -> void:
 	self.update_play_button()
 
 
+func _on_game_mode_option_button_item_selected(index: int) -> void:
+	Globals.game_mode = index
+	self.score_limit_container.visible = Globals.game_mode == Globals.GameMode.DEATHMATCH
+
+
 func _on_time_limit_spin_box_value_changed(value: float) -> void:
 	Globals.time_limit_seconds = int(value)
 
 
-func _on_option_button_item_selected(index: int) -> void:
-	Globals.game_mode = index
+func _on_score_limit_spin_box_value_changed(value: float) -> void:
+	Globals.score_limit = int(value)
 
 
 func _on_max_points_spin_box_value_changed(value: float) -> void:

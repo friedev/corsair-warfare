@@ -21,13 +21,13 @@ const SHIP_SCENE := preload("res://scenes/ship/ship.tscn")
 @export var score_label: RichTextLabel
 @export var game_timer: Timer
 
+var is_game_over := false
+
 var game_active: bool:
 	set(value):
 		game_active = value
 		self.hud_layer.visible = self.game_active
 		self.get_tree().paused = not self.game_active
-
-var ships_alive: int
 
 
 func move_ship_spawn_cast() -> void:
@@ -82,8 +82,9 @@ func sort_score_descending(
 
 
 func update_score_label() -> void:
-	if self.game_timer.is_stopped():
+	if self.is_game_over:
 		return
+
 	self.score_label.clear()
 	var details_list := Globals.players.values()
 	details_list.sort_custom(self.sort_score_descending)
@@ -104,10 +105,10 @@ func update_score_label() -> void:
 
 
 func start() -> void:
-	self.ships_alive = len(Globals.players)
 	for details_resource in Globals.players.values():
 		var details := details_resource as PlayerDetails
 		self.spawn_ship(details)
+	self.is_game_over = false
 	self.game_active = true
 	if Globals.time_limit_seconds > 0:
 		self.game_timer.paused = false
@@ -129,24 +130,40 @@ func end() -> void:
 	self.game_active = false
 
 
+func signal_game_over() -> void:
+	self.game_over.emit()
+	self.is_game_over = true
+	self.game_timer.paused = true
+
+
 func _on_ship_destroyed(ship: Ship, destroyer: int) -> void:
+	if self.is_game_over:
+		return
+
 	if Globals.game_mode == Globals.GameMode.LAST_MAN_STANDING:
-		self.ships_alive -= 1
-		if self.ships_alive <= 1:
-			self.game_over.emit()
-			self.game_timer.paused = true
+		var ships := self.get_tree().get_nodes_in_group(&"ships")
+		# Subtract 1 to account for the ship that was just destroyed
+		if len(ships) - 1 <= 1:
+			self.signal_game_over()
 	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
+		var highest_new_score: int
 		if destroyer == Globals.NO_PLAYER or destroyer == ship.details.player:
 			ship.details.score += deathmatch_self_destruct_score
+			highest_new_score = ship.details.score
 		else:
-			Globals.players[destroyer].score += deathmatch_kill_score
+			var destroyer_details := Globals.players[destroyer] as PlayerDetails
+			destroyer_details.score += deathmatch_kill_score
 			ship.details.score += deathmatch_death_score
+			highest_new_score = max(ship.details.score, destroyer_details.score)
 		self.update_score_label()
-		self.spawn_ship(ship.details)
+		if Globals.score_limit > 0 and highest_new_score >= Globals.score_limit:
+			self.signal_game_over()
+		if not self.is_game_over:
+			self.spawn_ship(ship.details)
 
 
 func _on_game_timer_timeout() -> void:
-	self.game_over.emit()
+	self.signal_game_over()
 
 
 func _on_lobby_menu_play_pressed(previous: Menu) -> void:
