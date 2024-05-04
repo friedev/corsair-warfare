@@ -1,19 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl5ui6i5c3mov"]
+[gd_scene load_steps=12 format=3 uid="uid://cl5ui6i5c3mov"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/player_section.gd" id="1_0lbsc"]
-[ext_resource type="PackedScene" uid="uid://c5i67jps1utlg" path="res://scenes/ui/menus/customization_section.tscn" id="3_3kk7s"]
+[ext_resource type="Resource" uid="uid://cj1jmouy4h856" path="res://scenes/ship/styles/navy.tres" id="3_mgg45"]
+[ext_resource type="Resource" uid="uid://b0nty5apjirs5" path="res://scenes/ship/styles/pirate.tres" id="4_2xlc5"]
+[ext_resource type="Resource" uid="uid://8qbol8ar27of" path="res://scenes/ship/styles/hunter.tres" id="5_pfa27"]
+[ext_resource type="Resource" uid="uid://b0icwb34d85ox" path="res://scenes/ship/styles/ghost.tres" id="6_lgdvf"]
+[ext_resource type="Resource" uid="uid://c6uowkts3ugjg" path="res://scenes/ship/styles/ship_a.tres" id="7_nb7li"]
+[ext_resource type="Resource" uid="uid://dpyljyobmytxi" path="res://scenes/ship/styles/ship_b.tres" id="8_gy7y7"]
+[ext_resource type="Resource" uid="uid://dw4qpxuvh5qve" path="res://scenes/ship/styles/ship_c.tres" id="9_auxn3"]
+[ext_resource type="Resource" uid="uid://bue2i4hbjy712" path="res://scenes/ship/styles/ship_d.tres" id="10_m4xg2"]
+[ext_resource type="Resource" uid="uid://c1fe222jihl61" path="res://scenes/ship/styles/ship_e.tres" id="11_ibt0i"]
+[ext_resource type="PackedScene" uid="uid://cm6lliew3ph6v" path="res://scenes/ship/ship_texture_rect.tscn" id="12_87bml"]
 
-[node name="PlayerSection" type="PanelContainer" node_paths=PackedStringArray("joined_container", "not_joined_container", "keyboard_1_button", "keyboard_2_button", "customization_section", "controls_container", "keyboard_1_controls", "keyboard_2_controls", "joy_controls")]
+[node name="PlayerSection" type="PanelContainer" node_paths=PackedStringArray("joined_container", "not_joined_container", "keyboard_1_button", "keyboard_2_button", "controls_container", "keyboard_1_controls", "keyboard_2_controls", "joy_controls", "texture_rect", "points_label", "hull_slider", "sails_slider", "cannons_slider")]
 script = ExtResource("1_0lbsc")
+styles = Array[Resource("res://scenes/ship/ship_style.gd")]([ExtResource("3_mgg45"), ExtResource("4_2xlc5"), ExtResource("5_pfa27"), ExtResource("6_lgdvf"), ExtResource("7_nb7li"), ExtResource("8_gy7y7"), ExtResource("9_auxn3"), ExtResource("10_m4xg2"), ExtResource("11_ibt0i")])
 joined_container = NodePath("MarginContainer/VBoxContainer/JoinedContainer")
 not_joined_container = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer")
 keyboard_1_button = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard1Button")
 keyboard_2_button = NodePath("MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard2Button")
-customization_section = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection")
 controls_container = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer")
 keyboard_1_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/Keyboard1Controls")
 keyboard_2_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/Keyboard2Controls")
 joy_controls = NodePath("MarginContainer/VBoxContainer/JoinedContainer/ControlsContainer/JoyControls")
+texture_rect = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer/ShipTextureRect")
+points_label = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/PointsLabel")
+hull_slider = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/HullSlider")
+sails_slider = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/SailsSlider")
+cannons_slider = NodePath("MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/CannonsSlider")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -64,8 +78,66 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
 
-[node name="CustomizationSection" parent="MarginContainer/VBoxContainer/JoinedContainer" instance=ExtResource("3_3kk7s")]
+[node name="CustomizationSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/JoinedContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection"]
+layout_mode = 2
+alignment = 1
+
+[node name="PreviousStyleButton" type="Button" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
+[node name="ShipTextureRect" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer" instance=ExtResource("12_87bml")]
+layout_mode = 2
+
+[node name="NextStyleButton" type="Button" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">"
+
+[node name="PointsLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection"]
+layout_mode = 2
+text = "4/4 Points Spent"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="HullLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+text = "Hull"
+
+[node name="HullSlider" type="HSlider" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+
+[node name="CannonsLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+text = "Cannons"
+
+[node name="CannonsSlider" type="HSlider" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+
+[node name="SailsLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+text = "Sails"
+
+[node name="SailsSlider" type="HSlider" parent="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
 
 [node name="ControlsContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/JoinedContainer"]
 layout_mode = 2
@@ -96,5 +168,8 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NotJoinedContainer/Keyboard2Button" to="." method="_on_keyboard_2_button_pressed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/NicknameEdit" to="." method="_on_nickname_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/JoinedContainer/HBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]
-[connection signal="levels_updated" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection" to="." method="_on_customization_section_levels_updated"]
-[connection signal="style_updated" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection" to="." method="_on_customization_section_style_updated"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer/PreviousStyleButton" to="." method="_on_previous_style_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/HBoxContainer/NextStyleButton" to="." method="_on_next_style_button_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/HullSlider" to="." method="_on_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/CannonsSlider" to="." method="_on_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/JoinedContainer/CustomizationSection/GridContainer/SailsSlider" to="." method="_on_slider_value_changed"]

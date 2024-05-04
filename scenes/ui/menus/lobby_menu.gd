@@ -42,7 +42,7 @@ func is_ready() -> bool:
 		return false
 	for player_section_node in self.player_section_container.get_children():
 		var player_section := player_section_node as PlayerSection
-		if not player_section.customization_section.is_valid():
+		if not player_section.is_valid():
 			return false
 	return true
 
@@ -109,7 +109,7 @@ func _on_max_points_spin_box_value_changed(value: float) -> void:
 	Globals.max_points = int(value)
 	for player_section_node in self.player_section_container.get_children():
 		var player_section := player_section_node as PlayerSection
-		player_section.customization_section.update_levels()
+		player_section.update_levels()
 
 
 func _on_kill_score_spin_box_value_changed(value: float) -> void:
