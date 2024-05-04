@@ -39,3 +39,33 @@ func deregister_player(player: int) -> void:
 
 func is_joy(player: int) -> bool:
 	return player >= 0
+
+
+func get_winner() -> PlayerDetails:
+	var ships := self.get_tree().get_nodes_in_group(&"ships")
+	if len(ships) == 1:
+		return null
+
+	var winner: PlayerDetails = null
+	if Globals.game_mode == Globals.GameMode.LAST_MAN_STANDING:
+		var max_health_percent := 0.0
+		for ship_node in ships:
+			var ship := ship_node as Ship
+			var health_percent := ship.health / ship.max_health
+			if health_percent > max_health_percent:
+				winner = ship.details
+				max_health_percent = health_percent
+			elif (
+				health_percent == max_health_percent
+				and max_health_percent > 0.0
+			):
+				winner = null
+	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
+		var max_score := -2^63
+		for details in Globals.players.values():
+			if details.score > max_score:
+				winner = details
+				max_score = details.score
+			elif details.score == max_score:
+				winner = null
+	return winner

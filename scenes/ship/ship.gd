@@ -79,9 +79,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	self.control_parent.global_rotation = 0
+
 	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
 	particle_material.angle_min = -self.rotation_degrees
 	particle_material.angle_max = -self.rotation_degrees
+
+	# Highlight my nickname if I'm winning
+	var winner := Globals.get_winner()
+	if winner != null and winner.player == self.details.player:
+		self.nickname_label.modulate = Color(1, 0.75, 0)
+	else:
+		self.nickname_label.modulate = Color.WHITE
 
 
 func handle_input() -> void:
