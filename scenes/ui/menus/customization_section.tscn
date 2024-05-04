@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://c5i67jps1utlg"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/customization_section.gd" id="1_sw0ox"]
-[ext_resource type="Resource" uid="uid://cj1jmouy4h856" path="res://scenes/world/ship/sprite/navy/navy_ship_style.tres" id="2_1t41w"]
-[ext_resource type="PackedScene" uid="uid://cm6lliew3ph6v" path="res://scenes/world/ship/sprite/ship_texture_rect.tscn" id="2_7qh87"]
-[ext_resource type="Resource" uid="uid://b0nty5apjirs5" path="res://scenes/world/ship/sprite/pirate/pirate_ship_style.tres" id="3_hei0l"]
-[ext_resource type="Resource" uid="uid://8qbol8ar27of" path="res://scenes/world/ship/sprite/hunter/hunter_ship_style.tres" id="4_nkcfp"]
-[ext_resource type="Resource" uid="uid://b0icwb34d85ox" path="res://scenes/world/ship/sprite/ghost/ghost_ship_style.tres" id="5_ybs3b"]
-[ext_resource type="Resource" uid="uid://c6uowkts3ugjg" path="res://scenes/world/ship/sprite/ship_a/ship_a_style.tres" id="6_2jdr2"]
-[ext_resource type="Resource" uid="uid://dpyljyobmytxi" path="res://scenes/world/ship/sprite/ship_b/ship_b_style.tres" id="7_ibffv"]
-[ext_resource type="Resource" uid="uid://dw4qpxuvh5qve" path="res://scenes/world/ship/sprite/ship_c/ship_c_style.tres" id="8_4kuua"]
-[ext_resource type="Resource" uid="uid://bue2i4hbjy712" path="res://scenes/world/ship/sprite/ship_d/ship_d_style.tres" id="9_053ad"]
-[ext_resource type="Resource" uid="uid://c1fe222jihl61" path="res://scenes/world/ship/sprite/ship_e/ship_e_style.tres" id="10_1aan4"]
+[ext_resource type="Resource" uid="uid://cj1jmouy4h856" path="res://scenes/ship/styles/navy.tres" id="2_1t41w"]
+[ext_resource type="PackedScene" uid="uid://cm6lliew3ph6v" path="res://scenes/ship/ship_texture_rect.tscn" id="2_7qh87"]
+[ext_resource type="Resource" uid="uid://b0nty5apjirs5" path="res://scenes/ship/styles/pirate.tres" id="3_hei0l"]
+[ext_resource type="Resource" uid="uid://8qbol8ar27of" path="res://scenes/ship/styles/hunter.tres" id="4_nkcfp"]
+[ext_resource type="Resource" uid="uid://b0icwb34d85ox" path="res://scenes/ship/styles/ghost.tres" id="5_ybs3b"]
+[ext_resource type="Resource" uid="uid://c6uowkts3ugjg" path="res://scenes/ship/styles/ship_a.tres" id="6_2jdr2"]
+[ext_resource type="Resource" uid="uid://dpyljyobmytxi" path="res://scenes/ship/styles/ship_b.tres" id="7_ibffv"]
+[ext_resource type="Resource" uid="uid://dw4qpxuvh5qve" path="res://scenes/ship/styles/ship_c.tres" id="8_4kuua"]
+[ext_resource type="Resource" uid="uid://bue2i4hbjy712" path="res://scenes/ship/styles/ship_d.tres" id="9_053ad"]
+[ext_resource type="Resource" uid="uid://c1fe222jihl61" path="res://scenes/ship/styles/ship_e.tres" id="10_1aan4"]
 
 [node name="CustomizationSection" type="VBoxContainer"]
 anchors_preset = 15
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_sw0ox")
-styles = Array[Resource("res://scenes/world/ship/sprite/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("8_4kuua"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
+styles = Array[Resource("res://scenes/ship/ship_style.gd")]([ExtResource("2_1t41w"), ExtResource("3_hei0l"), ExtResource("4_nkcfp"), ExtResource("5_ybs3b"), ExtResource("6_2jdr2"), ExtResource("7_ibffv"), ExtResource("8_4kuua"), ExtResource("9_053ad"), ExtResource("10_1aan4")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

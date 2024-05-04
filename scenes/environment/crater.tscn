@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu44tbtwjopms"]
+
+[ext_resource type="Texture2D" uid="uid://cvtkgk67pbxrd" path="res://art/environment/crater.png" id="1_vuld4"]
+
+[node name="Crater" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(518, 159, 423, 206, 349, 281, 340, 416, 362, 571, 444, 633, 474, 694, 689, 679, 513, 653, 424, 555, 389, 433, 406, 283, 459, 207)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(967, 382, 971, 494, 911, 588, 854, 627, 943, 498)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(726, 136, 790, 112, 855, 144, 891, 223, 878, 235, 780, 151)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_vuld4")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfhlmkykp54l0"]
 
-[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://scenes/music/Through_Navy's_Heart_1.mp3" id="1_0hov6"]
+[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/music/Through_Navy's_Heart_1.mp3" id="1_0hov6"]
 [ext_resource type="Script" path="res://scenes/music/music.gd" id="2_02xhd"]
 [ext_resource type="Script" path="res://scenes/music/music_track.gd" id="2_ki2pg"]
-[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://scenes/music/Through_Navy's_Heart_2.mp3" id="3_5moud"]
+[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/music/Through_Navy's_Heart_2.mp3" id="3_5moud"]
 
 [node name="Music" type="Node"]
 script = ExtResource("2_02xhd")

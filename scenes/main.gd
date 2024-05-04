@@ -2,7 +2,7 @@ extends Node
 
 signal game_over
 
-const SHIP_SCENE := preload("res://scenes/world/ship/ship.tscn")
+const SHIP_SCENE := preload("res://scenes/ship/ship.tscn")
 
 @export var ship_spawn_radius: float
 @export var low_time_threshold: float

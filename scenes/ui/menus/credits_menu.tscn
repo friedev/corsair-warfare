@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhqcal3iwc8bl"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/menu.gd" id="1_lh6t5"]
-[ext_resource type="Theme" path="res://scenes/ui/title_theme.tres" id="2_37cyy"]
+[ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_37cyy"]
 [ext_resource type="Script" path="res://scenes/ui/linked_label.gd" id="3_agmwj"]
 
 [node name="CreditsMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]

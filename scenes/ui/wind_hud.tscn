@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://r8e2fyjw2ond"]
+
+[ext_resource type="Script" path="res://scenes/ui/wind_hud.gd" id="1_gshh3"]
+[ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://art/wind/wind_background.png" id="1_umi1k"]
+[ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://art/wind/wind_arrow.png" id="2_mdgvw"]
+
+[node name="WindHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gshh3")
+minimum_size = 22
+maximum_size = 64
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("1_umi1k")
+
+[node name="Arrow" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 53.0
+offset_right = -8.0
+offset_bottom = 75.0
+grow_horizontal = 0
+pivot_offset = Vector2(6, 11)
+texture = ExtResource("2_mdgvw")
+patch_margin_left = 5
+patch_margin_top = 9
+patch_margin_right = 16
+patch_margin_bottom = 9

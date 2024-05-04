@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://q3sofkfm3603"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/lobby_menu.gd" id="1_paxxu"]
-[ext_resource type="Theme" path="res://scenes/ui/title_theme.tres" id="2_t00gu"]
+[ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_t00gu"]
 
 [node name="LobbyMenu" type="MarginContainer"]
 anchors_preset = 15

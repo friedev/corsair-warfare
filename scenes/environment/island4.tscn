@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://y3sd02fijcb3"]
+
+[ext_resource type="Texture2D" uid="uid://djbbmb0b1rnwg" path="res://art/environment/island4.png" id="1_avkh3"]
+
+[node name="Island4" type="StaticBody2D"]
+position = Vector2(2, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-659, -411)
+polygon = PackedVector2Array(367, 443, 368, 476, 461, 476, 461, 566, 505, 566, 522, 583, 560, 600, 581, 603, 600, 628, 629, 640, 657, 644, 681, 652, 723, 637, 766, 591, 778, 611, 804, 619, 831, 609, 842, 589, 900, 587, 923, 572, 931, 537, 929, 503, 952, 482, 954, 459, 944, 438, 930, 427, 932, 348, 949, 331, 953, 307, 940, 283, 920, 274, 905, 274, 839, 208, 836, 190, 826, 176, 805, 166, 777, 172, 766, 184, 764, 176, 754, 167, 734, 163, 714, 166, 704, 175, 700, 184, 686, 179, 653, 188, 627, 212, 598, 206, 589, 196, 560, 188, 514, 232, 506, 291, 466, 373, 466, 421, 481, 444)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.400944, 0.400944)
+texture = ExtResource("1_avkh3")

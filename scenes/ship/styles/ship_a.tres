@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ShipStyle" load_steps=13 format=3 uid="uid://c6uowkts3ugjg"]
+
+[ext_resource type="Texture2D" uid="uid://d2ghclf4l2eqi" path="res://art/ship/styles/ship_a/base_hull.png" id="1_drfv6"]
+[ext_resource type="Texture2D" uid="uid://chrtv4tcba8py" path="res://art/ship/styles/ship_a/base_sails.png" id="2_vf78r"]
+[ext_resource type="Texture2D" uid="uid://deidh30oke407" path="res://art/ship/styles/ship_a/cannons1.png" id="3_f8rqy"]
+[ext_resource type="Texture2D" uid="uid://dotff1xchigk7" path="res://art/ship/styles/ship_a/cannons2.png" id="4_g8pct"]
+[ext_resource type="Texture2D" uid="uid://dk3gvv1iqk82" path="res://art/ship/styles/ship_a/cannons3.png" id="5_5f1fv"]
+[ext_resource type="Texture2D" uid="uid://bmdko13byy1bf" path="res://art/ship/styles/ship_a/hull1.png" id="6_4hiy2"]
+[ext_resource type="Texture2D" uid="uid://id6bdlrdkml0" path="res://art/ship/styles/ship_a/hull2.png" id="7_0xm26"]
+[ext_resource type="Texture2D" uid="uid://conlyicl0btp" path="res://art/ship/styles/ship_a/hull3.png" id="8_e6nsi"]
+[ext_resource type="Texture2D" uid="uid://cle2qymul8utr" path="res://art/ship/styles/ship_a/sails1.png" id="9_r6qjb"]
+[ext_resource type="Texture2D" uid="uid://jglykkyeebjo" path="res://art/ship/styles/ship_a/sails2.png" id="10_fl8g1"]
+[ext_resource type="Texture2D" uid="uid://ba61x26hvj088" path="res://art/ship/styles/ship_a/sails3.png" id="11_d7p7p"]
+[ext_resource type="Script" path="res://scenes/ship/ship_style.gd" id="12_pi3p1"]
+
+[resource]
+script = ExtResource("12_pi3p1")
+base_hull = ExtResource("1_drfv6")
+base_sails = ExtResource("2_vf78r")
+hull_levels = Array[Texture]([ExtResource("6_4hiy2"), ExtResource("7_0xm26"), ExtResource("8_e6nsi")])
+cannons_levels = Array[Texture]([ExtResource("3_f8rqy"), ExtResource("4_g8pct"), ExtResource("5_5f1fv")])
+sails_levels = Array[Texture]([ExtResource("9_r6qjb"), ExtResource("10_fl8g1"), ExtResource("11_d7p7p")])

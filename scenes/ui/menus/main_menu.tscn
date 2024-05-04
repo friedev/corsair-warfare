@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://34dbo0xlihr"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/main_menu.gd" id="1_q3n4f"]
-[ext_resource type="Theme" path="res://scenes/ui/title_theme.tres" id="2_m7nol"]
+[ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_m7nol"]
 
 [node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
 anchors_preset = 15
