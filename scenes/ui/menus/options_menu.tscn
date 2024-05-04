@@ -4,7 +4,7 @@
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_u5dac"]
 [ext_resource type="PackedScene" uid="uid://rasjftexmjht" path="res://scenes/ui/options/fullscreen_option.tscn" id="3_u7ilx"]
 [ext_resource type="PackedScene" uid="uid://bm2n588heclnw" path="res://scenes/ui/options/volume_option.tscn" id="4_1ludw"]
-[ext_resource type="PackedScene" uid="uid://cgnmle83oa3at" path="res://scenes/ui/options/check_box_option.tscn" id="4_qgek8"]
+[ext_resource type="PackedScene" uid="uid://dbbnhubut8hco" path="res://scenes/ui/options/slider_option.tscn" id="4_wgx5l"]
 
 [node name="OptionsMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
 process_mode = 3
@@ -64,19 +64,19 @@ key = "fullscreen"
 layout_mode = 2
 text = "Screen Shake"
 
-[node name="ScreenShakeOption" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("4_qgek8")]
+[node name="ScreenShakeAmountSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("4_wgx5l")]
 layout_mode = 2
-default = true
-key = "screen_shake"
+default = 0.5
+key = "screen_shake_amount"
 
 [node name="VibrateLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Controller Vibration"
 
-[node name="VibrateOption" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("4_qgek8")]
+[node name="VibrateAmountSlider" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("4_wgx5l")]
 layout_mode = 2
-default = true
-key = "vibrate"
+default = 0.5
+key = "vibrate_amount"
 
 [node name="SoundLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2

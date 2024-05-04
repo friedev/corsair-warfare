@@ -127,15 +127,24 @@ func _physics_process(delta: float) -> void:
 	self.apply_collision_damage(delta)
 
 
-func is_vibrate_enabled() -> bool:
-	return Globals.options.get("vibrate", true)
+func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) -> void:
+	if Globals.is_joy(self.details.player):
+		var vibrate_amount: float = Globals.options.get("vibrate_amount", 0.5)
+		weak_magnitude = clamp(weak_magnitude * vibrate_amount, 0.0, 1.0)
+		strong_magnitude = clamp(strong_magnitude * vibrate_amount, 0.0, 1.0)
+		if vibrate_amount > 0.0:
+			Input.start_joy_vibration(
+				self.details.player,
+				weak_magnitude,
+				strong_magnitude,
+				duration
+			)
 
 
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
 		cannons.fire(self.cannon_count)
-		if Globals.is_joy(self.details.player) and self.is_vibrate_enabled():
-			Input.start_joy_vibration(self.details.player, 0.5, 0.0, 0.25)
+		self.vibrate(1.0, 0.0, 0.25)
 		self.cannon_fired.emit()
 
 
@@ -178,8 +187,7 @@ func apply_collision_damage(delta: float):
 
 
 func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
-	if Globals.is_joy(self.details.player) and self.is_vibrate_enabled():
-		Input.start_joy_vibration(self.details.player, 0.5, 0.25, 0.25)
+	self.vibrate(1.0, 0.5, 0.25)
 	self.damage_taken.emit(damage)
 	if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
 		self.damage_sound.play()

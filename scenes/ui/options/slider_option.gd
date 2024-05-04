@@ -6,7 +6,7 @@ class_name SliderOption extends Option
 
 
 func get_option() -> float:
-	return self.check_box.button_pressed
+	return self.slider.value
 
 
 func set_option(value: float, emit := true) -> void:

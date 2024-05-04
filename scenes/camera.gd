@@ -24,17 +24,12 @@ func _ready() -> void:
 	self.noise.seed = randi()
 
 
-func is_shake_enabled() -> bool:
-	return Globals.options.get("screen_shake", true)
-
-
 func apply_shake() -> void:
-	if not self.is_shake_enabled():
-		self.shake = 0.0
 	var noise_position := Time.get_ticks_msec() * self.shake_rate
 	var x := self.noise.get_noise_1d(noise_position)
 	var y := self.noise.get_noise_1d(-noise_position)
-	self.offset = Vector2(x, y) * self.max_offset * (self.shake ** 2)
+	var max_offset: float = self.max_offset * Globals.options.get("screen_shake_amount", 0.5)
+	self.offset = Vector2(x, y) * max_offset * (self.shake ** 2)
 	self.shake -= self.shake_reduction
 
 
