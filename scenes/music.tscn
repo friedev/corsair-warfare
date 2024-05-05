@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfhlmkykp54l0"]
 
-[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/music/Through_Navy's_Heart_1.mp3" id="1_0hov6"]
 [ext_resource type="Script" path="res://scenes/music.gd" id="2_02xhd"]
-[ext_resource type="AudioStream" uid="uid://cbpus0hqdamlg" path="res://audio/music/Through_Navy's_Heart_0.mp3" id="2_vh5es"]
-[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/music/Through_Navy's_Heart_2.mp3" id="3_5moud"]
+[ext_resource type="AudioStream" uid="uid://cbpus0hqdamlg" path="res://audio/music/Through_Navy's_Heart_Menu.mp3" id="2_vh5es"]
+[ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/music/Through_Navy's_Heart_Combat.mp3" id="3_5moud"]
+[ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/music/Through_Navy's_Heart_Noncombat.mp3" id="3_lxcct"]
 
 [node name="Music" type="Node" node_paths=PackedStringArray("combat_timer", "menu_music", "noncombat_music", "combat_music")]
 script = ExtResource("2_02xhd")
@@ -19,7 +19,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="NoncombatMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_0hov6")
+stream = ExtResource("3_lxcct")
 volume_db = -80.0
 autoplay = true
 bus = &"Music"
