@@ -59,7 +59,7 @@ Made with [Godot Engine 4](https://godotengine.org).
 
 ### Third-Party Assets
 
-See `THIRD-PARTY_LICENSES.md`.
+See [Third-Party Licenses](THIRD-PARTY_LICENSES.md).
 
 ## Licenses
 
