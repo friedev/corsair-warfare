@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c0nj0jrecpvyr" path="res://art/ship/styles/ship_d/sails1.png" id="9_d38vc"]
 [ext_resource type="Texture2D" uid="uid://dfddqd1lfedoi" path="res://art/ship/styles/ship_d/sails2.png" id="10_08ger"]
 [ext_resource type="Texture2D" uid="uid://56wtro3gew0x" path="res://art/ship/styles/ship_d/sails3.png" id="11_4jlil"]
-[ext_resource type="Script" path="res://scenes/ship/ship_style.gd" id="12_0wyui"]
+[ext_resource type="Script" uid="uid://mg022xuvi258" path="res://scenes/ship/ship_style.gd" id="12_0wyui"]
 
 [resource]
 script = ExtResource("12_0wyui")

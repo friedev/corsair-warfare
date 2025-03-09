@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cm7u838u14knh"]
 
-[ext_resource type="Script" path="res://scenes/ship/ship_sprite.gd" id="1_n1naw"]
+[ext_resource type="Script" uid="uid://dvuuuendm6atv" path="res://scenes/ship/ship_sprite.gd" id="1_n1naw"]
 
 [node name="ShipSprite" type="Node2D" node_paths=PackedStringArray("base_hull", "base_sails")]
 scale = Vector2(0.1, 0.1)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfhlmkykp54l0"]
 
-[ext_resource type="Script" path="res://scenes/music.gd" id="2_02xhd"]
+[ext_resource type="Script" uid="uid://ctg1y1n1ntrog" path="res://scenes/music.gd" id="2_02xhd"]
 [ext_resource type="AudioStream" uid="uid://cbpus0hqdamlg" path="res://audio/music/Through_Navy's_Heart_Menu.mp3" id="2_vh5es"]
 [ext_resource type="AudioStream" uid="uid://rgwd6sjdlaxw" path="res://audio/music/Through_Navy's_Heart_Combat.mp3" id="3_5moud"]
 [ext_resource type="AudioStream" uid="uid://cfrtmfemqwhx" path="res://audio/music/Through_Navy's_Heart_Noncombat.mp3" id="3_lxcct"]

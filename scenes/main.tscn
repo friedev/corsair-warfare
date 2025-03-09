@@ -1,10 +1,10 @@
 [gd_scene load_steps=32 format=3 uid="uid://j6lypfe2pyeo"]
 
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_ndiw8"]
-[ext_resource type="Script" path="res://scenes/camera.gd" id="2_whori"]
+[ext_resource type="Script" uid="uid://d8p8aot0wign" path="res://scenes/main.gd" id="1_ndiw8"]
+[ext_resource type="Script" uid="uid://bckoo1ncjj1ce" path="res://scenes/camera.gd" id="2_whori"]
 [ext_resource type="Texture2D" uid="uid://c02s3d4dov18p" path="res://art/wind/wind_particle.png" id="3_v1r5n"]
-[ext_resource type="Script" path="res://scenes/wind/wind_particles.gd" id="4_i4t2a"]
-[ext_resource type="Script" path="res://scenes/wind/wind.gd" id="5_hl8vl"]
+[ext_resource type="Script" uid="uid://x4hg7cyrh14o" path="res://scenes/wind/wind_particles.gd" id="4_i4t2a"]
+[ext_resource type="Script" uid="uid://db5al321qmfvp" path="res://scenes/wind/wind.gd" id="5_hl8vl"]
 [ext_resource type="PackedScene" uid="uid://q3sofkfm3603" path="res://scenes/ui/menus/lobby_menu.tscn" id="5_ke02y"]
 [ext_resource type="PackedScene" uid="uid://dqob1rf2731fk" path="res://scenes/environment/border.tscn" id="8_xltam"]
 [ext_resource type="PackedScene" uid="uid://cu44tbtwjopms" path="res://scenes/environment/crater.tscn" id="11_wp5vs"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dfhlmkykp54l0" path="res://scenes/music.tscn" id="21_w75cq"]
 [ext_resource type="AudioStream" uid="uid://3esjs3xlegwy" path="res://audio/ambience/ocean_ambience.ogg" id="26_1dgo2"]
 [ext_resource type="AudioStream" uid="uid://biebh5ie3gq3w" path="res://audio/ambience/wind_ambience_sound/wind_ambience.ogg" id="27_ageov"]
-[ext_resource type="Script" path="res://scenes/wind/wind_ambience.gd" id="28_imhu3"]
+[ext_resource type="Script" uid="uid://d0f7mxrk5k5m6" path="res://scenes/wind/wind_ambience.gd" id="28_imhu3"]
 
 [sub_resource type="Gradient" id="Gradient_843f8"]
 offsets = PackedFloat32Array(0, 0.496296, 1)
@@ -90,9 +90,9 @@ process_mode = 1
 z_index = 5
 position = Vector2(575.5, 323.5)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_rmtjh")
 texture = ExtResource("3_v1r5n")
 lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_rmtjh")
 script = ExtResource("4_i4t2a")
 added_velocity_multiplier = 100.0
 wind = NodePath("../../Wind")

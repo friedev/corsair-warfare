@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://6n17k76557br"]
 
-[ext_resource type="Script" path="res://scenes/ship/cannons/cannonball.gd" id="1_m684b"]
+[ext_resource type="Script" uid="uid://b5l2gw5surt5e" path="res://scenes/ship/cannons/cannonball.gd" id="1_m684b"]
 [ext_resource type="PackedScene" uid="uid://cgxj68waew15o" path="res://scenes/ship/cannons/cannonball_splash.tscn" id="2_qmfqx"]
 [ext_resource type="PackedScene" uid="uid://tk2mfrlgaap5" path="res://scenes/ship/cannons/cannonball_impact.tscn" id="3_dnbsy"]
 [ext_resource type="Texture2D" uid="uid://b7bk6ra4p8yxv" path="res://art/ship/cannons/cannonball.png" id="4_kr8cf"]

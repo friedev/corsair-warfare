@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cm6lliew3ph6v"]
 
-[ext_resource type="Script" path="res://scenes/ship/ship_sprite.gd" id="2_irt3b"]
+[ext_resource type="Script" uid="uid://dvuuuendm6atv" path="res://scenes/ship/ship_sprite.gd" id="2_irt3b"]
 
 [node name="ShipTextureRect" type="Control" node_paths=PackedStringArray("base_hull", "base_sails")]
 layout_mode = 3

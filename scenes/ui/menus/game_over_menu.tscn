@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxw338ghigg1r"]
 
-[ext_resource type="Script" path="res://scenes/ui/menus/game_over_menu.gd" id="1_3f5pq"]
+[ext_resource type="Script" uid="uid://ga0x6xmk56qf" path="res://scenes/ui/menus/game_over_menu.gd" id="1_3f5pq"]
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_xrp8r"]
 
 [node name="GameOverMenu" type="MarginContainer" node_paths=PackedStringArray("label")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://q3sofkfm3603"]
 
-[ext_resource type="Script" path="res://scenes/ui/menus/lobby_menu.gd" id="1_paxxu"]
+[ext_resource type="Script" uid="uid://773afnfyjjup" path="res://scenes/ui/menus/lobby_menu.gd" id="1_paxxu"]
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_t00gu"]
 
 [node name="LobbyMenu" type="MarginContainer" node_paths=PackedStringArray("player_section_container", "play_button", "game_mode_option_button", "time_limit_spin_box", "max_points_spin_box", "deathmatch_options_container", "score_limit_spin_box", "kill_score_spin_box", "death_score_spin_box", "self_destruct_score_spin_box")]

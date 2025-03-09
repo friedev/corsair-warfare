@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipStyle" load_steps=12 format=3 uid="uid://b0icwb34d85ox"]
 
-[ext_resource type="Script" path="res://scenes/ship/ship_style.gd" id="1_i2uc2"]
+[ext_resource type="Script" uid="uid://mg022xuvi258" path="res://scenes/ship/ship_style.gd" id="1_i2uc2"]
 [ext_resource type="Texture2D" uid="uid://bupxdeo715dha" path="res://art/ship/styles/ghost/base_hull.png" id="1_k4g0w"]
 [ext_resource type="Texture2D" uid="uid://gg2kvrwue8tr" path="res://art/ship/styles/ghost/base_sails.png" id="2_m88g3"]
 [ext_resource type="Texture2D" uid="uid://bsn1tp5xuuidd" path="res://art/ship/styles/ghost/cannons1.png" id="2_xobgc"]

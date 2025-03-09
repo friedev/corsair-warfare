@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dhdlb5dddls61" path="res://art/ship/styles/ship_e/hull1.png" id="6_02kg8"]
 [ext_resource type="Texture2D" uid="uid://bi3dv2xiiqkru" path="res://art/ship/styles/ship_e/hull2.png" id="7_sml44"]
 [ext_resource type="Texture2D" uid="uid://bk0273h1huwf7" path="res://art/ship/styles/ship_e/hull3.png" id="8_fxe0n"]
-[ext_resource type="Script" path="res://scenes/ship/ship_style.gd" id="9_03y13"]
+[ext_resource type="Script" uid="uid://mg022xuvi258" path="res://scenes/ship/ship_style.gd" id="9_03y13"]
 [ext_resource type="Texture2D" uid="uid://606urx725rea" path="res://art/ship/styles/ship_e/sails1.png" id="9_64yk8"]
 [ext_resource type="Texture2D" uid="uid://b4vp2e15ntmy8" path="res://art/ship/styles/ship_e/sails2.png" id="10_bpwfj"]
 [ext_resource type="Texture2D" uid="uid://bct8j5na8ym7y" path="res://art/ship/styles/ship_e/sails3.png" id="11_i5hl1"]

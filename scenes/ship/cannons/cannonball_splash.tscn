@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cgxj68waew15o"]
 
-[ext_resource type="Script" path="res://scenes/ship/cannons/cannonball_splash.gd" id="1_qmy8e"]
+[ext_resource type="Script" uid="uid://v5wqxheiixqy" path="res://scenes/ship/cannons/cannonball_splash.gd" id="1_qmy8e"]
 [ext_resource type="Texture2D" uid="uid://fckospq0ifsg" path="res://art/ship/cannons/cannon_splash_particle.png" id="2_i4nyy"]
 [ext_resource type="AudioStream" uid="uid://dlab8yw16mk8s" path="res://audio/sound/cannon_splash.wav" id="3_04wm0"]
 

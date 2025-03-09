@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://d212jkx14sapd"]
 
-[ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_lvdat"]
+[ext_resource type="Script" uid="uid://c2unldscbof7e" path="res://scenes/ship/ship.gd" id="1_lvdat"]
 [ext_resource type="PackedScene" uid="uid://cm7u838u14knh" path="res://scenes/ship/ship_sprite.tscn" id="2_casu2"]
 [ext_resource type="PackedScene" uid="uid://p73xe0fbsd8v" path="res://scenes/ship/cannons/cannons.tscn" id="4_dkwe4"]
 [ext_resource type="AudioStream" uid="uid://xxrrcux74pt4" path="res://audio/sound/ship_damage/ship_damage.wav" id="4_mi6ka"]

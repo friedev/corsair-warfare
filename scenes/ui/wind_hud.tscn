@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://r8e2fyjw2ond"]
 
-[ext_resource type="Script" path="res://scenes/ui/wind_hud.gd" id="1_gshh3"]
+[ext_resource type="Script" uid="uid://chum24l1fffue" path="res://scenes/ui/wind_hud.gd" id="1_gshh3"]
 [ext_resource type="Texture2D" uid="uid://rtne1v6krryq" path="res://art/wind/wind_background.png" id="1_umi1k"]
 [ext_resource type="Texture2D" uid="uid://b4hca6e8rvwwp" path="res://art/wind/wind_arrow.png" id="2_mdgvw"]
 

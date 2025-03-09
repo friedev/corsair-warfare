@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbbnhubut8hco"]
 
-[ext_resource type="Script" path="res://scenes/ui/options/slider_option.gd" id="2_i2te7"]
+[ext_resource type="Script" uid="uid://c4mxt8yh6f66u" path="res://scenes/ui/options/slider_option.gd" id="2_i2te7"]
 
 [node name="SliderOption" type="MarginContainer" node_paths=PackedStringArray("slider") groups=["options"]]
 anchors_preset = 15

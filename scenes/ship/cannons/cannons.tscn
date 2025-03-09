@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://p73xe0fbsd8v"]
 
-[ext_resource type="Script" path="res://scenes/ship/cannons/cannons.gd" id="1_0kae7"]
+[ext_resource type="Script" uid="uid://bo3ql58xluge8" path="res://scenes/ship/cannons/cannons.gd" id="1_0kae7"]
 [ext_resource type="Texture2D" uid="uid://cfdfpuivgxput" path="res://art/ship/smoke_particle.png" id="2_o0vx7"]
 [ext_resource type="AudioStream" uid="uid://c2ym4dc2scsby" path="res://audio/sound/cannon_fire/cannon_fire.wav" id="3_fj7rj"]
 [ext_resource type="AudioStream" uid="uid://dlkomyuf6prb7" path="res://audio/sound/cannon_reload.wav" id="5_0fx5t"]

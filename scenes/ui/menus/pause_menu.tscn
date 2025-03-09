@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqku2krmd7fpx"]
 
-[ext_resource type="Script" path="res://scenes/ui/menus/pause_menu.gd" id="1_duwyh"]
+[ext_resource type="Script" uid="uid://c4agai0e2ftxr" path="res://scenes/ui/menus/pause_menu.gd" id="1_duwyh"]
 [ext_resource type="Theme" path="res://ui/title_theme.tres" id="2_locs7"]
 
 [node name="PauseMenu" type="MarginContainer" node_paths=PackedStringArray("default_focus")]
