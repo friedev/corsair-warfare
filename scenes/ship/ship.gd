@@ -1,4 +1,5 @@
-class_name Ship extends RigidBody2D
+class_name Ship
+extends RigidBody2D
 
 signal cannon_fired
 signal damage_taken(damage: float)
@@ -25,7 +26,6 @@ const level_values := {
 @export var max_health: float
 
 @export var cannon_count: int
-
 
 var health: float:
 	set(value):
@@ -136,7 +136,7 @@ func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) ->
 				details.player,
 				weak_magnitude,
 				strong_magnitude,
-				duration
+				duration,
 			)
 
 
@@ -153,7 +153,7 @@ func apply_wind_force() -> void:
 	var actual_difference: float = min(
 		abs(difference),
 		abs(difference + TAU),
-		abs(difference - TAU)
+		abs(difference - TAU),
 	)
 	var alignment := 1.0 - actual_difference / PI
 	var magnitude := speed * wind.wind.length() * sqrt(alignment)

@@ -1,4 +1,5 @@
-class_name ShakeCamera2D extends Camera2D
+class_name ShakeCamera2D
+extends Camera2D
 
 ## Portion of the viewport dedicated to the ships. The remainder is a margin.
 @export var content_to_margin_ratio: float
@@ -63,7 +64,7 @@ func center_on_ships() -> void:
 	var zoom_amount: float = min(
 		1.0,
 		min_dimensions.x / distance.x,
-		min_dimensions.y / distance.y
+		min_dimensions.y / distance.y,
 	)
 	var new_zoom := Vector2(zoom_amount, zoom_amount)
 

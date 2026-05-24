@@ -13,9 +13,9 @@ const KEYBOARD_1_PLAYER := -1
 const KEYBOARD_2_PLAYER := -2
 const NO_PLAYER := -3
 
-var options := {}
+var options := { }
 
-var players := {}
+var players := { }
 var time_limit_seconds := 0
 var score_limit := 0
 var game_mode := GameMode.LAST_MAN_STANDING
@@ -63,7 +63,7 @@ func get_winner() -> PlayerDetails:
 			):
 				winner = null
 	elif Globals.game_mode == Globals.GameMode.DEATHMATCH:
-		var max_score := -2^63
+		var max_score := -2 ^ 63
 		for details in Globals.players.values():
 			if details.score > max_score:
 				winner = details

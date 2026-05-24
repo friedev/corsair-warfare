@@ -1,4 +1,5 @@
-class_name Cannons extends Node2D
+class_name Cannons
+extends Node2D
 
 const max_cannonball_offset := 10.0
 const cannonball_scene := preload("res://scenes/ship/cannons/cannonball.tscn")
@@ -17,6 +18,7 @@ func _process(delta: float) -> void:
 		reload_bar.max_value
 		* (1 - reload_timer.time_left / reload_timer.wait_time)
 	)
+
 
 func can_fire() -> bool:
 	return reload_timer.is_stopped()

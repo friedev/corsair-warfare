@@ -1,4 +1,5 @@
-class_name PlayerSection extends Control
+class_name PlayerSection
+extends Control
 
 signal player_set(player: int)
 signal player_left(player: int)
@@ -49,7 +50,7 @@ var style_index: int:
 @onready var sliders: Array[Slider] = [
 	hull_slider,
 	sails_slider,
-	cannons_slider
+	cannons_slider,
 ]
 
 

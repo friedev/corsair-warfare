@@ -1,4 +1,5 @@
-class_name Cannonball extends RigidBody2D
+class_name Cannonball
+extends RigidBody2D
 
 @export var speed: float
 @export var damage: float

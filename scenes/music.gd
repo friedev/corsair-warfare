@@ -1,4 +1,5 @@
-class_name Music extends Node
+class_name Music
+extends Node
 
 @export var combat_timer: Timer
 @export var transition_duration: float

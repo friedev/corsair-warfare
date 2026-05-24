@@ -28,7 +28,8 @@ var game_active: bool:
 
 func move_ship_spawn_cast() -> void:
 	ship_spawn_cast.position = Vector2(
-		ship_spawn_radius * sqrt(randf()), 0
+		ship_spawn_radius * sqrt(randf()),
+		0,
 	).rotated(randf() * TAU)
 	ship_spawn_cast.force_shapecast_update()
 
@@ -72,8 +73,8 @@ func _process(delta: float) -> void:
 
 
 func sort_score_descending(
-	details1: PlayerDetails,
-	details2: PlayerDetails
+		details1: PlayerDetails,
+		details2: PlayerDetails,
 ) -> bool:
 	return details1.score > details2.score
 
@@ -95,7 +96,7 @@ func update_score_label() -> void:
 		if highest_score:
 			score_label.push_color(Color(1, 0.75, 0))
 		score_label.add_text(
-			"%d: %s\n" % [details.score, details.nickname]
+			"%d: %s\n" % [details.score, details.nickname],
 		)
 		if highest_score:
 			score_label.pop()

@@ -34,4 +34,3 @@ func _process(delta: float) -> void:
 
 func _on_window_size_changed() -> void:
 	update_emission_box()
-

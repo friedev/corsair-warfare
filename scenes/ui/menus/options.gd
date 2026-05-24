@@ -12,7 +12,8 @@ func load_config():
 		var option := option_node as Option
 		if config.has_section_key(OPTIONS_SECTION, option.key):
 			option.set_option(
-				config.get_value(OPTIONS_SECTION, option.key), false
+				config.get_value(OPTIONS_SECTION, option.key),
+				false,
 			)
 
 

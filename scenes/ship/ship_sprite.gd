@@ -1,5 +1,6 @@
 # Used for both Sprite2Ds and TextureRects
-class_name ShipSprite extends CanvasItem
+class_name ShipSprite
+extends CanvasItem
 
 @export var base_hull: CanvasItem
 @export var base_sails: CanvasItem
