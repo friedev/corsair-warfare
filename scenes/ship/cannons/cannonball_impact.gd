@@ -2,8 +2,8 @@ extends GPUParticles2D
 
 
 func _ready() -> void:
-	self.restart()
+	restart()
 
 
 func _on_free_timer_timeout() -> void:
-	self.queue_free()
+	queue_free()

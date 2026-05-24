@@ -6,7 +6,7 @@ extends AudioStreamPlayer
 
 
 func _process(delta: float) -> void:
-	self.volume_db = (
+	volume_db = (
 		min_volume_db
-		+ (max_volume_db - min_volume_db) * self.wind.wind.length()
+		+ (max_volume_db - min_volume_db) * wind.wind.length()
 	)

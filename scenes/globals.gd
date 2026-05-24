@@ -26,17 +26,17 @@ var deathmatch_self_destruct_score := -3
 
 
 func register_player(player: int, ship_details: PlayerDetails) -> void:
-	if player == self.NO_PLAYER:
+	if player == NO_PLAYER:
 		return
-	self.players[player] = ship_details
-	self.player_registered.emit(player)
+	players[player] = ship_details
+	player_registered.emit(player)
 
 
 func deregister_player(player: int) -> void:
-	if player == self.NO_PLAYER:
+	if player == NO_PLAYER:
 		return
-	self.players.erase(player)
-	self.player_deregistered.emit(player)
+	players.erase(player)
+	player_deregistered.emit(player)
 
 
 func is_joy(player: int) -> bool:
@@ -44,7 +44,7 @@ func is_joy(player: int) -> bool:
 
 
 func get_winner() -> PlayerDetails:
-	var ships := self.get_tree().get_nodes_in_group(&"ships")
+	var ships := get_tree().get_nodes_in_group(&"ships")
 	if len(ships) == 1:
 		return null
 

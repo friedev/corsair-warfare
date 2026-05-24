@@ -7,14 +7,14 @@ class_name Music extends Node
 @export var noncombat_music: AudioStreamPlayer
 @export var combat_music: AudioStreamPlayer
 
-@onready var active_track := self.menu_music
+@onready var active_track := menu_music
 
 
 func _process(delta: float) -> void:
-	for music_track in [self.menu_music, self.noncombat_music, self.combat_music]:
+	for music_track in [menu_music, noncombat_music, combat_music]:
 		var volume_linear := db_to_linear(music_track.volume_db)
-		var increment := delta / self.transition_duration
-		if music_track == self.active_track:
+		var increment := delta / transition_duration
+		if music_track == active_track:
 			volume_linear += increment
 		else:
 			volume_linear -= increment
@@ -23,38 +23,38 @@ func _process(delta: float) -> void:
 
 
 func enter_combat() -> void:
-	self.combat_timer.start()
-	self.active_track = self.combat_music
+	combat_timer.start()
+	active_track = combat_music
 
 
 func enter_noncombat() -> void:
-	self.active_track = self.noncombat_music
+	active_track = noncombat_music
 
 
 func enter_menu() -> void:
-	self.combat_timer.stop()
-	self.active_track = self.menu_music
+	combat_timer.stop()
+	active_track = menu_music
 
 
 func _on_pause_menu_menu_pressed(previous: Menu) -> void:
-	self.enter_menu()
+	enter_menu()
 
 
 func _on_game_over_menu_menu_pressed(previous: Menu) -> void:
-	self.enter_menu()
+	enter_menu()
 
 
 func _on_lobby_menu_play_pressed(previous: Menu) -> void:
-	self.enter_noncombat()
+	enter_noncombat()
 
 
 func _on_combat_timer_timeout() -> void:
-	self.enter_noncombat()
+	enter_noncombat()
 
 
 func _on_ship_cannon_fired() -> void:
-	self.enter_combat()
+	enter_combat()
 
 
 func _on_ship_damage_taken(_damage: float) -> void:
-	self.enter_combat()
+	enter_combat()

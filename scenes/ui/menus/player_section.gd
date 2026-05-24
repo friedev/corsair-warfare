@@ -14,19 +14,19 @@ var player := Globals.NO_PLAYER:
 	set(value):
 		if value != Globals.NO_PLAYER and value in Globals.players:
 			return
-		self.set_controls_visible(false)
+		set_controls_visible(false)
 		player = value
-		self.details.player = self.player
-		self.set_controls_visible(true)
-		self.updated_joined_containers()
-		Globals.register_player(self.player, self.details)
-		self.player_set.emit(self.player)
+		details.player = player
+		set_controls_visible(true)
+		updated_joined_containers()
+		Globals.register_player(player, details)
+		player_set.emit(player)
 
 var style_index: int:
 	set(value):
-		style_index = wrapi(value, 0, len(self.styles))
-		self.texture_rect.apply_style(self.get_style())
-		self.details.style = self.get_style()
+		style_index = wrapi(value, 0, len(styles))
+		texture_rect.apply_style(get_style())
+		details.style = get_style()
 
 @export var joined_container: Control
 @export var not_joined_container: Control
@@ -47,23 +47,23 @@ var style_index: int:
 @export var sails_slider: Slider
 @export var cannons_slider: Slider
 @onready var sliders: Array[Slider] = [
-	self.hull_slider,
-	self.sails_slider,
-	self.cannons_slider
+	hull_slider,
+	sails_slider,
+	cannons_slider
 ]
 
 
 func get_style() -> ShipStyle:
-	return self.styles[self.style_index]
+	return styles[style_index]
 
 
 func is_valid() -> bool:
-	return self.get_points_spent() <= Globals.max_points
+	return get_points_spent() <= Globals.max_points
 
 
 func get_points_spent() -> int:
 	var points_spent := 0
-	for slider in self.sliders:
+	for slider in sliders:
 		points_spent += slider.value
 	return points_spent
 
@@ -71,85 +71,85 @@ func get_points_spent() -> int:
 func get_levels() -> Dictionary:
 	# TODO DRY
 	return {
-		"Hull": self.hull_slider.value,
-		"Cannons": self.cannons_slider.value,
-		"Sails": self.sails_slider.value,
+		"Hull": hull_slider.value,
+		"Cannons": cannons_slider.value,
+		"Sails": sails_slider.value,
 	}
 
 
 func update_levels() -> void:
-	var points_spent := self.get_points_spent()
-	self.points_label.text = "%d/%d Points Spent" % [points_spent, Globals.max_points]
-	self.points_label.modulate = (
+	var points_spent := get_points_spent()
+	points_label.text = "%d/%d Points Spent" % [points_spent, Globals.max_points]
+	points_label.modulate = (
 		Color.WHITE
 		if points_spent <= Globals.max_points
 		else Color(1, 0.25, 0.25)
 	)
-	self.texture_rect.apply_levels(self.get_levels())
-	self.details.levels = self.get_levels()
-	self.customization_updated.emit()
+	texture_rect.apply_levels(get_levels())
+	details.levels = get_levels()
+	customization_updated.emit()
 
 
 func _on_slider_value_changed(_value: float) -> void:
-	self.update_levels()
+	update_levels()
 
 
 func _on_previous_style_button_pressed() -> void:
-	self.style_index -= 1
+	style_index -= 1
 
 
 func _on_next_style_button_pressed() -> void:
-	self.style_index += 1
+	style_index += 1
 
 
 func get_controls() -> Control:
-	match self.player:
+	match player:
 		Globals.KEYBOARD_1_PLAYER:
-			return self.keyboard_1_controls
+			return keyboard_1_controls
 		Globals.KEYBOARD_2_PLAYER:
-			return self.keyboard_2_controls
+			return keyboard_2_controls
 		Globals.NO_PLAYER:
 			return null
 		_:
-			return self.joy_controls
+			return joy_controls
 
 
 func set_controls_visible(visible: bool) -> void:
-	var my_controls := self.get_controls()
-	for controls in self.controls_container.get_children():
+	var my_controls := get_controls()
+	for controls in controls_container.get_children():
 		controls.visible = controls == my_controls
 
 
 func updated_joined_containers() -> void:
-	var joined := self.player != Globals.NO_PLAYER
-	self.not_joined_container.visible = not joined
-	self.joined_container.visible = joined
+	var joined := player != Globals.NO_PLAYER
+	not_joined_container.visible = not joined
+	joined_container.visible = joined
 
 
 func leave() -> void:
-	Globals.deregister_player(self.player)
-	self.player_left.emit(self.player)
-	self.queue_free()
+	Globals.deregister_player(player)
+	player_left.emit(player)
+	queue_free()
 
 
 func update_keyboard_buttons() -> void:
-	self.keyboard_1_button.disabled = Globals.KEYBOARD_1_PLAYER in Globals.players
-	self.keyboard_2_button.disabled = Globals.KEYBOARD_2_PLAYER in Globals.players
+	keyboard_1_button.disabled = Globals.KEYBOARD_1_PLAYER in Globals.players
+	keyboard_2_button.disabled = Globals.KEYBOARD_2_PLAYER in Globals.players
 
 
 func _ready() -> void:
-	self.update_keyboard_buttons()
+	update_keyboard_buttons()
 
-	Globals.player_registered.connect(self._on_player_registered)
-	Globals.player_deregistered.connect(self._on_player_deregistered)
+	Globals.player_registered.connect(_on_player_registered)
+	Globals.player_deregistered.connect(_on_player_deregistered)
 
-	self.style_index = self.index
-	self.update_levels()
+	style_index = index
+	update_levels()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (
-		not self.is_visible_in_tree()
+		not is_visible_in_tree()
 		or not event.is_pressed()
 		or not event is InputEventJoypadButton
 	):
@@ -157,34 +157,34 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	var joy_event := event as InputEventJoypadButton
 
-	if self.player == Globals.NO_PLAYER and joy_event.button_index == JOY_BUTTON_A:
-		self.player = joy_event.device
+	if player == Globals.NO_PLAYER and joy_event.button_index == JOY_BUTTON_A:
+		player = joy_event.device
 		return
 
-	if self.player == joy_event.device and joy_event.button_index == JOY_BUTTON_B:
-		self.leave()
+	if player == joy_event.device and joy_event.button_index == JOY_BUTTON_B:
+		leave()
 		return
 
 
 func _on_nickname_edit_text_changed(new_text: String) -> void:
-	self.details.nickname = new_text
+	details.nickname = new_text
 
 
 func _on_leave_button_pressed() -> void:
-	self.leave()
+	leave()
 
 
 func _on_keyboard_1_button_pressed() -> void:
-	self.player = Globals.KEYBOARD_1_PLAYER
+	player = Globals.KEYBOARD_1_PLAYER
 
 
 func _on_keyboard_2_button_pressed() -> void:
-	self.player = Globals.KEYBOARD_2_PLAYER
+	player = Globals.KEYBOARD_2_PLAYER
 
 
 func _on_player_registered(player: int) -> void:
-	self.update_keyboard_buttons()
+	update_keyboard_buttons()
 
 
 func _on_player_deregistered(player: int) -> void:
-	self.update_keyboard_buttons()
+	update_keyboard_buttons()

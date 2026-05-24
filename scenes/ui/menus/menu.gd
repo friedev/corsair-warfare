@@ -3,30 +3,30 @@ class_name Menu extends Control
 @export var default_focus: Control
 @export var can_go_back := true
 
-var previous: Menu
+var previous_menu: Menu
 
 
 func open(previous: Menu = null) -> void:
-	if self.visible:
+	if visible:
 		return
-	self.previous = previous
-	self.show()
-	if self.default_focus != null:
-		self.default_focus.grab_focus()
+	previous_menu = previous
+	show()
+	if default_focus != null:
+		default_focus.grab_focus()
 
 
 func close() -> void:
-	if not self.visible:
+	if not visible:
 		return
-	self.hide()
-	if self.can_go_back and self.previous != null:
-		self.previous.open()
+	hide()
+	if can_go_back and previous_menu != null:
+		previous_menu.open()
 
 
 func _input(event: InputEvent) -> void:
 	if (
-		self.can_go_back
-		and self.visible
+		can_go_back
+		and visible
 		and event.is_action_released(&"ui_cancel")
 	):
-		self.close()
+		close()

@@ -17,28 +17,28 @@ var shake := 0.0:
 		shake = clamp(value, 0.0, 1.0)
 var noise := FastNoiseLite.new()
 
-@onready var default_zoom := self.zoom
+@onready var default_zoom := zoom
 
 
 func _ready() -> void:
-	self.noise.seed = randi()
+	noise.seed = randi()
 
 
 func apply_shake() -> void:
-	var noise_position := Time.get_ticks_msec() * self.shake_rate
-	var x := self.noise.get_noise_1d(noise_position)
-	var y := self.noise.get_noise_1d(-noise_position)
-	var max_offset: float = self.max_offset * Globals.options.get("screen_shake_amount", 0.5)
-	self.offset = Vector2(x, y) * max_offset * (self.shake ** 2)
-	self.shake -= self.shake_reduction
+	var noise_position := Time.get_ticks_msec() * shake_rate
+	var x := noise.get_noise_1d(noise_position)
+	var y := noise.get_noise_1d(-noise_position)
+	var max_offset: float = max_offset * Globals.options.get("screen_shake_amount", 0.5)
+	offset = Vector2(x, y) * max_offset * (shake ** 2)
+	shake -= shake_reduction
 
 
 func center_on_ships() -> void:
-	var ships := self.get_tree().get_nodes_in_group(&"ships")
+	var ships := get_tree().get_nodes_in_group(&"ships")
 
 	if len(ships) == 0:
-		self.global_position = Vector2(0, 0)
-		self.zoom = lerp(self.get_zoom(), self.default_zoom, self.zoom_speed)
+		global_position = Vector2(0, 0)
+		zoom = lerp(get_zoom(), default_zoom, zoom_speed)
 		return
 
 	# Find bounding box for all ships
@@ -53,12 +53,12 @@ func center_on_ships() -> void:
 			rect = rect.expand((ship as Ship).global_position)
 
 	# Center on the bounding box
-	self.global_position = rect.get_center()
+	global_position = rect.get_center()
 
 	# Zoom to fit the bounding box
-	var dimensions := self.get_viewport_rect().size
+	var dimensions := get_viewport_rect().size
 	var screen_ratio := dimensions.x / dimensions.y
-	var min_dimensions := dimensions * self.content_to_margin_ratio
+	var min_dimensions := dimensions * content_to_margin_ratio
 	var distance := rect.size.abs()
 	var zoom_amount: float = min(
 		1.0,
@@ -67,17 +67,17 @@ func center_on_ships() -> void:
 	)
 	var new_zoom := Vector2(zoom_amount, zoom_amount)
 
-	self.zoom = lerp(self.get_zoom(), new_zoom, self.zoom_speed)
+	zoom = lerp(get_zoom(), new_zoom, zoom_speed)
 
 
 func _process(delta: float) -> void:
-	self.center_on_ships()
-	self.apply_shake()
+	center_on_ships()
+	apply_shake()
 
 
 func _on_ship_damage_taken(damage: float) -> void:
-	self.shake = max(self.shake, damage * self.shake_per_damage)
+	shake = max(shake, damage * shake_per_damage)
 
 
 func _on_ship_cannon_fired() -> void:
-	self.shake = max(self.shake, self.cannon_shake)
+	shake = max(shake, cannon_shake)

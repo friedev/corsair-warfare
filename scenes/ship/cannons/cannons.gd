@@ -13,39 +13,39 @@ const cannonball_scene := preload("res://scenes/ship/cannons/cannonball.tscn")
 
 
 func _process(delta: float) -> void:
-	self.reload_bar.value = (
-		self.reload_bar.max_value
-		* (1 - self.reload_timer.time_left / self.reload_timer.wait_time)
+	reload_bar.value = (
+		reload_bar.max_value
+		* (1 - reload_timer.time_left / reload_timer.wait_time)
 	)
 
 func can_fire() -> bool:
-	return self.reload_timer.is_stopped()
+	return reload_timer.is_stopped()
 
 
 func spawn_cannonball(ball_position: Vector2, player: int) -> void:
-	var cannonball = self.cannonball_scene.instantiate()
+	var cannonball = cannonball_scene.instantiate()
 	cannonball.global_position = ball_position
-	cannonball.global_rotation = self.global_rotation
+	cannonball.global_rotation = global_rotation
 	cannonball.player = player
-	cannonball.add_collision_exception_with(self.get_parent())
+	cannonball.add_collision_exception_with(get_parent())
 	SignalBus.node_spawned.emit(cannonball)
 
 
 func fire(cannon_count: int, player: int) -> void:
-	var p := self.spawn_point_1.global_position
-	var q := self.spawn_point_2.global_position
+	var p := spawn_point_1.global_position
+	var q := spawn_point_2.global_position
 	for i in range(cannon_count):
 		var offset_ratio := float(i) / float(cannon_count)
-		var perpendicular_offset := self.max_cannonball_offset * randf()
+		var perpendicular_offset := max_cannonball_offset * randf()
 		var ball_position := p + (q - p) * offset_ratio
-		ball_position -= Vector2(perpendicular_offset, 0).rotated(self.rotation)
-		self.spawn_cannonball(ball_position, player)
-	self.fire_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
-	self.fire_sound.play()
-	self.fire_particles.restart()
-	self.reload_timer.start()
+		ball_position -= Vector2(perpendicular_offset, 0).rotated(rotation)
+		spawn_cannonball(ball_position, player)
+	fire_sound.pitch_scale = 1 + (randf() - 0.5) * 0.4
+	fire_sound.play()
+	fire_particles.restart()
+	reload_timer.start()
 
 
 func _on_reload_timer_timeout() -> void:
-	self.reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.125
-	self.reload_sound.play()
+	reload_sound.pitch_scale = 1 + (randf() - 0.5) * 0.125
+	reload_sound.play()

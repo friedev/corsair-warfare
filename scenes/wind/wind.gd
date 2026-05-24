@@ -10,14 +10,14 @@ var noise_position: float
 
 
 func _ready() -> void:
-	self.noise.seed = randi()
-	self.noise_position = self.initial_noise_position
+	noise.seed = randi()
+	noise_position = initial_noise_position
 
 
 func _physics_process(delta: float) -> void:
-	self.noise_position += delta * self.change_rate
-	var x := self.noise.get_noise_1d(self.noise_position)
-	var y := self.noise.get_noise_1d(-self.noise_position)
+	noise_position += delta * change_rate
+	var x := noise.get_noise_1d(noise_position)
+	var y := noise.get_noise_1d(-noise_position)
 	x = sign(x) * sqrt(abs(x))
 	y = sign(y) * sqrt(abs(y))
-	self.wind = Vector2(x, y).limit_length()
+	wind = Vector2(x, y).limit_length()

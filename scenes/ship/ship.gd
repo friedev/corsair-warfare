@@ -29,22 +29,22 @@ const level_values := {
 
 var health: float:
 	set(value):
-		health = clampf(value, 0, self.max_health)
-		self.health_bar.value = self.health / self.max_health * self.health_bar.max_value
-		if self.health > self.max_health * (2.0 / 3.0):
-			self.medium_health_particles.emitting = false
-			self.low_health_particles.emitting = false
-		elif self.health > self.max_health * (1.0 / 3.0):
-			self.medium_health_particles.emitting = true
-			self.low_health_particles.emitting = false
+		health = clampf(value, 0, max_health)
+		health_bar.value = health / max_health * health_bar.max_value
+		if health > max_health * (2.0 / 3.0):
+			medium_health_particles.emitting = false
+			low_health_particles.emitting = false
+		elif health > max_health * (1.0 / 3.0):
+			medium_health_particles.emitting = true
+			low_health_particles.emitting = false
 		else:
-			self.medium_health_particles.emitting = false
-			self.low_health_particles.emitting = true
+			medium_health_particles.emitting = false
+			low_health_particles.emitting = true
 
 var nickname: String:
 	set(value):
 		nickname = value
-		nickname_label.text = self.nickname
+		nickname_label.text = nickname
 
 @export var sprite: ShipSprite
 @export var control_parent: Node2D
@@ -61,79 +61,79 @@ var nickname: String:
 
 
 func _ready() -> void:
-	self.nickname = self.details.nickname
-	self.sprite.apply_style(self.details.style)
-	self.sprite.apply_levels(self.details.levels)
+	nickname = details.nickname
+	sprite.apply_style(details.style)
+	sprite.apply_levels(details.levels)
 
 	# Apply levels
-	self.max_health = self.level_values["Hull"][self.details.levels["Hull"]]
-	self.health = self.max_health
-	self.cannon_count = self.level_values["Cannons"][self.details.levels["Cannons"]]
-	self.speed *= self.level_values["Sails"][self.details.levels["Sails"]]
+	max_health = level_values["Hull"][details.levels["Hull"]]
+	health = max_health
+	cannon_count = level_values["Cannons"][details.levels["Cannons"]]
+	speed *= level_values["Sails"][details.levels["Sails"]]
 
 	# Duplicate material so that changes by one ship don't affect the others
-	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
-	self.wake_particles.process_material = particle_material.duplicate()
+	var particle_material := wake_particles.process_material as ParticleProcessMaterial
+	wake_particles.process_material = particle_material.duplicate()
 
 
 func _process(delta: float) -> void:
-	self.control_parent.global_rotation = 0
+	control_parent.global_rotation = 0
 
-	var particle_material := self.wake_particles.process_material as ParticleProcessMaterial
-	particle_material.angle_min = -self.rotation_degrees
-	particle_material.angle_max = -self.rotation_degrees
+	var particle_material := wake_particles.process_material as ParticleProcessMaterial
+	particle_material.angle_min = -rotation_degrees
+	particle_material.angle_max = -rotation_degrees
 
 	# Highlight my nickname if I'm winning
 	var winner := Globals.get_winner()
-	if winner != null and winner.player == self.details.player:
-		self.nickname_label.modulate = Color(1, 0.75, 0)
+	if winner != null and winner.player == details.player:
+		nickname_label.modulate = Color(1, 0.75, 0)
 	else:
-		self.nickname_label.modulate = Color.WHITE
+		nickname_label.modulate = Color.WHITE
 
 
 func handle_input() -> void:
 	# TODO DRY
-	if self.details.player == Globals.KEYBOARD_1_PLAYER:
+	if details.player == Globals.KEYBOARD_1_PLAYER:
 		if Input.is_key_pressed(KEY_A):
-			self.apply_torque(-self.rotation_speed)
+			apply_torque(-rotation_speed)
 		if Input.is_key_pressed(KEY_D):
-			self.apply_torque(self.rotation_speed)
+			apply_torque(rotation_speed)
 		if Input.is_key_pressed(KEY_Q):
-			self.fire(self.left_cannons)
+			fire(left_cannons)
 		if Input.is_key_pressed(KEY_E):
-			self.fire(self.right_cannons)
-	elif self.details.player == Globals.KEYBOARD_2_PLAYER:
+			fire(right_cannons)
+	elif details.player == Globals.KEYBOARD_2_PLAYER:
 		if Input.is_key_pressed(KEY_J):
-			self.apply_torque(-self.rotation_speed)
+			apply_torque(-rotation_speed)
 		if Input.is_key_pressed(KEY_L):
-			self.apply_torque(self.rotation_speed)
+			apply_torque(rotation_speed)
 		if Input.is_key_pressed(KEY_U):
-			self.fire(self.left_cannons)
+			fire(left_cannons)
 		if Input.is_key_pressed(KEY_O):
-			self.fire(self.right_cannons)
+			fire(right_cannons)
 	else:
-		var joy_axis := Input.get_joy_axis(self.details.player, JOY_AXIS_LEFT_X)
-		self.apply_torque(self.rotation_speed * joy_axis)
-		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
-			self.fire(self.left_cannons)
-		if Input.get_joy_axis(self.details.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
-			self.fire(self.right_cannons)
+		var joy_axis := Input.get_joy_axis(details.player, JOY_AXIS_LEFT_X)
+		apply_torque(rotation_speed * joy_axis)
+		if Input.get_joy_axis(details.player, JOY_AXIS_TRIGGER_LEFT) > 0.5:
+			fire(left_cannons)
+		if Input.get_joy_axis(details.player, JOY_AXIS_TRIGGER_RIGHT) > 0.5:
+			fire(right_cannons)
 
 
 func _physics_process(delta: float) -> void:
-	self.handle_input()
-	self.apply_wind_force()
-	self.apply_collision_damage(delta)
+	handle_input()
+	apply_wind_force()
+	apply_collision_damage(delta)
 
 
 func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) -> void:
-	if Globals.is_joy(self.details.player):
+	if Globals.is_joy(details.player):
 		var vibrate_amount: float = Globals.options.get("vibrate_amount", 0.5)
 		weak_magnitude = clamp(weak_magnitude * vibrate_amount, 0.0, 1.0)
 		strong_magnitude = clamp(strong_magnitude * vibrate_amount, 0.0, 1.0)
 		if vibrate_amount > 0.0:
 			Input.start_joy_vibration(
-				self.details.player,
+				details.player,
 				weak_magnitude,
 				strong_magnitude,
 				duration
@@ -142,13 +142,13 @@ func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) ->
 
 func fire(cannons: Cannons) -> void:
 	if cannons.can_fire():
-		cannons.fire(self.cannon_count, self.details.player)
-		self.vibrate(1.0, 0.0, 0.25)
-		self.cannon_fired.emit()
+		cannons.fire(cannon_count, details.player)
+		vibrate(1.0, 0.0, 0.25)
+		cannon_fired.emit()
 
 
 func apply_wind_force() -> void:
-	var difference := self.rotation - self.wind.wind.angle()
+	var difference := rotation - wind.wind.angle()
 	# https://stackoverflow.com/a/2007355
 	var actual_difference: float = min(
 		abs(difference),
@@ -156,14 +156,14 @@ func apply_wind_force() -> void:
 		abs(difference - TAU)
 	)
 	var alignment := 1.0 - actual_difference / PI
-	var magnitude := self.speed * self.wind.wind.length() * sqrt(alignment)
-	magnitude = max(magnitude, self.min_speed)
-	var force := Vector2(1, 0).rotated(self.rotation) * magnitude
-	self.apply_force(force)
+	var magnitude := speed * wind.wind.length() * sqrt(alignment)
+	magnitude = max(magnitude, min_speed)
+	var force := Vector2(1, 0).rotated(rotation) * magnitude
+	apply_force(force)
 
 
 func apply_collision_damage(delta: float):
-	for body in self.get_colliding_bodies():
+	for body in get_colliding_bodies():
 		# Take damage from colliding ships or other obstacles over time
 		var damage_to_self: float
 		var damager := Globals.NO_PLAYER
@@ -173,30 +173,30 @@ func apply_collision_damage(delta: float):
 			# Always take some damage while ramming
 			damage_to_self = other.ram_dps_min
 			# Take more damage if the other ship is hitting me straight on
-			var angle_other_to_self := other.get_angle_to(self.position)
+			var angle_other_to_self := other.get_angle_to(position)
 			if -PI / 2 < angle_other_to_self and angle_other_to_self < PI / 2:
 				damage_to_self += (
 					(1.0 - absf(angle_other_to_self) / (PI / 2))
 					* (other.ram_dps_max - other.ram_dps_min)
 				)
 		else:
-			damage_to_self = self.obstacle_dps
+			damage_to_self = obstacle_dps
 		damage_to_self *= delta
-		self.take_damage(damage_to_self, damager)
+		take_damage(damage_to_self, damager)
 
 
 func take_damage(damage: float, damager := Globals.NO_PLAYER) -> void:
-	self.vibrate(1.0, 0.5, 0.25)
-	self.damage_taken.emit(damage)
-	if self.damage_timer.is_stopped() and not self.damage_sound.is_playing():
-		self.damage_sound.play()
-	self.damage_timer.start()
-	var previous_health := self.health
-	self.health -= damage
-	if previous_health > 0.0 and self.health <= 0:
-		self.destroy(damager)
+	vibrate(1.0, 0.5, 0.25)
+	damage_taken.emit(damage)
+	if damage_timer.is_stopped() and not damage_sound.is_playing():
+		damage_sound.play()
+	damage_timer.start()
+	var previous_health := health
+	health -= damage
+	if previous_health > 0.0 and health <= 0:
+		destroy(damager)
 
 
 func destroy(destroyer := Globals.NO_PLAYER) -> void:
-	self.destroyed.emit(self, destroyer)
-	self.queue_free()
+	destroyed.emit(self, destroyer)
+	queue_free()

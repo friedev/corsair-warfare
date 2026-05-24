@@ -6,15 +6,19 @@ signal changed(value)
 
 
 func _ready() -> void:
-	if self.key in Options.options:
-		self.set_option(self.default, false)
+	if key in Options.options:
+		set_option(get_default(), false)
 
 
 func get_option():
-	return Globals.options[self.key]
+	return Globals.options[key]
 
 
 func set_option(value, emit := true) -> void:
-	Globals.options[self.key] = value
+	Globals.options[key] = value
 	if emit:
-		self.changed.emit(value)
+		changed.emit(value)
+
+
+func get_default():
+	assert(false, "Abstract function called")

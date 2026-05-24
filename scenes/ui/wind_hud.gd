@@ -8,7 +8,7 @@ extends Control
 
 
 func _process(delta: float) -> void:
-	self.arrow.rotation = self.wind.wind.angle()
-	self.arrow.size.x = (
-		self.wind.wind.length() * (maximum_size - minimum_size) + minimum_size
+	arrow.rotation = wind.wind.angle()
+	arrow.size.x = (
+		wind.wind.length() * (maximum_size - minimum_size) + minimum_size
 	)
