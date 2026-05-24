@@ -6,8 +6,7 @@ signal changed(value)
 
 
 func _ready() -> void:
-	if key in Options.options:
-		set_option(get_default(), false)
+	set_option(get_default(), false)
 
 
 func get_option():
